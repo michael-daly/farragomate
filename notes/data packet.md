@@ -1,5 +1,5 @@
-## DataPacket ( Integer type, body )
+## DataPacket ( Integer type, <\*> body )
 
-* [ ]  type
-* [ ]  body
-* [ ]  sequence
+* [ ]  Integer type
+* [ ]  <\*> body
+* [ ]  Integer sequence

@@ -1,6 +1,6 @@
-## ResponsePacket ( RequestPacket request, body )
+## ResponsePacket ( RequestPacket request, Object body )
 
-* [ ]  type
-* [ ]  body = { response: 'OK'|'FAIL' }
-* [ ]  sequence
-* [ ]  requestSeq = request.sequence
+* [ ]  Integer type
+* [ ]  Object body `{ response: 'OK'|'FAIL', data: <...> }`
+* [ ]  Integer sequence
+* [ ]  Integer requestSeq=request.sequence
