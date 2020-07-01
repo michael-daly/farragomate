@@ -28,5 +28,6 @@
 * [ ]  playerIDs = Set
 * [ ]  currTime
 * [ ]  currRound
+* [ ]  timer = Timer
 * [ ]  screen = GameScreen
 * [ ]  wordbank = GameWordbank
