@@ -26,6 +26,7 @@
 * [ ]  ownerID
 * [ ]  info
 * [ ]  playerIDs = Set
+* [ ]  currTime
 * [ ]  currRound
 * [ ]  screen = GameScreen
 * [ ]  wordbank = GameWordbank
