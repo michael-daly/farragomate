@@ -5,7 +5,7 @@
 * [ ]  currTimeout
 
 
-#### on ( event, callback )
+#### on ( String event, Function callback )
 
 * [ ]  event
        * [ ]  start ( startTime )
@@ -13,7 +13,7 @@
        * [ ]  stop ( stopTime, wasForced )
 
 
-#### off ( event, callback )
+#### off ( String event, Function callback )
 
 
 #### start ()

@@ -1,5 +1,10 @@
 ## Packet Classes
 
+#### Packet
+
+* Base packet class.
+
+
 #### Data Packet
 
 * One-time send with no response needed or expected.

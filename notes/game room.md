@@ -1,4 +1,4 @@
-## GameRoomInfo ( info = { ... } )
+## GameRoomInfo ( Object info )
 
 * [ ]  title
        * [ ]  min length: 1
@@ -21,7 +21,7 @@
        * [ ]  max: 16
 
 
-## GameRoom ( ownerID, info = GameRoomInfo )
+## GameRoom ( Integer ownerID, GameRoomInfo info )
 
 * [ ]  ownerID
 * [ ]  info

@@ -1,4 +1,4 @@
-## GameScreen ( startTime, nextScreen )
+## GameScreen ( Integer startTime, GameScreen|null nextScreen=null )
 
 > Singleton strategy
 
@@ -6,13 +6,17 @@
 * [ ]  nextScreen = GameScreen
 
 
-#### onEnterScreen ( GameRoom )
+#### onEnterScreen ( GameRoom room )
+
+```
+
+```
 
 
-#### onTick ( GameRoom )
+#### onTick ( GameRoom room )
 
 
-#### onLeaveScreen ( GameRoom )
+#### onLeaveScreen ( GameRoom room )
 
 
 #### getStartTime ()
