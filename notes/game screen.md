@@ -1,9 +1,8 @@
-## GameScreen ( Integer startTime, GameScreen|null nextScreen=null )
+## GameScreen ( Integer startTime )
 
 > Singleton strategy
 
 * [ ]  startTime = Integer|null (null means set to GameRoomInfo's timeLimit)
-* [ ]  nextScreen = GameScreen
 
 
 #### onEnterScreen ( GameRoom room )
@@ -19,11 +18,13 @@
 #### onLeaveScreen ( GameRoom room )
 
 
-#### getStartTime ()
+#### getStartTime ( GameRoom room )
 
 * Returns `this.startTime`
 
 
-#### getNextScreen ()
+#### getNextScreen ( GameRoom room )
 
-* Returns `this.nextScreen`
+* Returns the next screen in the game.
+	* Sometimes based on the state of the room.
+		* For instance, the VotingResults screen will either go to the FinalScores screen or back to the SentenceCreation screen, depending on whether it's the final round.
