@@ -28,5 +28,14 @@ const deleteClient = clientID =>
 	GameClientMap.deleteObject (clientID);
 };
 
+/**
+ * @param   {string} clientID
+ * @returns {GameClient|null} null if not found
+ */
+const getClient = clientID =>
+{
+	return GameClientMap.getObject (clientID);
+}
 
-module.exports = { addNewClient, deleteClient };
+
+module.exports = { addNewClient, deleteClient, getClient };

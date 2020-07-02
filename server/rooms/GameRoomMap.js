@@ -6,10 +6,12 @@ const { createRoom } = require ('$/rooms/GameRoom.js');
 const GameRoomMap = new GameObjectMap ();
 
 /**
- * @param   {GameRoomInfo} info
+ * @param {string}       ownerID
+ * @param {GameRoomInfo} info
+ *
  * @returns {GameRoom}
  */
-const addNewRoom = info =>
+const addNewRoom = ( ownerID, info ) =>
 {
 	const room = createRoom (info);
 
@@ -26,5 +28,14 @@ const deleteRoom = roomID =>
 	GameRoomMap.deleteObject (roomID);
 };
 
+/**
+ * @param   {string} roomID
+ * @returns {GameRoom|null} null if not found
+ */
+const getRoom = roomID =>
+{
+	return GameRoomMap.getObject (roomID);
+}
 
-module.exports = { addNewRoom, deleteRoom };
+
+module.exports = { addNewRoom, deleteRoom, getRoom };
