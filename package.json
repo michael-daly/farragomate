@@ -21,7 +21,9 @@
     "module-alias": "^2.2.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-redux": "^7.2.0"
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "ws": "^7.3.0"
   },
   "_moduleAliases": {
     "$": "server/",
