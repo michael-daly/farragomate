@@ -2,7 +2,6 @@
 
 * [ ]  Integer currSeq
 * [ ]  Map pendingPackets
-* [ ]  EventEmitter packetHandlers
 
 
 #### createDataPacket ( Integer type, <\*> body )
@@ -30,38 +29,15 @@ return new ResponsePacket (type, body);
 ```
 
 
-#### onPacket ( Integer type, Function callback )
+#### hasPendingPacket ( Integer sequence )
 
 ```js
-this.packetHandlers.on (type, callback);
+return pendingPackets.has (sequence);
 ```
 
 
-#### offPacket ( Integer type, Function callback )
+#### deletePendingPacket ( Integer sequence )
 
 ```js
-return this.packetHandlers.off (type, callback);
-```
-
-
-#### handlePacket ( Packet packet )
-
-```js
-const callbackArg = {};
-
-if ( packet instanceof ResponsePacket )
-{
-	const { pendingPackets } = this;
-
-	if ( !pendingPackets.has (packet.sequence) )
-	{
-		return;
-	}
-
-	callbackArg.request = pendingPackets.get (packet.sequence);
-
-	pendingPackets.delete (packet.sequence);
-}
-
-this.packetHandlers.emit (packet.type, callbackArg);
+pendingPackets.delete (sequence);
 ```
