@@ -1,34 +1,33 @@
 ## GameRoomInfo ( Object info )
 
-* [ ]  String title
+* [X]  String title
        * [ ]  min length: 1
        * [ ]  max length: 32
 
-* [ ]  String password
+* [X]  String password
        * [ ]  min length: 0
-       * [ ]  max length: 32
+       * [ ]  max length: 12
 
-* [ ]  Integer maxPlayers
+* [X]  Integer maxPlayers
        * [ ]  min: 1
        * [ ]  max: 16
 
-* [ ]  Integer timeLimit
+* [X]  Integer timeLimit
        * [ ]  min: 30
        * [ ]  max: 120
 
-* [ ]  Integer numRounds
+* [X]  Integer numRounds
        * [ ]  min: 1
        * [ ]  max: 16
 
 
 ## GameRoom ( Integer id, Integer ownerID, GameRoomInfo info )
 
-* [ ]  Integer id
-* [ ]  Integer ownerID
-* [ ]  GameRoomInfo info
-* [ ]  Set playerIDs
-* [ ]  Integer currTime
-* [ ]  Integer currRound
+* [X]  Integer id
+* [X]  Integer ownerID
+* [X]  GameRoomInfo info
+* [X]  Set clientIDs
+* [X]  Integer currRound
 * [ ]  Timer timer
 * [ ]  GameScreen screen
 * [ ]  GameWordbank wordbank
