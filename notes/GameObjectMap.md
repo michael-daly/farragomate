@@ -53,8 +53,6 @@ const { map } = this;
 
 if ( map.has (objectID) )
 {
-	const object = map.get (objectID);
-
-	object.sendPacket (objectID, packet);
+	map.get (objectID).sendPacket (objectID, packet);
 }
 ```

@@ -6,8 +6,10 @@
        * [ ]  max length: 24
 
 
-## GameClient ( Integer id, GameClientInfo info )
+## GameClient ( Integer id, WebSocket socket, GameClientInfo info )
 
 * [ ]  Integer id
+* [ ]  WebSocket socket
 * [ ]  GameClientInfo info
+* [ ]  PacketManager packetManager
 * [ ]  Integer|null roomID=null
