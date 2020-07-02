@@ -1,7 +1,9 @@
+const GameObjectMap = require ('$/misc/GameObjectMap.js');
+
 const { createClient } = require ('$/clients/GameClient.js');
 
 
-const GameClientMap = new Map ();
+const GameClientMap = new GameObjectMap ();
 
 /**
  * @param {WebSocket}      socket
@@ -13,7 +15,7 @@ const addNewClient = ( socket, info ) =>
 {
 	const client = createClient (socket, info);
 
-	GameClientMap.set (client.id, client);
+	GameClientMap.addObject (client);
 
 	return client;
 };
@@ -23,15 +25,7 @@ const addNewClient = ( socket, info ) =>
  */
 const deleteClient = clientID =>
 {
-	if ( !GameClientMap.has (clientID) )
-	{
-		return;
-	}
-
-	const client = GameClientMap.get (clientID);
-
-	GameClientMap.delete (clientID);
-	client.delete ();
+	GameClientMap.deleteObject (clientID);
 };
 
 

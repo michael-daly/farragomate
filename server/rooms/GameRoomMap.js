@@ -1,7 +1,9 @@
+const GameObjectMap = require ('$/misc/GameObjectMap.js');
+
 const { createRoom } = require ('$/rooms/GameRoom.js');
 
 
-const GameRoomMap = new Map ();
+const GameRoomMap = new GameObjectMap ();
 
 /**
  * @param   {GameRoomInfo} info
@@ -9,9 +11,9 @@ const GameRoomMap = new Map ();
  */
 const addNewRoom = info =>
 {
-	const room = createRoom (socket, info);
+	const room = createRoom (info);
 
-	GameRoomMap.set (room.id, room);
+	GameRoomMap.addObject (room);
 
 	return room;
 };
@@ -21,15 +23,7 @@ const addNewRoom = info =>
  */
 const deleteRoom = roomID =>
 {
-	if ( !GameRoomMap.has (roomID) )
-	{
-		return;
-	}
-
-	const room = GameRoomMap.get (roomID);
-
-	GameRoomMap.delete (roomID);
-	room.delete ();
+	GameRoomMap.deleteObject (roomID);
 };
 
 
