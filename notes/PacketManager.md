@@ -36,7 +36,7 @@ return pendingPackets.has (sequence);
 ```
 
 
-#### deletePendingPacket ( Integer sequence )
+#### removePendingPacket ( Integer sequence )
 
 ```js
 pendingPackets.delete (sequence);

@@ -23,3 +23,5 @@
 
 
 #### stop ()
+
+* Returns `this.timeLeft`
