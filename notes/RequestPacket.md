@@ -1,5 +1,5 @@
-## RequestPacket ( Integer type, <\*> body )
+## RequestPacket ( Integer sequence, Integer type, <\*> body )
 
+* [ ]  Integer sequence
 * [ ]  Integer type
 * [ ]  <\*> body
-* [ ]  Integer sequence

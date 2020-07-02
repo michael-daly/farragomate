@@ -1,6 +1,6 @@
-## ResponsePacket ( RequestPacket request, Object body )
+## ResponsePacket ( Integer sequence, RequestPacket request, Object body )
 
-* [ ]  Integer type
-* [ ]  Object body `{ response: 'OK'|'ERROR', data: <...> }`
 * [ ]  Integer sequence
+* [ ]  Integer type=request.type
+* [ ]  Object body `{ response: 'OK'|'ERROR', data: <...> }`
 * [ ]  Integer requestSeq=request.sequence
