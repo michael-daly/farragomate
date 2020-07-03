@@ -1,5 +1,7 @@
 const { v4: uuid } = require ('uuid');
 
+const PacketManager = require ('~/packets/PacketManager.js');
+
 
 class GameClient
 {
@@ -12,10 +14,11 @@ class GameClient
 	{
 		socket.gameClient = this;
 
-		this.id     = id;
-		this.socket = socket;
-		this.info   = info;
-		this.roomID = null;
+		this.id      = id;
+		this.socket  = socket;
+		this.info    = info;
+		this.packets = new PacketManager ();
+		this.roomID  = null;
 
 		this.isDeleted = false;
 	}
@@ -34,9 +37,19 @@ class GameClient
 		delete this.id;
 		delete this.socket;
 		delete this.info;
+		delete this.packets;
 		delete this.roomID;
 
 		this.isDeleted = true;
+	}
+
+	/**
+	 * @param {string} funcName
+	 * @param {...*}   args
+	 */
+	sendPacket ( funcName, ...args )
+	{
+		this.socket.send (this.packets[funcName] (...args).toString ());
 	}
 }
 
