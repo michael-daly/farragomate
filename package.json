@@ -28,6 +28,7 @@
   },
   "_moduleAliases": {
     "~/util": "common/util/",
+    "~/packets": "common/packets/",
     "~": "common/",
     "$/rooms": "server/rooms/",
     "$/client": "server/client/",
