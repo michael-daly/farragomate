@@ -18,10 +18,10 @@ class GameRoomInfo
 }
 
 /**
- * @param   {Object} info
+ * @param   {Object} [info={}]
  * @returns {GameRoomInfo}
  */
-const createRoomInfo = info =>
+const createRoomInfo = ( info = {} ) =>
 {
 	return new GameRoomInfo (applyDefaultValues (info, fieldData));
 };

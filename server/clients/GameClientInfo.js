@@ -14,12 +14,12 @@ class GameClientInfo
 }
 
 /**
- * @param   {string} displayName
+ * @param   {Object} [info={}]
  * @returns {GameClientInfo}
  */
-const createClientInfo = displayName =>
+const createClientInfo = ( info = {} ) =>
 {
-	return new GameClientInfo (applyDefaultValues (displayName, fieldData));
+	return new GameClientInfo (applyDefaultValues (info, fieldData));
 }
 
 

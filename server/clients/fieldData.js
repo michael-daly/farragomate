@@ -14,7 +14,7 @@ const fieldData =
 
 		required: true,
 
-		defaultValue: 'Username',
+		defaultValue: null,
 	},
 };
 
