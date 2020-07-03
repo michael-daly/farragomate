@@ -37,3 +37,6 @@ const isValidPacket = packet =>
 
 	return true;
 };
+
+
+module.exports = isValidPacket;
