@@ -2,6 +2,10 @@ const { v4: uuid } = require ('uuid');
 
 const PacketManager = require ('~/packets/PacketManager.js');
 
+const { packetTypes, isPacketType } = require ('~/packets/types.js');
+
+const $ = require ('~/packets/commands.js').packetCommands;
+
 
 class GameClient
 {
@@ -53,31 +57,31 @@ class GameClient
 
 		switch ( type )
 		{
-			case 'DataPacket':
+			case 'Data':
 			{
 				funcName = 'createDataPacket';
 				break;
 			}
 
-			case 'RequestPacket':
+			case 'Request':
 			{
 				funcName = 'createRequestPacket';
 				break;
 			}
 
-			case 'ResponsePacket':
+			case 'Response':
 			{
 				funcName = 'createResponsePacket';
 				break;
 			}
 
-			case 'AcceptPacket':
+			case 'Accept':
 			{
 				funcName = 'createAcceptPacket';
 				break;
 			}
 
-			case 'RejectPacket':
+			case 'Reject':
 			{
 				funcName = 'createRejectPacket';
 				break;
@@ -90,6 +94,11 @@ class GameClient
 		}
 
 		this.socket.send (this.packets[funcName] (...args).toString ());
+	}
+
+	sendError ( message, isFatal = true )
+	{
+		this.sendPacket ('Data', $.Error, { isFatal, message });
 	}
 }
 
