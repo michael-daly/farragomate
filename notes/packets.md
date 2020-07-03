@@ -1,4 +1,4 @@
-## Packet Classes
+## Packet Types
 
 #### Packet
 
@@ -20,7 +20,7 @@
 * Either an acception or a rejection. May contain more detailed information in the body.
 
 
-## Packet Types
+## Packet Commands
 
 * [ ]  Error
 * [ ]  Warning
