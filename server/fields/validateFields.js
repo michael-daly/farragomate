@@ -19,43 +19,46 @@ const
  * @param {string} field
  * @param {Object} data
  *
- * @returns {Integer|Array} [fieldName, errorCode] or FIELD_ERR_NONE if no error.
+ * @returns {Integer} FIELD_ERR_NONE if no error.
  *
  * @private
  */
 const validate = ( inputFields, fieldName, data ) =>
 {
+	let error = FIELD_ERR_NONE;
+
 	if ( !has (inputFields, fieldName) )
 	{
 		if ( data.required )
 		{
-			return [fieldName, FIELD_ERR_REQUIRED];
+			error = FIELD_ERR_REQUIRED;
 		}
-
-		return FIELD_ERR_NONE;
 	}
-
-	const field = inputFields[fieldName];
-	const type  = (data.type === FIELD_TYPE_NUM) ? 'number' : 'string';
-
-	if ( typeof field !== type )
+	else
 	{
-		return [fieldName, FIELD_ERR_TYPE];
+		const field = inputFields[fieldName];
+		const type  = (data.type === FIELD_TYPE_NUM) ? 'number' : 'string';
+
+		if ( typeof field !== type )
+		{
+			error = FIELD_ERR_TYPE;
+		}
+		else
+		{
+			const size = (data.type === FIELD_TYPE_NUM) ? field : field.length;
+
+			if ( size < data.min )
+			{
+				error = FIELD_ERR_MIN;
+			}
+			else if ( size > data.max )
+			{
+				error = FIELD_ERR_MAX;
+			}
+		}
 	}
 
-	const size = (data.type === FIELD_TYPE_NUM) ? field : field.length;
-
-	if ( size < data.min )
-	{
-		return [fieldName, FIELD_ERR_MIN];
-	}
-
-	if ( size > data.max )
-	{
-		return [fieldName, FIELD_ERR_MAX];
-	}
-
-	return FIELD_ERR_NONE;
+	return error;
 };
 
 /**
@@ -72,7 +75,7 @@ const validateFields = ( inputFields, fieldData ) =>
 
 		if ( result !== FIELD_ERR_NONE )
 		{
-			return result;
+			return [fieldName, result];
 		}
 	}
 
