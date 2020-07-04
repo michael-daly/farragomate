@@ -1,11 +1,16 @@
+require ('$/packets/registerHandlers.js');
+
 const isValidPacket = require ('~/packets/isValidPacket.js');
 
+const { RegisterInfo } = require ('~/packets/commands.js').packetCommands;
+const { handlePacket } = require ('$/packets/PacketHandlers.js');
+
 const { InvalidPacketError } = require ('$/errors.js');
-const { createClientInfo }     = require ('$/clients/GameClientInfo.js');
+const { createClientInfo }   = require ('$/clients/GameClientInfo.js');
+
+const { removeClientName } = require ('$/clients/GameClientNames.js');
 
 const { addNewClient, deleteClient } = require ('$/clients/GameClientMap.js');
-
-const { RegisterInfo } = require ('~/packets/commands.js').packetCommands;
 
 
 /**
@@ -26,11 +31,13 @@ const onNewConnection = function ( socket, request )
  */
 const onSocketClose = function ()
 {
-	const { id } = this.gameClient;
+	const { id }          = this.gameClient;
+	const { displayName } = this.gameClient.info;
 
 	deleteClient (id);
+	removeClientName (displayName);
 
-	console.log (`${id} disconnected.`);
+	console.log (`${displayName === null ? id : `${displayName} (${id})`} disconnected.`);
 };
 
 /**
@@ -81,7 +88,7 @@ const onSocketMessage = function ( message )
 		return;
 	}
 
-	console.log ('All good! :)');
+	handlePacket (gameClient, packet);
 };
 
 

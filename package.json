@@ -33,6 +33,7 @@
     "$/rooms": "server/rooms/",
     "$/client": "server/client/",
     "$/fields": "server/fields/",
+    "$/packets": "server/packets/",
     "$/misc": "server/misc/",
     "$": "server/"
   },

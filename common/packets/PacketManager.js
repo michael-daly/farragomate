@@ -48,24 +48,38 @@ class PacketManager
 
 	/**
 	 * @param {RequestPacket} request
-	 * @param {Object}        [data={}]
+	 * @param {Object}        [data=null]
 	 *
 	 * @returns {ResponsePacket}
 	 */
-	createAcceptPacket ( request, data = {} )
+	createAcceptPacket ( request, data = null )
 	{
-		return this.createResponsePacket (command, request, { response: 'OK', data });
+		const body = { response: 'OK' };
+
+		if ( data !== null )
+		{
+			body.data = data;
+		}
+
+		return this.createResponsePacket (request, body);
 	}
 
 	/**
 	 * @param {RequestPacket} request
-	 * @param {Object}        [data={}]
+	 * @param {Object}        [data=null]
 	 *
 	 * @returns {ResponsePacket}
 	 */
-	createRejectPacket ( request, data = {} )
+	createRejectPacket ( request, data = null )
 	{
-		return this.createResponsePacket (command, request, { response: 'ERROR', data });
+		const body = { response: 'ERROR' };
+
+		if ( data !== null )
+		{
+			body.data = data;
+		}
+
+		return this.createResponsePacket (request, body);
 	}
 
 	/**
