@@ -1,6 +1,11 @@
-const { createClientInfo } = require ('$/clients/GameClientInfo.js');
+const isValidPacket = require ('~/packets/isValidPacket.js');
+
+const { InvalidPacketError } = require ('$/errors.js');
+const { createClientInfo }     = require ('$/clients/GameClientInfo.js');
 
 const { addNewClient, deleteClient } = require ('$/clients/GameClientMap.js');
+
+const { RegisterInfo } = require ('~/packets/commands.js').packetCommands;
 
 
 /**
@@ -35,6 +40,48 @@ const onSocketClose = function ()
 const onSocketMessage = function ( message )
 {
 	console.log ('onSocketMessage:', message);
+
+	const { gameClient } = this;
+
+	let packet;
+
+	try
+	{
+		packet = JSON.parse (message);
+
+		if ( !isValidPacket (packet) )
+		{
+			throw new InvalidPacketError ();
+		}
+	}
+	catch ( error )
+	{
+		let errorMsg = 'Internal server error';
+
+		if ( error instanceof SyntaxError )
+		{
+			errorMsg = 'Malformed packet';
+		}
+		else if ( error instanceof InvalidPacketError )
+		{
+			errorMsg = 'Invalid packet';
+		}
+		else
+		{
+			console.error ('Packet JSON parsing error:', error.message);
+		}
+
+		gameClient.sendError (errorMsg, true);
+		return;
+	}
+
+	if ( gameClient.info.displayName === null && packet.command !== RegisterInfo )
+	{
+		gameClient.sendPacket ('Response', packet, 'Please set your name first.');
+		return;
+	}
+
+	console.log ('All good! :)');
 };
 
 

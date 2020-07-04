@@ -5,11 +5,11 @@ const fieldData          = require ('$/clients/fieldData.js');
 class GameClientInfo
 {
 	/**
-	 * @param {string} displayName
+	 * @param {Object} info
 	 */
-	constructor ( displayName )
+	constructor ( info )
 	{
-		this.displayName = displayName;
+		this.displayName = info.displayName;
 	}
 }
 
