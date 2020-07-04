@@ -26,55 +26,55 @@
 * [ ]  Warning
 * [ ]  Message
 
-* [ ]  RegisterInfo
-       * [ ]  Request
-       * [ ]  Response
+* [X]  RegisterInfo
+	* [ ]  Request
+	* [X]  Response
 
 * [ ]  CreateRoom
-       * [ ]  Request
-       * [ ]  Response
+	* [ ]  Request
+	* [ ]  Response
 
 * [ ]  JoinRoom
-       * [ ]  Request
-       * [ ]  Response
-       * [ ]  Can also be used as a DataPacket to notify members of the room someone joined.
+	* [ ]  Request
+	* [ ]  Response
+	* [ ]  Can also be used as a DataPacket to notify members of the room someone joined.
 
 * [ ]  LeaveRoom
-       * [ ]  DataPacket from client to server.
-       * [ ]  Can also be used as a DataPacket from server to client to notify members of the room someone left.
+	* [ ]  DataPacket from client to server.
+	* [ ]  Can also be used as a DataPacket from server to client to notify members of the room someone left.
 
 * [ ]  KickClient
-       * [ ]  Request
-       * [ ]  Response
-       * [ ]  Can also be used as a DataPacket from server to client to notify members of the room someone (potentially them) got kicked.
+	* [ ]  Request
+	* [ ]  Response
+	* [ ]  Can also be used as a DataPacket from server to client to notify members of the room someone (potentially them) got kicked.
 
 * [ ]  BanClient
-       * [ ]  Request
-       * [ ]  Response
-       * [ ]  Can also be used as a DataPacket from server to client to notify members of the room someone (potentially them) got banned.
+	* [ ]  Request
+	* [ ]  Response
+	* [ ]  Can also be used as a DataPacket from server to client to notify members of the room someone (potentially them) got banned.
 
 * [ ]  RoomInfo
-       * [ ]  DataPacket from server to client.
-       * [ ]  Does not have to contain all fields as it's also used to send time updates.
+	* [ ]  DataPacket from server to client.
+	* [ ]  Does not have to contain all fields as it's also used to send time updates.
 
 * [ ]  RoomList
-       * [ ]  Request
-       * [ ]  Response
+	* [ ]  Request
+	* [ ]  Response
 
 * [ ]  PlayerList
-       * [ ]  DataPacket from server to client when the client first joins the room.
+	* [ ]  DataPacket from server to client when the client first joins the room.
 
 * [ ]  SendSentence
-       * [ ]  Request
-       * [ ]  Response
+	* [ ]  Request
+	* [ ]  Response
 
 * [ ]  PlayerSentences
-       * [ ]  DataPacket from server to client.
-       * [ ]  Used in both the "SentenceVoting" screen and the "VotingResults" screen.
+	* [ ]  DataPacket from server to client.
+	* [ ]  Used in both the "SentenceVoting" screen and the "VotingResults" screen.
 
 * [ ]  CastVote
-       * [ ]  Request
-       * [ ]  Response
+	* [ ]  Request
+	* [ ]  Response
 
 * [ ]  PlayerScores
-       * [ ]  DataPacket from server to client.
+	* [ ]  DataPacket from server to client.
