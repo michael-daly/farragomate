@@ -1,6 +1,4 @@
-const sanitizeString = require ('~/util/sanitizeString.js');
-const stripNonASCII  = require ('~/util/stripNonASCII.js');
-
+const { sanitizeString, stripNonASCII }  = require ('~/util/sanitization.js');
 const { FIELD_TYPE_NUM, FIELD_TYPE_STR } = require ('$/fields/constants.js');
 
 
