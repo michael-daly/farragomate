@@ -6,16 +6,19 @@ const { createRoom } = require ('$/rooms/GameRoom.js');
 const GameRoomMap = new GameObjectMap ();
 
 /**
- * @param {string}       ownerID
+ * @param {GameClient}   owner
  * @param {GameRoomInfo} info
  *
  * @returns {GameRoom}
  */
-const addNewRoom = ( ownerID, info ) =>
+const addNewRoom = ( owner, info ) =>
 {
-	const room = createRoom (info);
+	const room = createRoom (owner.id, info);
 
 	GameRoomMap.addObject (room);
+
+	room.addClientID (owner.id);
+	owner.roomID = room.id;
 
 	return room;
 };
