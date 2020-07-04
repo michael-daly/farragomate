@@ -26,7 +26,7 @@
 * [ ]  Warning
 * [ ]  Message
 
-* [X]  RegisterInfo
+* [ ]  RegisterInfo
 	* [ ]  Request
 	* [X]  Response
 
