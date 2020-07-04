@@ -1,5 +1,9 @@
 const { v4: uuid } = require ('uuid');
 
+const { has } = require ('~/util/has.js');
+
+const fieldData = require ('$/rooms/fieldData.js');
+
 
 class GameRoom
 {
@@ -36,6 +40,34 @@ class GameRoom
 		delete this.currRound;
 
 		this.isDeleted = true;
+	}
+
+	/**
+	 * @param {string} field
+	 * @param {*}      value
+	 */
+	setInfoField ( field, value )
+	{
+		if ( has (fieldData, field) )
+		{
+			this.info[field] = value;
+		}
+	}
+
+	/**
+	 * @param {string} clientID
+	 */
+	addClientID ( clientID )
+	{
+		this.clientIDs.add (clientIDs);
+	}
+
+	/**
+	 * @param {string} clientID
+	 */
+	removeClientID ( clientID )
+	{
+		this.clientIDs.delete (clientID);
 	}
 }
 

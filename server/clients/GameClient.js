@@ -1,6 +1,9 @@
 const { v4: uuid } = require ('uuid');
 
+const { has } = require ('~/util/has.js');
+
 const PacketManager = require ('~/packets/PacketManager.js');
+const fieldData     = require ('$/clients/fieldData.js');
 
 const { packetTypes, isPacketType } = require ('~/packets/types.js');
 
@@ -45,6 +48,18 @@ class GameClient
 		delete this.roomID;
 
 		this.isDeleted = true;
+	}
+
+	/**
+	 * @param {string} field
+	 * @param {*}      value
+	 */
+	setInfoField ( field, value )
+	{
+		if ( has (fieldData, field) )
+		{
+			this.info[field] = value;
+		}
 	}
 
 	/**
