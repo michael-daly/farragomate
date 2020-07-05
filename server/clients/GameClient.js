@@ -5,7 +5,8 @@ const { has } = require ('~/util/has.js');
 const PacketManager = require ('~/packets/PacketManager.js');
 const fieldData     = require ('$/clients/fieldData.js');
 
-const { packetTypes, isPacketType } = require ('~/packets/types.js');
+const { addClientName, removeClientName } = require ('$/clients/GameClientNames.js');
+const { packetTypes, isPacketType }       = require ('~/packets/types.js');
 
 const $ = require ('~/packets/commands.js').packetCommands;
 
@@ -51,15 +52,18 @@ class GameClient
 	}
 
 	/**
-	 * @param {string} field
-	 * @param {*}      value
+	 * @param {string} name
 	 */
-	setInfoField ( field, value )
+	setDisplayName ( name )
 	{
-		if ( has (fieldData, field) )
+		if ( this.info.displayName !== null )
 		{
-			this.info[field] = value;
+			removeClientName (this.info.displayName);
 		}
+
+		addClientName (name);
+
+		this.info.displayName = name;
 	}
 
 	/**
