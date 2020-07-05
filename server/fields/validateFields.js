@@ -1,7 +1,5 @@
 const { has } = require ('~/util/has.js');
 
-const { FIELD_TYPE_NUM, FIELD_TYPE_STR } = require ('$/fields/constants.js');
-
 const
 {
 	FIELD_ERR_NONE,
@@ -36,15 +34,14 @@ const validate = ( inputFields, fieldName, data ) =>
 	else
 	{
 		const field = inputFields[fieldName];
-		const type  = (data.type === FIELD_TYPE_NUM) ? 'number' : 'string';
 
-		if ( typeof field !== type )
+		if ( typeof field !== data.type )
 		{
 			error = FIELD_ERR_TYPE;
 		}
 		else
 		{
-			const size = (data.type === FIELD_TYPE_NUM) ? field : field.length;
+			const size = (data.type === 'number') ? field : field.length;
 
 			if ( size < data.min )
 			{

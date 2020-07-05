@@ -2,7 +2,6 @@ require ('$/packets/registerHandlers.js');
 
 const isValidPacket = require ('~/packets/isValidPacket.js');
 
-const { RegisterInfo } = require ('~/packets/commands.js').packetCommands;
 const { handlePacket } = require ('$/packets/PacketHandlers.js');
 
 const { InvalidPacketError } = require ('$/errors.js');
@@ -82,7 +81,7 @@ const onSocketMessage = function ( message )
 		return;
 	}
 
-	if ( gameClient.info.displayName === null && packet.command !== RegisterInfo )
+	if ( gameClient.info.displayName === null && packet.command !== 'RegisterInfo' )
 	{
 		gameClient.sendPacket ('Response', packet, 'Please set your name first.');
 		return;

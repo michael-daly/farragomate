@@ -6,9 +6,6 @@ const PacketManager = require ('~/packets/PacketManager.js');
 const fieldData     = require ('$/clients/fieldData.js');
 
 const { addClientName, removeClientName } = require ('$/clients/GameClientNames.js');
-const { packetTypes, isPacketType }       = require ('~/packets/types.js');
-
-const $ = require ('~/packets/commands.js').packetCommands;
 
 
 class GameClient
@@ -117,7 +114,7 @@ class GameClient
 
 	sendError ( message, isFatal = true )
 	{
-		this.sendPacket ('Data', $.Error, { isFatal, message });
+		this.sendPacket ('Data', 'Error', { isFatal, message });
 	}
 }
 

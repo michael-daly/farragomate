@@ -1,13 +1,11 @@
 const deepFreeze = require ('~/util/deepFreeze.js');
 
-const { FIELD_TYPE_NUM, FIELD_TYPE_STR } = require ('$/fields/constants.js');
-
 
 const fieldData =
 {
 	title:
 	{
-		type: FIELD_TYPE_STR,
+		type: 'string',
 
 		min: 1,
 		max: 32,
@@ -19,7 +17,7 @@ const fieldData =
 
 	password:
 	{
-		type: FIELD_TYPE_STR,
+		type: 'string',
 
 		min: 0,
 		max: 12,
@@ -31,7 +29,7 @@ const fieldData =
 
 	maxPlayers:
 	{
-		type: FIELD_TYPE_NUM,
+		type: 'number',
 
 		min: 1,
 		max: 16,
@@ -43,7 +41,7 @@ const fieldData =
 
 	timeLimit:
 	{
-		type: FIELD_TYPE_NUM,
+		type: 'number',
 
 		min: 30,
 		max: 120,
@@ -55,7 +53,7 @@ const fieldData =
 
 	numRounds:
 	{
-		type: FIELD_TYPE_NUM,
+		type: 'number',
 
 		min: 1,
 		max: 16,

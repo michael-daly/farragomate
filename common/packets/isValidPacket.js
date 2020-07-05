@@ -1,5 +1,5 @@
-const { isPacketCommand }           = require ('~/packets/commands.js');
-const { packetTypes, isPacketType } = require ('~/packets/types.js');
+const { isPacketCommand } = require ('~/packets/commands.js');
+const { isPacketType }    = require ('~/packets/types.js');
 
 const { has, hasMultiple } = require ('~/util/has.js');
 
@@ -22,7 +22,7 @@ const isValidPacket = packet =>
 		return false;
 	}
 
-	if ( packet.type === packetTypes.ResponsePacket )
+	if ( packet.type === 'Response' )
 	{
 		if ( !has (packet, 'requestSeq') || !Number.isInteger (packet.requestSeq) )
 		{

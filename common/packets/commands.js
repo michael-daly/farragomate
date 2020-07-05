@@ -1,9 +1,4 @@
-const enumerate = require ('~/util/enumerate.js');
-
-const { has } = require ('~/util/has.js');
-
-
-const commandNames =
+const commands = new Set (
 [
 	// DataPackets sent from server to client.
 	'Error',
@@ -52,22 +47,13 @@ const commandNames =
 
 	// RequestPacket->ResponsePacket for voting for a player's sentence.
 	'CastVote',
-];
-
-const packetCommands = enumerate (commandNames);
+]);
 
 
 module.exports =
 {
-	packetCommands,
-
 	isPacketCommand ( command )
 	{
-		if ( typeof command === 'string' )
-		{
-			return has (packetCommands, command);
-		}
-
-		return Number.isInteger (command) && command >= 0 && command < commandNames.length;
-	}
+		return commands.has (command);
+	},
 };

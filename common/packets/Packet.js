@@ -1,6 +1,3 @@
-const T = require ('~/packets/types.js').packetTypes;
-
-
 class Packet
 {
 	/**
@@ -10,7 +7,7 @@ class Packet
 	 */
 	constructor ( sequence, command, body = {} )
 	{
-		this.type     = T.Packet;
+		this.type     = 'Packet';
 		this.sequence = sequence;
 		this.command  = command;
 		this.body     = body;
@@ -32,7 +29,7 @@ class DataPacket extends Packet
 	constructor ( ...args )
 	{
 		super (...args);
-		this.type = T.DataPacket;
+		this.type = 'Data';
 	}
 }
 
@@ -41,7 +38,7 @@ class RequestPacket extends Packet
 	constructor ( ...args )
 	{
 		super (...args);
-		this.type = T.RequestPacket;
+		this.type = 'Request';
 	}
 }
 
@@ -56,7 +53,7 @@ class ResponsePacket extends Packet
 	{
 		super (sequence, request.command, body);
 
-		this.type       = T.ResponsePacket;
+		this.type       = 'Response';
 		this.requestSeq = request.sequence;
 	}
 

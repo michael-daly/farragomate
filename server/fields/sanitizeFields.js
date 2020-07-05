@@ -1,5 +1,4 @@
 const { sanitizeString, stripNonASCII }  = require ('~/util/sanitization.js');
-const { FIELD_TYPE_NUM, FIELD_TYPE_STR } = require ('$/fields/constants.js');
 
 
 /**
@@ -17,7 +16,7 @@ const sanitizeFields = ( inputFields, fieldData ) =>
 		const field = inputFields[fieldName];
 		const data  = fieldData[fieldName];
 
-		if ( data.type === FIELD_TYPE_STR )
+		if ( data.type === 'string' )
 		{
 			sanitized[fieldName] = sanitizeString (stripNonASCII (field)).trim ();
 		}

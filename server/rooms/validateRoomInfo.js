@@ -1,6 +1,5 @@
 const fieldData      = require ('$/rooms/fieldData.js');
 const validateFields = require ('$/fields/validateFields.js');
-const enumerate      = require ('~/util/enumerate.js');
 
 const { FIELD_ERR_NONE, RM_ERR_IN_ROOM } = require ('~/errorCodes.js');
 
