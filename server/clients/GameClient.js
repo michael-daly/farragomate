@@ -64,52 +64,52 @@ class GameClient
 	}
 
 	/**
-	 * @param {string} funcName
+	 * @param {string} type
 	 * @param {...*}   args
 	 */
 	sendPacket ( type, ...args )
 	{
-		let funcName;
+		let packet;
 
 		switch ( type )
 		{
 			case 'Data':
 			{
-				funcName = 'createDataPacket';
+				packet = this.packets.createDataPacket (...args);
 				break;
 			}
 
 			case 'Request':
 			{
-				funcName = 'createRequestPacket';
+				packet = this.packets.createRequestPacket (...args);
 				break;
 			}
 
 			case 'Response':
 			{
-				funcName = 'createResponsePacket';
+				packet = this.packets.createResponsePacket (...args);
 				break;
 			}
 
 			case 'Accept':
 			{
-				funcName = 'createAcceptPacket';
+				packet = this.packets.createAcceptPacket (...args);
 				break;
 			}
 
 			case 'Reject':
 			{
-				funcName = 'createRejectPacket';
+				packet = this.packets.createRejectPacket (...args);
 				break;
 			}
 
 			default:
 			{
-				throw new Error (`Invalid packet type ${type}`);
+				throw new Error (`Invalid packet type \`${type}\``);
 			}
 		}
 
-		this.socket.send (this.packets[funcName] (...args).toString ());
+		this.socket.send (packet.toString ());
 	}
 
 	sendError ( message, isFatal = true )
