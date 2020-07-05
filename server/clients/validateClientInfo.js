@@ -4,10 +4,8 @@ const enumerate      = require ('~/util/enumerate.js');
 
 const { hasClientName } = require ('$/clients/GameClientNames.js');
 
-const { FIELD_ERR_NONE } = require ('$/fields/constants.js');
+const { FIELD_ERR_NONE, FIELD_ERR_UNIQUE } = require ('~/errorCodes.js');
 
-
-const errors = enumerate (['CL_INFO_ERR_UNIQUE']);
 
 /**
  * @param   {Object} info
@@ -24,11 +22,11 @@ const validateClientInfo = info =>
 
 	if ( hasClientName (info.displayName) )
 	{
-		return ['displayName', errors.CL_INFO_ERR_UNIQUE];
+		return ['displayName', FIELD_ERR_UNIQUE];
 	}
 
 	return FIELD_ERR_NONE;
 };
 
 
-module.exports = { ...errors, validateClientInfo };
+module.exports = validateClientInfo;

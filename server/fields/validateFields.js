@@ -1,5 +1,7 @@
 const { has } = require ('~/util/has.js');
 
+const { FIELD_TYPE_NUM, FIELD_TYPE_STR } = require ('$/fields/constants.js');
+
 const
 {
 	FIELD_ERR_NONE,
@@ -7,11 +9,8 @@ const
 	FIELD_ERR_TYPE,
 	FIELD_ERR_MIN,
 	FIELD_ERR_MAX,
-
-	FIELD_TYPE_NUM,
-	FIELD_TYPE_STR,
 }
-= require ('$/fields/constants.js');
+= require ('~/errorCodes.js');
 
 
 /**
