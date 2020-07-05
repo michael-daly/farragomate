@@ -1,6 +1,5 @@
 const fieldData      = require ('$/clients/fieldData.js');
 const validateFields = require ('$/fields/validateFields.js');
-const enumerate      = require ('~/util/enumerate.js');
 
 const { hasClientName } = require ('$/clients/GameClientNames.js');
 

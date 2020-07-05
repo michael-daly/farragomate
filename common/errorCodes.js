@@ -17,4 +17,4 @@ module.exports =
 
 		'RM_ERR_IN_ROOM',
 	]),
-}
+};
