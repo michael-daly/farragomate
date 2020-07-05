@@ -19,6 +19,7 @@ class GameRoom
 		this.info    = info;
 
 		this.clientIDs = new Set ();
+		this.bannedIDs = new Set ();
 		this.currRound = 0;
 
 		this.isDeleted = false;
@@ -68,6 +69,40 @@ class GameRoom
 	removeClientID ( clientID )
 	{
 		this.clientIDs.delete (clientID);
+	}
+
+	/**
+	 * @param   {string} clientID
+	 * @returns {boolean}
+	 */
+	hasClientID ( clientID )
+	{
+		return this.clientIDs.has (clientID);
+	}
+
+	/**
+	 * @param {string} clientID
+	 */
+	addBannedID ( clientID )
+	{
+		this.bannedIDs.add (clientIDs);
+	}
+
+	/**
+	 * @param {string} clientID
+	 */
+	removeBannedID ( clientID )
+	{
+		this.bannedIDs.delete (clientID);
+	}
+
+	/**
+	 * @param   {string} clientID
+	 * @returns {boolean}
+	 */
+	hasBannedID ( clientID )
+	{
+		return this.bannedIDs.has (clientID);
 	}
 }
 
