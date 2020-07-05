@@ -3,18 +3,18 @@ const validateFields = require ('$/fields/validateFields.js');
 
 const { hasClientName } = require ('$/clients/GameClientNames.js');
 
-const { FIELD_ERR_NONE, FIELD_ERR_UNIQUE } = require ('~/errorCodes.js');
+const { ERROR_NONE, FIELD_ERR_UNIQUE } = require ('~/errorCodes.js');
 
 
 /**
  * @param   {Object} info
- * @returns {Integer|Array} [fieldName, errorCode] or FIELD_ERR_NONE if no error.
+ * @returns {Integer|Array} [fieldName, errorCode] or ERROR_NONE if no error.
  */
 const validateClientInfo = info =>
 {
 	const result = validateFields (info, fieldData);
 
-	if ( result !== FIELD_ERR_NONE )
+	if ( result !== ERROR_NONE )
 	{
 		return result;
 	}
@@ -24,7 +24,7 @@ const validateClientInfo = info =>
 		return ['displayName', FIELD_ERR_UNIQUE];
 	}
 
-	return FIELD_ERR_NONE;
+	return ERROR_NONE;
 };
 
 

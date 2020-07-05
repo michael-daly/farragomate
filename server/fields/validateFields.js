@@ -2,7 +2,8 @@ const { has } = require ('~/util/has.js');
 
 const
 {
-	FIELD_ERR_NONE,
+	ERROR_NONE,
+
 	FIELD_ERR_REQUIRED,
 	FIELD_ERR_TYPE,
 	FIELD_ERR_MIN,
@@ -16,13 +17,13 @@ const
  * @param {string} field
  * @param {Object} data
  *
- * @returns {Integer} FIELD_ERR_NONE if no error.
+ * @returns {Integer} ERROR_NONE if no error.
  *
  * @private
  */
 const validate = ( inputFields, fieldName, data ) =>
 {
-	let error = FIELD_ERR_NONE;
+	let error = ERROR_NONE;
 
 	if ( !has (inputFields, fieldName) )
 	{
@@ -61,7 +62,7 @@ const validate = ( inputFields, fieldName, data ) =>
  * @param {Object} inputFields
  * @param {Object} fieldData
  *
- * @returns {Integer|Array} [fieldName, errorCode] or FIELD_ERR_NONE if no error.
+ * @returns {Integer|Array} [fieldName, errorCode] or ERROR_NONE if no error.
  */
 const validateFields = ( inputFields, fieldData ) =>
 {
@@ -69,13 +70,13 @@ const validateFields = ( inputFields, fieldData ) =>
 	{
 		const result = validate (inputFields, fieldName, fieldData[fieldName]);
 
-		if ( result !== FIELD_ERR_NONE )
+		if ( result !== ERROR_NONE )
 		{
 			return [fieldName, result];
 		}
 	}
 
-	return FIELD_ERR_NONE;
+	return ERROR_NONE;
 };
 
 

@@ -8,7 +8,6 @@ module.exports =
 		'ERROR_NONE',
 		'ERROR_GENERIC',
 
-		'FIELD_ERR_NONE',
 		'FIELD_ERR_REQUIRED',
 		'FIELD_ERR_TYPE',
 		'FIELD_ERR_MIN',
