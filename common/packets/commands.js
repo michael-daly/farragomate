@@ -19,6 +19,9 @@ const commands = new Set (
 	// When a DataPacket sent from client to server, it's a notification that they left.
 	'LeaveRoom',
 
+	// DataPacket sent from server to client notifying that the room they were in was deleted.
+	'DeleteRoom',
+
 	// When a DataPacket sent from server to client, it's a notification that someone was kicked.
 	// When a RequestPacket->ResponsePacket, it's a request/response to kick a client.
 	'KickClient',

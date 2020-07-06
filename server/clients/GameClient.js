@@ -50,7 +50,7 @@ class GameClient
 
 	toJSON ()
 	{
-		return { id: this.id, displayName: this.info.displayName, roomID: this.roomID };
+		return { id: this.id, displayName: this.getDisplayName (), roomID: this.roomID };
 	}
 
 	toString ()
@@ -71,6 +71,14 @@ class GameClient
 		addClientName (name);
 
 		this.info.displayName = name;
+	}
+
+	/**
+	 * @returns {string}
+	 */
+	getDisplayName ()
+	{
+		return this.info.displayName;
 	}
 
 	/**

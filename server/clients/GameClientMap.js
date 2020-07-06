@@ -1,4 +1,5 @@
-const GameObjectMap = require ('$/misc/GameObjectMap.js');
+const GameObjectMap    = require ('$/misc/GameObjectMap.js');
+const GameClientEvents = require ('$/clients/GameClientEvents.js');
 
 const { createClient } = require ('$/clients/GameClient.js');
 
@@ -25,6 +26,8 @@ const addNewClient = ( socket, info ) =>
  */
 const deleteClient = clientID =>
 {
+	GameClientEvents.emit ('deleteClient', getClient (clientID));
+
 	GameClientMap.deleteObject (clientID);
 };
 

@@ -1,3 +1,5 @@
+require ('$/clients/registerEvents.js');
+require ('$/rooms/registerEvents.js');
 require ('$/packets/registerHandlers.js');
 
 const isValidPacket = require ('~/packets/isValidPacket.js');
@@ -6,8 +8,6 @@ const { handlePacket } = require ('$/packets/PacketHandlers.js');
 
 const { InvalidPacketError } = require ('$/errors.js');
 const { createClientInfo }   = require ('$/clients/GameClientInfo.js');
-
-const { removeClientName } = require ('$/clients/GameClientNames.js');
 
 const { addNewClient, deleteClient } = require ('$/clients/GameClientMap.js');
 
@@ -30,13 +30,11 @@ const onNewConnection = function ( socket, request )
  */
 const onSocketClose = function ()
 {
-	const { id }          = this.gameClient;
-	const { displayName } = this.gameClient.info;
+	const { id } = this.gameClient;
 
 	deleteClient (id);
-	removeClientName (displayName);
 
-	console.log (`${displayName === null ? id : `${displayName} (${id})`} disconnected.`);
+	console.log (`${id} disconnected.`);
 };
 
 /**

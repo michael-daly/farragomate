@@ -124,6 +124,19 @@ class GameRoom
 	{
 		return this.bannedIDs.has (clientID);
 	}
+
+	/**
+	 * @param {Function} callback
+	 */
+	forEachClient ( callback )
+	{
+		const { clientIDs } = this;
+
+		for ( let id of clientIDs )
+		{
+			callback (id);
+		}
+	}
 }
 
 /**

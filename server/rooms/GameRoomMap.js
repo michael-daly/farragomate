@@ -1,4 +1,5 @@
-const GameObjectMap = require ('$/misc/GameObjectMap.js');
+const GameObjectMap  = require ('$/misc/GameObjectMap.js');
+const GameRoomEvents = require ('$/rooms/GameRoomEvents.js');
 
 const { createRoom } = require ('$/rooms/GameRoom.js');
 const { getClient }  = require ('$/clients/GameClientMap.js');
@@ -17,28 +18,25 @@ const addNewRoom = ( owner, info ) =>
 	const room = createRoom (owner.id, info);
 
 	GameRoomMap.addObject (room);
-	addClientToRoom (owner, room);
+	addClientToRoom (room, owner);
 
 	return room;
 };
-
-/**
- * @param {GameClient} client
- * @param {GameRoom}   room
- */
-const addClientToRoom = ( client, room ) =>
-{
-	client.roomID = room.id;
-	sendDataToRoom (room.id, 'JoinRoom', client.toString ());
-
-	room.addClientID (client.id);
-}
 
 /**
  * @param {string} roomID
  */
 const deleteRoom = roomID =>
 {
+	const room = getRoom (roomID);
+
+	GameRoomEvents.emit ('deleteRoom', room);
+
+	room.forEachClient (clientID =>
+	{
+		getClient (clientID).roomID = null;
+	});
+
 	GameRoomMap.deleteObject (roomID);
 };
 
@@ -49,16 +47,47 @@ const deleteRoom = roomID =>
 const getRoom = roomID =>
 {
 	return GameRoomMap.getObject (roomID);
-}
+};
 
 /**
- * @param {string} roomID
- * @param {string} command
- * @param {*}      body
+ * @param {GameRoom}   room
+ * @param {GameClient} client
  */
-const sendDataToRoom = ( roomID, command, body ) =>
+const addClientToRoom = ( room, client ) =>
 {
-	const { clientIDs } = getRoom (roomID);
+	GameRoomEvents.emit ('joinRoom', room, client);
+
+	client.roomID = room.id;
+	room.addClientID (client.id);
+};
+
+/**
+ * @param {GameRoom}   room
+ * @param {GameClient} client
+ */
+const removeClientFromRoom = ( room, client ) =>
+{
+	if ( room.ownerID === client.id )
+	{
+		deleteRoom (room.id);
+	}
+	else
+	{
+		GameRoomEvents.emit ('leaveRoom', room, client);
+
+		client.roomID = null;
+		room.removeClientID (client.id);
+	}
+};
+
+/**
+ * @param {GameRoom} room
+ * @param {string}   command
+ * @param {*}        body
+ */
+const sendDataToRoom = ( room, command, body ) =>
+{
+	const { clientIDs } = room;
 
 	for ( let id of clientIDs )
 	{
@@ -67,4 +96,14 @@ const sendDataToRoom = ( roomID, command, body ) =>
 };
 
 
-module.exports = { addNewRoom, addClientToRoom, deleteRoom, getRoom, sendDataToRoom };
+module.exports =
+{
+	addNewRoom,
+	deleteRoom,
+	getRoom,
+
+	addClientToRoom,
+	removeClientFromRoom,
+
+	sendDataToRoom,
+};

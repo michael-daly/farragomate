@@ -36,12 +36,12 @@
 
 * [ ]  JoinRoom
 	* [ ]  Request
-	* [ ]  Response
+	* [X]  Response
 	* [X]  Can also be used as a DataPacket to notify members of the room someone joined.
 
 * [ ]  LeaveRoom
 	* [ ]  DataPacket from client to server.
-	* [ ]  Can also be used as a DataPacket from server to client to notify members of the room someone left.
+	* [X]  Can also be used as a DataPacket from server to client to notify members of the room someone left.
 
 * [ ]  KickClient
 	* [ ]  Request
