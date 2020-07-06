@@ -1,6 +1,5 @@
-const { addPacketHandler } = require ('$/packets/PacketHandlers.js');
-
-const { addClientToRoom, getRoom, sendDataToRoom } = require ('$/rooms/GameRoomMap.js');
+const { addPacketHandler }         = require ('$/packets/PacketHandlers.js');
+const { addClientToRoom, getRoom } = require ('$/rooms/GameRoomMap.js');
 
 const { ERROR_IN_ROOM, ERROR_NOT_FOUND, ERROR_ROOM_FULL, ERROR_BANNED } = require ('~/errorCodes.js');
 

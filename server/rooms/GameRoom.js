@@ -76,6 +76,15 @@ class GameRoom
 	}
 
 	/**
+	 * @param   {string} clientID
+	 * @returns {boolean}
+	 */
+	isOwner ( clientID )
+	{
+		return clientID === this.ownerID;
+	}
+
+	/**
 	 * @param {string} clientID
 	 */
 	addClientID ( clientID )

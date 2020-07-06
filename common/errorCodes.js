@@ -15,8 +15,10 @@ module.exports =
 		'FIELD_ERR_UNIQUE',
 
 		'ERROR_IN_ROOM',
+		'ERROR_NOT_IN_ROOM',
 		'ERROR_NOT_FOUND',
 		'ERROR_ROOM_FULL',
 		'ERROR_BANNED',
+		'ERROR_NOT_ALLOWED',
 	]),
 };

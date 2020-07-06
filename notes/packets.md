@@ -40,13 +40,13 @@
 	* [X]  Can also be used as a DataPacket to notify members of the room someone joined.
 
 * [ ]  LeaveRoom
-	* [X]  DataPacket from client to server.
+	* [-]  DataPacket from client to server.
 	* [X]  Can also be used as a DataPacket from server to client to notify members of the room someone left.
 
 * [ ]  KickClient
 	* [ ]  Request
-	* [ ]  Response
-	* [ ]  Can also be used as a DataPacket from server to client to notify members of the room someone (potentially them) got kicked.
+	* [X]  Response
+	* [X]  Can also be used as a DataPacket from server to client to notify members of the room someone (potentially them) got kicked.
 
 * [ ]  BanClient
 	* [ ]  Request
