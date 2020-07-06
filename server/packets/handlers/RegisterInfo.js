@@ -4,21 +4,28 @@ const validateClientInfo = require ('$/clients/validateClientInfo.js');
 
 const { addPacketHandler } = require ('$/packets/PacketHandlers.js');
 
-const { ERROR_NONE } = require ('~/errorCodes.js');
+const { ERROR_NONE, ERROR_IN_ROOM } = require ('~/errorCodes.js');
 
 
 addPacketHandler ('Request', 'RegisterInfo', ( client, packet ) =>
 {
-	const info   = sanitizeFields (packet.body, fieldData);
-	const result = validateClientInfo (info);
-
-	if ( result !== ERROR_NONE )
+	if ( client.roomID !== null )
 	{
-		client.sendPacket ('Reject', packet, result);
+		client.sendPacket ('Reject', packet, ERROR_IN_ROOM);
 	}
 	else
 	{
-		client.setDisplayName (info.displayName);
-		client.sendPacket ('Accept', packet, client.id);
+		const info   = sanitizeFields (packet.body, fieldData);
+		const result = validateClientInfo (info);
+
+		if ( result !== ERROR_NONE )
+		{
+			client.sendPacket ('Reject', packet, result);
+		}
+		else
+		{
+			client.setDisplayName (info.displayName);
+			client.sendPacket ('Accept', packet, client.id);
+		}
 	}
 });
