@@ -1,8 +1,9 @@
 const GameObjectMap  = require ('$/misc/GameObjectMap.js');
 const GameRoomEvents = require ('$/rooms/GameRoomEvents.js');
 
-const { createRoom } = require ('$/rooms/GameRoom.js');
-const { getClient }  = require ('$/clients/GameClientMap.js');
+const { createRoom }     = require ('$/rooms/GameRoom.js');
+const { createRoomInfo } = require ('$/rooms/GameRoomInfo.js');
+const { getClient }      = require ('$/clients/GameClientMap.js');
 
 
 const GameRoomMap = new GameObjectMap ();
@@ -15,10 +16,12 @@ const GameRoomMap = new GameObjectMap ();
  */
 const addNewRoom = ( owner, info ) =>
 {
-	const room = createRoom (owner.id, info);
+	const room = createRoom (owner.id, createRoomInfo (info));
 
 	GameRoomMap.addObject (room);
 	addClientToRoom (room, owner);
+
+	GameRoomEvents.emit ('createRoom', room, owner);
 
 	return room;
 };
@@ -95,6 +98,24 @@ const sendDataToRoom = ( room, command, body ) =>
 	}
 };
 
+/**
+ * @param {GameRoom}   room
+ * @param {GameClient} client
+ */
+const sendRoomInfo = ( room, client ) =>
+{
+	client.sendPacket ('Data', 'RoomInfo', room.toString ());
+};
+
+/**
+ * @param {GameRoom}   room
+ * @param {GameClient} client
+ */
+const sendInfoToRoom = ( room ) =>
+{
+	sendDataToRoom (room, 'RoomInfo', room.toString ());
+};
+
 
 module.exports =
 {
@@ -106,4 +127,6 @@ module.exports =
 	removeClientFromRoom,
 
 	sendDataToRoom,
+	sendRoomInfo,
+	sendInfoToRoom,
 };

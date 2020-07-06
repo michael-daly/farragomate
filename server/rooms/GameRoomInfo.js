@@ -1,6 +1,8 @@
 const applyDefaultValues = require ('$/fields/applyDefaultValues.js');
 const fieldData          = require ('$/rooms/fieldData.js');
 
+const { has } = require ('~/util/has.js');
+
 
 class GameRoomInfo
 {
@@ -14,6 +16,51 @@ class GameRoomInfo
 		this.maxPlayers = info.maxPlayers;
 		this.timeLimit  = info.timeLimit;
 		this.numRounds  = info.numRounds;
+	}
+
+	/**
+	 * @param {string} field
+	 * @param {*}      value
+	 */
+	setField ( field, value )
+	{
+		if ( has (fieldData, field) )
+		{
+			this[field] = value;
+		}
+	}
+
+	/**
+	 * @param   {string} field
+	 * @returns {*} null if not valid
+	 */
+	getField ( field )
+	{
+		return has (fieldData, field) ? this[field] : null;
+	}
+
+	/**
+	 * @returns {Object}
+	 */
+	toJSON ()
+	{
+		const object =
+		{
+			title:      this.title,
+			maxPlayers: this.maxPlayers,
+			timeLimit:  this.timeLimit,
+			numRounds:  this.numRounds,
+		};
+
+		return object;
+	}
+
+	/**
+	 * @returns {string}
+	 */
+	toString ()
+	{
+		return JSON.stringify (this.toJSON ());
 	}
 }
 

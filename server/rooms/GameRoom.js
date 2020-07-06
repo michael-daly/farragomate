@@ -2,6 +2,7 @@ const { v4: uuid } = require ('uuid');
 
 const { has } = require ('~/util/has.js');
 
+const Timer     = require ('~/Timer.js');
 const fieldData = require ('$/rooms/fieldData.js');
 
 
@@ -22,6 +23,8 @@ class GameRoom
 		this.bannedIDs = new Set ();
 		this.currRound = 0;
 
+		this.timer = new Timer ();
+
 		this.isDeleted = false;
 	}
 
@@ -32,6 +35,7 @@ class GameRoom
 			return;
 		}
 
+		this.timer.delete ();
 		this.clientIDs.clear ();
 
 		delete this.id;
@@ -39,6 +43,7 @@ class GameRoom
 		delete this.info;
 		delete this.clientIDs;
 		delete this.currRound;
+		delete this.timer;
 
 		this.isDeleted = true;
 	}
@@ -49,22 +54,47 @@ class GameRoom
 	 */
 	setInfoField ( field, value )
 	{
-		if ( has (fieldData, field) )
-		{
-			this.info[field] = value;
-		}
+		this.info.setField (field, value);
 	}
 
 	/**
 	 * @param   {string} field
-	 * @returns {*}
+	 * @returns {*} null if not valid
 	 */
 	getInfoField ( field )
 	{
-		if ( has (fieldData, field) )
-		{
-			return this.info[field];
-		}
+		return this.info.getField (field);
+	}
+
+	/**
+	 * @param {Integer} startTime
+	 */
+	startTimer ( startTime )
+	{
+		this.timer.start (startTime);
+	}
+
+	stopTimer ()
+	{
+		this.timer.stop ();
+	}
+
+	/**
+	 * @param {string}   event
+	 * @param {Function} callback
+	 */
+	onTimer ( event, callback )
+	{
+		this.timer.events.on (event, callback);
+	}
+
+	/**
+	 * @param {string}   event
+	 * @param {Function} callback
+	 */
+	offTimer ( event, callback )
+	{
+		this.timer.events.off (event, callback);
 	}
 
 	/**
@@ -145,6 +175,32 @@ class GameRoom
 		{
 			callback (id);
 		}
+	}
+
+	/**
+	 * @returns {Object}
+	 */
+	toJSON ()
+	{
+		const object = this.info.toJSON ();
+
+		object.timeLeft  = this.timeLeft;
+		object.currRound = this.currRound;
+
+		return object;
+	}
+
+	/**
+	 * @returns {string}
+	 */
+	toString ()
+	{
+		return JSON.stringify (this.toJSON ());
+	}
+
+	get timeLeft ()
+	{
+		return this.timer.timeLeft;
 	}
 }
 

@@ -38,23 +38,7 @@ class Timer
 		if ( this.timeLeft > 0 )
 		{
 			this.events.emit ('start', this.timeLeft);
-			this.tick ();
-		}
-	}
-
-	tick ()
-	{
-		this.events.emit ('tick', this.timeLeft);
-
-		if ( this.timeLeft <= 0 )
-		{
-			clearTimeout (this.currTimeout);
-			this.events.emit ('stop', this.timeLeft, false);
-		}
-		else
-		{
-			this.timeLeft--;
-			this.currTimeout = setTimeout (this.tick.bind (this), 1000);
+			this._tick ();
 		}
 	}
 
@@ -67,6 +51,22 @@ class Timer
 		this.events.emit ('stop', this.timeLeft, true);
 
 		return this.timeLeft;
+	}
+
+	_tick ()
+	{
+		this.events.emit ('tick', this.timeLeft);
+
+		if ( this.timeLeft <= 0 )
+		{
+			clearTimeout (this.currTimeout);
+			this.events.emit ('stop', this.timeLeft, false);
+		}
+		else
+		{
+			this.timeLeft--;
+			this.currTimeout = setTimeout (this._tick.bind (this), 1000);
+		}
 	}
 }
 
