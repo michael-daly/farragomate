@@ -8,7 +8,7 @@
 	* [ ]  min length: 0
 	* [ ]  max length: 12
 
-* [X]  Integer maxPlayers
+* [X]  Integer maxClients
 	* [ ]  min: 1
 	* [ ]  max: 16
 

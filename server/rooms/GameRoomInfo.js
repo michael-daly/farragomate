@@ -13,7 +13,7 @@ class GameRoomInfo
 	{
 		this.title      = info.title;
 		this.password   = info.password;
-		this.maxPlayers = info.maxPlayers;
+		this.maxClients = info.maxClients;
 		this.timeLimit  = info.timeLimit;
 		this.numRounds  = info.numRounds;
 	}
@@ -47,7 +47,7 @@ class GameRoomInfo
 		const object =
 		{
 			title:      this.title,
-			maxPlayers: this.maxPlayers,
+			maxClients: this.maxClients,
 			timeLimit:  this.timeLimit,
 			numRounds:  this.numRounds,
 		};

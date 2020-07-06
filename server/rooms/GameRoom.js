@@ -102,7 +102,7 @@ class GameRoom
 	 */
 	isFull ()
 	{
-		return this.clientIDs.size >= this.info.maxPlayers;
+		return this.clientIDs.size >= this.info.maxClients;
 	}
 
 	/**

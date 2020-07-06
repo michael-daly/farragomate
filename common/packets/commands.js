@@ -37,18 +37,18 @@ const commands = new Set (
 	// RequestPacket->ResponsePacket for requesting 10 (with pagination) entries of room data.
 	'RoomList',
 
-	// DataPacket sent from server to client containing a list of player names, IDs, and scores.
-	// Can be partial to update when a player leaves.
-	'PlayerList',
+	// DataPacket sent from server to client containing a list of client names, IDs, and scores.
+	// Can be partial to update when a client leaves.
+	'ClientList',
 
-	// RequestPacket->ResponsePacket for sending a sentence a player created to the server.
+	// RequestPacket->ResponsePacket for sending a sentence a client created to the server.
 	'SendSentence',
 
-	// DataPacket from server to client containing a list of player-made sentences and, if the
+	// DataPacket from server to client containing a list of client-made sentences and, if the
 	// correct screen, how many votes each has.
-	'PlayerSentences',
+	'ClientSentences',
 
-	// RequestPacket->ResponsePacket for voting for a player's sentence.
+	// RequestPacket->ResponsePacket for voting for a client's sentence.
 	'CastVote',
 ]);
 

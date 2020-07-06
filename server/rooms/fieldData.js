@@ -27,7 +27,7 @@ const fieldData =
 		defaultValue: '',
 	},
 
-	maxPlayers:
+	maxClients:
 	{
 		type: 'number',
 
