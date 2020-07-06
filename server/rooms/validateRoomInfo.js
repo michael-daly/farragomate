@@ -1,7 +1,7 @@
 const fieldData      = require ('$/rooms/fieldData.js');
 const validateFields = require ('$/fields/validateFields.js');
 
-const { ERROR_NONE, RM_ERR_IN_ROOM } = require ('~/errorCodes.js');
+const { ERROR_NONE, ERROR_IN_ROOM } = require ('~/errorCodes.js');
 
 
 /**
@@ -20,7 +20,7 @@ const validateRoomInfo = ( info, client ) =>
 
 	if ( client.roomID !== null )
 	{
-		return RM_ERR_IN_ROOM;
+		return ERROR_IN_ROOM;
 	}
 
 	return ERROR_NONE;
