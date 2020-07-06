@@ -8,21 +8,28 @@ addPacketHandler ('Request', 'JoinRoom', ( client, packet ) =>
 {
 	const room = getRoom (packet.body);
 
+	let error = null;
+
 	if ( client.roomID !== null )
 	{
-		client.sendPacket ('Reject', packet, ERROR_IN_ROOM);
+		error = ERROR_IN_ROOM;
 	}
 	else if ( room === null )
 	{
-		client.sendPacket ('Reject', packet, ERROR_NOT_FOUND);
+		error = ERROR_NOT_FOUND;
 	}
 	else if ( room.isBannedID (client.id) )
 	{
-		client.sendPacket ('Reject', packet, ERROR_BANNED);
+		error = ERROR_BANNED;
 	}
 	else if ( room.isFull () )
 	{
-		client.sendPacket ('Reject', packet, ERROR_ROOM_FULL);
+		error = ERROR_ROOM_FULL;
+	}
+
+	if ( error !== null )
+	{
+		client.sendPacket ('Reject', packet, error);
 	}
 	else
 	{
