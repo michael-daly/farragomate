@@ -3,14 +3,15 @@ const sanitizeFields   = require ('$/fields/sanitizeFields.js');
 const validateRoomInfo = require ('$/rooms/validateRoomInfo.js');
 
 const { addPacketHandler } = require ('$/packets/PacketHandlers.js');
+const { addNewRoom }       = require ('$/rooms/GameRoomMap.js');
 
 const { ERROR_NONE } = require ('~/errorCodes.js');
 
 
-addPacketHandler ('Request', 'RegisterInfo', ( client, packet ) =>
+addPacketHandler ('Request', 'CreateRoom', ( client, packet ) =>
 {
 	const info   = sanitizeFields (packet.body, fieldData);
-	const result = validateRoomInfo (info);
+	const result = validateRoomInfo (info, client);
 
 	if ( result !== ERROR_NONE )
 	{
@@ -18,7 +19,7 @@ addPacketHandler ('Request', 'RegisterInfo', ( client, packet ) =>
 	}
 	else
 	{
-		client.setDisplayName (info.displayName);
+		addNewRoom (client, info);
 		client.sendPacket ('Accept', packet);
 	}
 });

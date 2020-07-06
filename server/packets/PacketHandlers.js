@@ -60,7 +60,7 @@ const addPacketHandler = ( type, command, handler ) =>
 {
 	if ( PacketHandlers.has (type, command) && PacketHandlers.get (type, command) !== handler )
 	{
-		throw new Error (`Packet type \`${type}\` already has a handler!`);
+		throw new Error (`Packet command \`${command}\` already has a handler!`);
 	}
 
 	PacketHandlers.add (type, command, handler);

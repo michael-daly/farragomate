@@ -1,3 +1,5 @@
+const { has } = require ('~/util/has.js');
+
 const { sanitizeString, stripNonASCII }  = require ('~/util/sanitization.js');
 
 
@@ -11,14 +13,20 @@ const sanitizeFields = ( inputFields, fieldData ) =>
 {
 	const sanitized = {};
 
-	for ( let fieldName in inputFields )
+	for ( let fieldName in fieldData )
 	{
-		const field = inputFields[fieldName];
-		const data  = fieldData[fieldName];
+		const data = fieldData[fieldName];
 
 		if ( data.type === 'string' )
 		{
-			sanitized[fieldName] = sanitizeString (stripNonASCII (field)).trim ();
+			if ( has (inputFields, fieldName) )
+			{
+				sanitized[fieldName] = sanitizeString (stripNonASCII (inputFields[fieldName])).trim ();
+			}
+		}
+		else
+		{
+			sanitized[fieldName] = inputFields[fieldName];
 		}
 	}
 

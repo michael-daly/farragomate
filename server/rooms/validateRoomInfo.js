@@ -27,4 +27,4 @@ const validateRoomInfo = ( info, client ) =>
 };
 
 
-module.exports = validateClientInfo;
+module.exports = validateRoomInfo;

@@ -60,7 +60,7 @@ class GameRoom
 	 */
 	addClientID ( clientID )
 	{
-		this.clientIDs.add (clientIDs);
+		this.clientIDs.add (clientID);
 	}
 
 	/**
@@ -85,7 +85,7 @@ class GameRoom
 	 */
 	addBannedID ( clientID )
 	{
-		this.bannedIDs.add (clientIDs);
+		this.bannedIDs.add (clientID);
 	}
 
 	/**

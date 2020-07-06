@@ -17,7 +17,7 @@ const addNewRoom = ( owner, info ) =>
 	const room = createRoom (owner.id, info);
 
 	GameRoomMap.addObject (room);
-	addClientToRoom (owner, room.id);
+	addClientToRoom (owner, room);
 
 	return room;
 };

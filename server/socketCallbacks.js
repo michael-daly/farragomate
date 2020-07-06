@@ -83,7 +83,7 @@ const onSocketMessage = function ( message )
 
 	if ( gameClient.info.displayName === null && packet.command !== 'RegisterInfo' )
 	{
-		gameClient.sendPacket ('Response', packet, 'Please set your name first.');
+		gameClient.sendPacket ('Reject', packet, 'Please set your name first.');
 		return;
 	}
 
