@@ -19,7 +19,6 @@ addPacketHandler ('Request', 'CreateRoom', ( client, packet ) =>
 	}
 	else
 	{
-		addNewRoom (client, info);
-		client.sendPacket ('Accept', packet);
+		client.sendPacket ('Accept', packet, addNewRoom (client, info).id);
 	}
 });

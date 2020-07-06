@@ -56,6 +56,26 @@ class GameRoom
 	}
 
 	/**
+	 * @param   {string} field
+	 * @returns {*}
+	 */
+	getInfoField ( field )
+	{
+		if ( has (fieldData, field) )
+		{
+			return this.info[field];
+		}
+	}
+
+	/**
+	 * @returns {boolean}
+	 */
+	isFull ()
+	{
+		return this.clientIDs.size >= this.info.maxPlayers;
+	}
+
+	/**
 	 * @param {string} clientID
 	 */
 	addClientID ( clientID )
@@ -100,7 +120,7 @@ class GameRoom
 	 * @param   {string} clientID
 	 * @returns {boolean}
 	 */
-	hasBannedID ( clientID )
+	isBannedID ( clientID )
 	{
 		return this.bannedIDs.has (clientID);
 	}

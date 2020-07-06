@@ -19,6 +19,6 @@ addPacketHandler ('Request', 'RegisterInfo', ( client, packet ) =>
 	else
 	{
 		client.setDisplayName (info.displayName);
-		client.sendPacket ('Accept', packet);
+		client.sendPacket ('Accept', packet, client.id);
 	}
 });

@@ -32,12 +32,12 @@
 
 * [ ]  CreateRoom
 	* [ ]  Request
-	* [ ]  Response
+	* [X]  Response
 
 * [ ]  JoinRoom
 	* [ ]  Request
 	* [ ]  Response
-	* [ ]  Can also be used as a DataPacket to notify members of the room someone joined.
+	* [X]  Can also be used as a DataPacket to notify members of the room someone joined.
 
 * [ ]  LeaveRoom
 	* [ ]  DataPacket from client to server.
