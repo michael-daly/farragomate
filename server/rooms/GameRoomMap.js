@@ -1,6 +1,7 @@
 const GameObjectMap = require ('$/misc/GameObjectMap.js');
 
 const { createRoom } = require ('$/rooms/GameRoom.js');
+const { getClient }  = require ('$/clients/GameClientMap.js');
 
 
 const GameRoomMap = new GameObjectMap ();
@@ -16,12 +17,22 @@ const addNewRoom = ( owner, info ) =>
 	const room = createRoom (owner.id, info);
 
 	GameRoomMap.addObject (room);
-
-	room.addClientID (owner.id);
-	owner.roomID = room.id;
+	addClientToRoom (owner, room.id);
 
 	return room;
 };
+
+/**
+ * @param {GameClient} client
+ * @param {GameRoom}   room
+ */
+const addClientToRoom = ( client, room ) =>
+{
+	client.roomID = room.id;
+	sendDataToRoom (room.id, 'JoinRoom', client.toString ());
+
+	room.addClientID (client.id);
+}
 
 /**
  * @param {string} roomID
@@ -40,5 +51,20 @@ const getRoom = roomID =>
 	return GameRoomMap.getObject (roomID);
 }
 
+/**
+ * @param {string} roomID
+ * @param {string} command
+ * @param {*}      body
+ */
+const sendDataToRoom = ( roomID, command, body ) =>
+{
+	const { clientIDs } = getRoom (roomID);
 
-module.exports = { addNewRoom, deleteRoom, getRoom };
+	for ( let id of clientIDs )
+	{
+		getClient (id).sendPacket ('Data', command, body);
+	}
+};
+
+
+module.exports = { addNewRoom, addClientToRoom, deleteRoom, getRoom, sendDataToRoom };

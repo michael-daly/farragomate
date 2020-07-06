@@ -10,8 +10,8 @@ const PacketHandlers =
 	map: new Map (),
 
 	/**
-	 * @param {Integer}       type
-	 * @param {Integer}       command
+	 * @param {string}        type
+	 * @param {string}        command
 	 * @param {PacketHandler} handler
 	 */
 	add ( type, command, handler )
@@ -27,8 +27,8 @@ const PacketHandlers =
 	},
 
 	/**
-	 * @param {Integer} type
-	 * @param {Integer} command
+	 * @param {string} type
+	 * @param {string} command
 	 *
 	 * @returns {boolean}
 	 */
@@ -38,8 +38,8 @@ const PacketHandlers =
 	},
 
 	/**
-	 * @param {Integer} type
-	 * @param {Integer} command
+	 * @param {string} type
+	 * @param {string} command
 	 *
 	 * @returns {PacketHandler|null} null if not found
 	 */
@@ -50,8 +50,8 @@ const PacketHandlers =
 };
 
 /**
- * @param {Integer}       type
- * @param {Integer}       command
+ * @param {string}        type
+ * @param {string}        command
  * @param {PacketHandler} handler
  *
  * @throws {Error} If there's already an existing handler for that packet type.

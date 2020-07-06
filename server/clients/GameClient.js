@@ -48,6 +48,16 @@ class GameClient
 		this.isDeleted = true;
 	}
 
+	toJSON ()
+	{
+		return { id: this.id, displayName: this.info.displayName, roomID: this.roomID };
+	}
+
+	toString ()
+	{
+		return JSON.stringify (this.toJSON ());
+	}
+
 	/**
 	 * @param {string} name
 	 */

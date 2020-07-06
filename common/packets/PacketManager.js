@@ -10,8 +10,8 @@ class PacketManager
 	}
 
 	/**
-	 * @param {Integer} command
-	 * @param {Object}  [body={}]
+	 * @param {string} command
+	 * @param {Object} [body={}]
 	 *
 	 * @returns {DataPacket}
 	 */
@@ -21,8 +21,8 @@ class PacketManager
 	}
 
 	/**
-	 * @param {Integer} command
-	 * @param {Object}  [body={}]
+	 * @param {string} command
+	 * @param {Object} [body={}]
 	 *
 	 * @returns {RequestPacket}
 	 */

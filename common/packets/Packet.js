@@ -2,7 +2,7 @@ class Packet
 {
 	/**
 	 * @param {Integer} sequence
-	 * @param {Integer} command
+	 * @param {string}  command
 	 * @param {Object}  [body={}]
 	 */
 	constructor ( sequence, command, body = {} )
