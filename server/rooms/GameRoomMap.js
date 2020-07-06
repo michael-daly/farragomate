@@ -5,17 +5,26 @@ const { createRoom }     = require ('$/rooms/GameRoom.js');
 const { createRoomInfo } = require ('$/rooms/GameRoomInfo.js');
 const { getClient }      = require ('$/clients/GameClientMap.js');
 
+const { ERROR_ROOM_LIMIT } = require ('~/errorCodes.js');
+
 
 const GameRoomMap = new GameObjectMap ();
+
+GameRoomMap.maxRooms = 20;
 
 /**
  * @param {GameClient}   owner
  * @param {GameRoomInfo} info
  *
- * @returns {GameRoom}
+ * @returns {GameRoom|Integer} Error code if there was an issue creating the room.
  */
 const addNewRoom = ( owner, info ) =>
 {
+	if ( GameRoomMap.size >= GameRoomMap.maxRooms )
+	{
+		return ERROR_ROOM_LIMIT;
+	}
+
 	const room = createRoom (owner.id, createRoomInfo (info));
 
 	GameRoomMap.addObject (room);
@@ -116,6 +125,39 @@ const sendInfoToRoom = ( room ) =>
 	sendDataToRoom (room, 'RoomInfo', room.toString ());
 };
 
+/**
+ * @param {Integer} value
+ */
+const setMaxRooms = value =>
+{
+	GameRoomMap.maxRooms = Math.round (value);
+};
+
+/**
+ * @returns {Integer}
+ */
+const getMaxRooms = () =>
+{
+	return GameRoomMap.maxRooms;
+};
+
+/**
+ * @returns {Object[]}
+ */
+const getRoomList = () =>
+{
+	const { map } = GameRoomMap;
+
+	const list = {};
+
+	for ( let [id, room] of map )
+	{
+		list[id] = room.toJSON ();
+	}
+
+	return list;
+};
+
 
 module.exports =
 {
@@ -129,4 +171,9 @@ module.exports =
 	sendDataToRoom,
 	sendRoomInfo,
 	sendInfoToRoom,
+
+	setMaxRooms,
+	getMaxRooms,
+
+	getRoomList,
 };

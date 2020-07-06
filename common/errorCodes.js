@@ -7,6 +7,7 @@ module.exports =
 	[
 		'ERROR_NONE',
 		'ERROR_GENERIC',
+		'ERROR_FLOOD',
 
 		'FIELD_ERR_REQUIRED',
 		'FIELD_ERR_TYPE',
@@ -20,5 +21,6 @@ module.exports =
 		'ERROR_ROOM_FULL',
 		'ERROR_BANNED',
 		'ERROR_NOT_ALLOWED',
+		'ERROR_ROOM_LIMIT',
 	]),
 };

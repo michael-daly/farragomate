@@ -25,6 +25,9 @@ class GameClient
 		this.packets = new PacketManager ();
 		this.roomID  = null;
 
+		// Last time they requested the room list.
+		this.lastRoomListTime = 0;
+
 		this.isDeleted = false;
 	}
 

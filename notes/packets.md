@@ -54,12 +54,12 @@
 	* [ ]  Can also be used as a DataPacket from server to client to notify members of the room someone (potentially them) got banned.
 
 * [ ]  RoomInfo
-	* [ ]  DataPacket from server to client.
-	* [ ]  Does not have to contain all fields as it's also used to send time updates.
+	* [X]  DataPacket from server to client.
+	* [X]  Does not have to contain all fields as it's also used to send time updates.
 
 * [ ]  RoomList
 	* [ ]  Request
-	* [ ]  Response
+	* [X]  Response
 
 * [ ]  PlayerList
 	* [ ]  DataPacket from server to client when the client first joins the room.

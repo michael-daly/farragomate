@@ -41,6 +41,11 @@ class GameObjectMap
 	{
 		return this.map.has (objectID) ? this.map.get (objectID) : null;
 	}
+
+	get size ()
+	{
+		return this.map.size;
+	}
 }
 
 

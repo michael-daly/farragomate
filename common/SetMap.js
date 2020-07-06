@@ -5,7 +5,8 @@ class SetMap
 {
 	constructor ()
 	{
-		this.map = new Map ();
+		this.map  = new Map ();
+		this.size = 0;
 	}
 
 	/**
@@ -25,9 +26,15 @@ class SetMap
 			map.set (key, new Set ());
 		}
 
-		map.get (key).add (value);
+		const set = map.get (key);
 
-		return map.get (key).size;
+		if ( !set.has (value) )
+		{
+			set.add (value);
+			this.size++;
+		}
+
+		return set.size;
 	}
 
 	/**
@@ -49,7 +56,11 @@ class SetMap
 
 		const set = map.get (key);
 
-		set.delete (value);
+		if ( set.has (value) )
+		{
+			set.delete (value);
+			this.size--;
+		}
 
 		// If there's nothing in the set, we don't need it anymore so just remove it.
 		if ( set.size <= 0 )
@@ -73,6 +84,8 @@ class SetMap
 		{
 			return;
 		}
+
+		this.size -= map.get (key).size;
 
 		map.get (key).clear ();
 		map.delete (key);
@@ -119,6 +132,7 @@ class SetMap
 		}
 
 		map.clear ();
+		this.size = 0;
 	}
 
 	/**
