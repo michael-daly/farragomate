@@ -61,20 +61,17 @@
 	* [ ]  Request
 	* [X]  Response
 
-* [ ]  PlayerList
-	* [ ]  DataPacket from server to client when the client first joins the room.
+* [ ]  ClientList
+	* [X]  DataPacket from server to client when the client first joins the room.
 
 * [ ]  SendSentence
 	* [ ]  Request
 	* [ ]  Response
 
-* [ ]  PlayerSentences
+* [ ]  ClientSentences
 	* [ ]  DataPacket from server to client.
 	* [ ]  Used in both the "SentenceVoting" screen and the "VotingResults" screen.
 
 * [ ]  CastVote
 	* [ ]  Request
 	* [ ]  Response
-
-* [ ]  PlayerScores
-	* [ ]  DataPacket from server to client.

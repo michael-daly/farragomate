@@ -99,12 +99,10 @@ const removeClientFromRoom = ( room, client ) =>
  */
 const sendDataToRoom = ( room, command, body ) =>
 {
-	const { clientIDs } = room;
-
-	for ( let id of clientIDs )
+	room.forEachClient (clientID =>
 	{
-		getClient (id).sendPacket ('Data', command, body);
-	}
+		getClient (clientID).sendPacket ('Data', command, body);
+	});
 };
 
 /**
@@ -158,6 +156,21 @@ const getRoomList = () =>
 	return list;
 };
 
+/**
+ * @param   {GameRoom} room
+ * @returns {Object}
+ */
+const getRoomClientList = room =>
+{
+	const list = {};
+
+	room.forEachClient (clientID =>
+	{
+		list[clientID] = getClient (clientID).toJSON ();
+	});
+
+	return list;
+};
 
 module.exports =
 {
@@ -176,4 +189,5 @@ module.exports =
 	getMaxRooms,
 
 	getRoomList,
+	getRoomClientList,
 };

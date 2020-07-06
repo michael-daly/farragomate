@@ -1,6 +1,13 @@
 const GameRoomEvents = require ('$/rooms/GameRoomEvents.js');
 
-const { sendDataToRoom, sendRoomInfo, sendInfoToRoom } = require ('$/rooms/GameRoomMap.js');
+const
+{
+	sendDataToRoom,
+	sendRoomInfo,
+	sendInfoToRoom,
+	getRoomClientList,
+}
+= require ('$/rooms/GameRoomMap.js');
 
 
 GameRoomEvents.on ('createRoom', ( room, owner ) =>
@@ -16,6 +23,8 @@ GameRoomEvents.on ('createRoom', ( room, owner ) =>
 GameRoomEvents.on ('joinRoom', ( room, client ) =>
 {
 	sendDataToRoom (room, 'JoinRoom', client.toString ());
+	client.sendPacket ('Data', 'ClientList', getRoomClientList (room));
+
 	sendRoomInfo (room, client);
 });
 
