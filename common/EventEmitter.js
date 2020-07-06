@@ -37,6 +37,11 @@ class EventEmitter
 			callback (...args);
 		});
 	}
+
+	clear ()
+	{
+		this.map.clear ();
+	}
 }
 
 

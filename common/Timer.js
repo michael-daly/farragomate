@@ -8,6 +8,24 @@ class Timer
 		this.timeLeft    = 0;
 		this.currTimeout = null;
 		this.events      = new EventEmitter ();
+		this.isDeleted   = false;
+	}
+
+	delete ()
+	{
+		if ( this.isDeleted )
+		{
+			return;
+		}
+
+		this.stop ();
+		this.events.clear ();
+
+		delete this.timeLeft;
+		delete this.currTimeout;
+		delete this.events;
+
+		this.isDeleted = true;
 	}
 
 	/**
@@ -26,6 +44,8 @@ class Timer
 
 	tick ()
 	{
+		this.events.emit ('tick', this.timeLeft);
+
 		if ( this.timeLeft <= 0 )
 		{
 			clearTimeout (this.currTimeout);
@@ -33,10 +53,8 @@ class Timer
 		}
 		else
 		{
-			this.events.emit ('tick', this.timeLeft);
-			this.currTimeout = setTimeout (this.tick.bind (this), 1000);
-
 			this.timeLeft--;
+			this.currTimeout = setTimeout (this.tick.bind (this), 1000);
 		}
 	}
 
