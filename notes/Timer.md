@@ -1,16 +1,16 @@
 ## Timer
 
-* [ ]  EventEmitter events
-* [ ]  Integer timeLeft
-* [ ]  TimeoutID currTimeout
+* [X]  EventEmitter events
+* [X]  Integer timeLeft
+* [X]  TimeoutID currTimeout
 
 
 #### on ( String event, Function callback )
 
-* [ ]  event
-	* [ ]  start ( startTime )
-	* [ ]  tick ( currTime )
-	* [ ]  stop ( stopTime, wasForced )
+* [X]  event
+	* [X]  start ( startTime )
+	* [X]  tick ( currTime )
+	* [X]  stop ( stopTime, wasForced )
 
 
 #### off ( String event, Function callback )
