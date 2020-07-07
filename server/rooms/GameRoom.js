@@ -2,7 +2,10 @@ const { v4: uuid } = require ('uuid');
 
 const { has } = require ('~/util/has.js');
 
-const Timer     = require ('~/Timer.js');
+const Timer        = require ('~/Timer.js');
+const GameWordbank = require ('$/wordbanks/GameWordbank.js');
+
+const words     = require ('$/config/words.js');
 const fieldData = require ('$/rooms/fieldData.js');
 
 
@@ -24,6 +27,16 @@ class GameRoom
 		this.currRound = 0;
 
 		this.timer = new Timer ();
+
+		this.wordbanks =
+		{
+			adjectives: new GameWordbank ('adjective'),
+			nouns:      new GameWordbank ('noun'),
+			verbs:      new GameWordbank ('verb'),
+			grammar:    [ ...words.grammar ],
+			pronouns:   [ ...words.pronouns ],
+			misc:       [ ...words.misc ],
+		};
 
 		this.isDeleted = false;
 	}
@@ -175,6 +188,20 @@ class GameRoom
 		{
 			callback (id);
 		}
+	}
+
+	async fetchWords ()
+	{
+		const { wordbanks } = this;
+
+		const promises =
+		[
+			wordbanks.adjectives.fetchWords (),
+			wordbanks.nouns.fetchWords (),
+			wordbanks.verbs.fetchWords (),
+		];
+
+		return Promise.all (promises);
 	}
 
 	/**

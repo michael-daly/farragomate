@@ -3,7 +3,7 @@
 * [ ]  String[] adjectives
 * [ ]  String[] nouns
 * [ ]  String[] verbs
-* [ ]  String[] affixes
+* [ ]  String[] grammar
 * [ ]  String[] pronouns
 * [ ]  String[] misc
 
