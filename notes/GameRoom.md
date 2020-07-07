@@ -1,24 +1,24 @@
 ## GameRoomInfo ( Object info )
 
 * [X]  String title
-	* [ ]  min length: 1
-	* [ ]  max length: 32
+	* [X]  min length: 1
+	* [X]  max length: 32
 
 * [X]  String password
-	* [ ]  min length: 0
-	* [ ]  max length: 12
+	* [X]  min length: 0
+	* [X]  max length: 12
 
 * [X]  Integer maxClients
-	* [ ]  min: 1
-	* [ ]  max: 16
+	* [X]  min: 1
+	* [X]  max: 16
 
 * [X]  Integer timeLimit
-	* [ ]  min: 30
-	* [ ]  max: 120
+	* [X]  min: 30
+	* [X]  max: 120
 
 * [X]  Integer numRounds
-	* [ ]  min: 1
-	* [ ]  max: 16
+	* [X]  min: 1
+	* [X]  max: 16
 
 
 ## GameRoom ( Integer id, Integer ownerID, GameRoomInfo info )
