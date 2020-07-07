@@ -1,24 +1,20 @@
 const fieldData          = require ('$/clients/info/fieldData.js');
 const validateClientInfo = require ('$/clients/info/validateClientInfo.js');
 
-const { addPacketHandler } = require ('$/packets/PacketHandlers.js');
+const { MainMenuHandlers } = require ('$/packets/handlerMaps.js');
 const { mapStringFields }  = require ('$/fields/mapFields.js');
 const { hasClientName }    = require ('$/clients/GameClientNames.js');
 
 const { sanitizeString, stripNonASCII } = require ('~/util/sanitization.js');
 
-const { ERROR_NONE, ERROR_BAD_PACKET, ERROR_IN_ROOM, FIELD_ERR_UNIQUE } = require ('~/errorCodes.js');
+const { ERROR_NONE, ERROR_BAD_PACKET, FIELD_ERR_UNIQUE } = require ('~/errorCodes.js');
 
 
-addPacketHandler ('Request', 'RegisterInfo', ( client, packet ) =>
+MainMenuHandlers.addHandler ('Request', 'RegisterInfo', ( client, packet ) =>
 {
 	const { body } = packet;
 
-	if ( client.roomID !== null )
-	{
-		client.sendPacket ('Reject', packet, ERROR_IN_ROOM);
-	}
-	else if ( body === null || typeof body !== 'object' )
+	if ( body === null || typeof body !== 'object' )
 	{
 		client.sendPacket ('Reject', packet, ERROR_BAD_PACKET);
 	}

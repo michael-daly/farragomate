@@ -4,12 +4,11 @@ require ('$/packets/registerHandlers.js');
 
 const isValidPacket = require ('~/packets/isValidPacket.js');
 
-const { handlePacket } = require ('$/packets/PacketHandlers.js');
-
 const { InvalidPacketError } = require ('$/errors.js');
 const { createClientInfo }   = require ('$/clients/info/GameClientInfo.js');
 
-const { addNewClient, deleteClient } = require ('$/clients/GameClientMap.js');
+const { MainMenuHandlers, GameRoomHandlers } = require ('$/packets/handlerMaps.js');
+const { addNewClient, deleteClient }         = require ('$/clients/GameClientMap.js');
 
 
 /**
@@ -85,7 +84,14 @@ const onSocketMessage = function ( message )
 		return;
 	}
 
-	handlePacket (gameClient, packet);
+	if ( gameClient.roomID === null )
+	{
+		MainMenuHandlers.handlePacket (gameClient, packet);
+	}
+	else
+	{
+		GameRoomHandlers.handlePacket (gameClient, packet);
+	}
 };
 
 

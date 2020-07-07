@@ -1,12 +1,9 @@
-const { addPacketHandler } = require ('$/packets/PacketHandlers.js');
+const { GameRoomHandlers } = require ('$/packets/handlerMaps.js');
 
 const { getRoom, removeClientFromRoom } = require ('$/rooms/GameRoomMap.js');
 
 
-addPacketHandler ('Data', 'LeaveRoom', ( client, packet ) =>
+GameRoomHandlers.addHandler ('Data', 'LeaveRoom', ( client, packet ) =>
 {
-	if ( client.roomID !== null )
-	{
-		removeClientFromRoom (getRoom (client.roomID), client);
-	}
+	removeClientFromRoom (getRoom (client.roomID), client);
 });

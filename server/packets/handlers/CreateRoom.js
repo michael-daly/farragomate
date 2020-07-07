@@ -3,27 +3,23 @@ const validateRoomInfo = require ('$/rooms/info/validateRoomInfo.js');
 
 const { GameRoom } = require ('$/rooms/GameRoom.js');
 
-const { addPacketHandler } = require ('$/packets/PacketHandlers.js');
+const { MainMenuHandlers } = require ('$/packets/handlerMaps.js');
 const { addNewRoom }       = require ('$/rooms/GameRoomMap.js');
 const { mapStringFields }  = require ('$/fields/mapFields.js');
 
 const { sanitizeString, stripNonASCII } = require ('~/util/sanitization.js');
 
-const { ERROR_NONE, ERROR_BAD_PACKET, ERROR_IN_ROOM } = require ('~/errorCodes.js');
+const { ERROR_NONE, ERROR_BAD_PACKET } = require ('~/errorCodes.js');
 
 
-addPacketHandler ('Request', 'CreateRoom', ( client, packet ) =>
+MainMenuHandlers.addHandler ('Request', 'CreateRoom', ( client, packet ) =>
 {
 	const { body } = packet;
 
 	let info;
 	let error = ERROR_NONE;
 
-	if ( client.roomID !== null )
-	{
-		error = ERROR_IN_ROOM;
-	}
-	else if ( body === null || typeof body !== 'object' )
+	if ( body === null || typeof body !== 'object' )
 	{
 		error = ERROR_BAD_PACKET;
 	}

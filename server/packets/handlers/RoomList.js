@@ -1,16 +1,15 @@
-const { addPacketHandler } = require ('$/packets/PacketHandlers.js');
+const { MainMenuHandlers } = require ('$/packets/handlerMaps.js');
 const { getRoomList }      = require ('$/rooms/GameRoomMap.js');
 
 const { getTimestamp, getTimeSince } = require ('~/util/timestamps.js');
 
-const { ERROR_FLOOD } = require ('~/errorCodes.js');
+const { ERROR_FLOOD }       = require ('~/errorCodes.js');
+const { ROOM_LIST_TIMEOUT } = require ('~/constants.js');
 
-const TIMEOUT = 1500;
 
-
-addPacketHandler ('Request', 'RoomList', ( client, packet ) =>
+MainMenuHandlers.addHandler ('Request', 'RoomList', ( client, packet ) =>
 {
-	if ( getTimeSince (client.lastRoomListTime) < TIMEOUT )
+	if ( getTimeSince (client.lastRoomListTime) < ROOM_LIST_TIMEOUT )
 	{
 		client.sendPacket ('Reject', packet, ERROR_FLOOD);
 	}
