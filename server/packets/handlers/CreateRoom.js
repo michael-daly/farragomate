@@ -1,27 +1,45 @@
 const fieldData        = require ('$/rooms/fieldData.js');
-const sanitizeFields   = require ('$/fields/sanitizeFields.js');
 const validateRoomInfo = require ('$/rooms/validateRoomInfo.js');
 
 const { GameRoom } = require ('$/rooms/GameRoom.js');
 
 const { addPacketHandler } = require ('$/packets/PacketHandlers.js');
 const { addNewRoom }       = require ('$/rooms/GameRoomMap.js');
+const { mapStringFields }  = require ('$/fields/mapFields.js');
 
-const { ERROR_NONE } = require ('~/errorCodes.js');
+const { sanitizeString, stripNonASCII } = require ('~/util/sanitization.js');
+
+const { ERROR_NONE, ERROR_BAD_PACKET, ERROR_IN_ROOM } = require ('~/errorCodes.js');
 
 
 addPacketHandler ('Request', 'CreateRoom', ( client, packet ) =>
 {
-	const info   = sanitizeFields (packet.body, fieldData);
-	const result = validateRoomInfo (info, client);
+	const { body } = packet;
 
-	if ( result !== ERROR_NONE )
+	let info;
+	let error = ERROR_NONE;
+
+	if ( client.roomID !== null )
 	{
-		client.sendPacket ('Reject', packet, result);
+		error = ERROR_IN_ROOM;
+	}
+	else if ( body === null || typeof body !== 'object' )
+	{
+		error = ERROR_BAD_PACKET;
 	}
 	else
 	{
-		const roomOrError = addNewRoom (client, info);
+		info  = mapStringFields (body, fieldData, field => stripNonASCII (field).trim ());
+		error = validateRoomInfo (info, client);
+	}
+
+	if ( error !== ERROR_NONE )
+	{
+		client.sendPacket ('Reject', packet, error);
+	}
+	else
+	{
+		const roomOrError = addNewRoom (client, mapStringFields (info, fieldData, sanitizeString));
 
 		if ( roomOrError instanceof GameRoom )
 		{

@@ -1,10 +1,6 @@
 const fieldData      = require ('$/clients/fieldData.js');
 const validateFields = require ('$/fields/validateFields.js');
 
-const { hasClientName } = require ('$/clients/GameClientNames.js');
-
-const { ERROR_NONE, FIELD_ERR_UNIQUE } = require ('~/errorCodes.js');
-
 
 /**
  * @param   {Object} info
@@ -12,19 +8,7 @@ const { ERROR_NONE, FIELD_ERR_UNIQUE } = require ('~/errorCodes.js');
  */
 const validateClientInfo = info =>
 {
-	const result = validateFields (info, fieldData);
-
-	if ( result !== ERROR_NONE )
-	{
-		return result;
-	}
-
-	if ( hasClientName (info.displayName) )
-	{
-		return ['displayName', FIELD_ERR_UNIQUE];
-	}
-
-	return ERROR_NONE;
+	return validateFields (info, fieldData);
 };
 
 

@@ -1,29 +1,14 @@
 const fieldData      = require ('$/rooms/fieldData.js');
 const validateFields = require ('$/fields/validateFields.js');
 
-const { ERROR_NONE, ERROR_IN_ROOM } = require ('~/errorCodes.js');
-
 
 /**
- * @param   {Object}     info
- * @param   {GameClient} client
+ * @param   {Object} info
  * @returns {Integer|Array} [fieldName, errorCode] or ERROR_NONE if no error.
  */
-const validateRoomInfo = ( info, client ) =>
+const validateRoomInfo = info =>
 {
-	const result = validateFields (info, fieldData);
-
-	if ( result !== ERROR_NONE )
-	{
-		return result;
-	}
-
-	if ( client.roomID !== null )
-	{
-		return ERROR_IN_ROOM;
-	}
-
-	return ERROR_NONE;
+	return validateFields (info, fieldData);
 };
 
 
