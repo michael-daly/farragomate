@@ -2,11 +2,11 @@ const { v4: uuid } = require ('uuid');
 
 const { has } = require ('~/util/has.js');
 
-const Timer            = require ('~/Timer.js');
-const GameWordbank     = require ('$/wordbanks/GameWordbank.js');
-const SentenceCreation = require ('$/screens/SentenceCreation.js');
+const Timer = require ('~/Timer.js');
 
-const words     = require ('$/config/words.js');
+const GameRoomSentences = require ('$/rooms/GameRoomSentences.js');
+const SentenceCreation  = require ('$/screens/SentenceCreation.js');
+
 const fieldData = require ('$/rooms/info/fieldData.js');
 
 
@@ -27,19 +27,9 @@ class GameRoom
 		this.clientIDs = new Set ();
 		this.bannedIDs = new Set ();
 
-		this.timer  = new Timer ();
-		this.screen = SentenceCreation;
-
-		this.sentences = {};
-		this.wordbanks =
-		{
-			adjectives: new GameWordbank ('adjective'),
-			nouns:      new GameWordbank ('noun'),
-			verbs:      new GameWordbank ('verb'),
-			grammar:    [ ...words.grammar ],
-			pronouns:   [ ...words.pronouns ],
-			misc:       [ ...words.misc ],
-		};
+		this.timer     = new Timer ();
+		this.sentences = new GameRoomSentences ();
+		this.screen    = SentenceCreation;
 
 		this.isDeleted = false;
 	}
@@ -52,10 +42,7 @@ class GameRoom
 		}
 
 		this.timer.delete ();
-
-		this.wordbanks.adjectives.delete ();
-		this.wordbanks.nouns.delete ();
-		this.wordbanks.verbs.delete ();
+		this.sentences.delete ();
 
 		this.clientIDs.clear ();
 
@@ -66,9 +53,8 @@ class GameRoom
 		delete this.clientIDs;
 		delete this.bannedIDs;
 		delete this.timer;
-		delete this.screen;
 		delete this.sentences;
-		delete this.wordbanks;
+		delete this.screen;
 
 		this.isDeleted = true;
 	}
@@ -120,23 +106,6 @@ class GameRoom
 	offTimer ( event, callback )
 	{
 		this.timer.events.off (event, callback);
-	}
-
-	/**
-	 * @param {string}    clientID
-	 * @param {Integer[]} sentenceArr
-	 */
-	addSentence ( clientID, sentenceArr )
-	{
-		if ( !has (this.sentences, clientID) )
-		{
-			this.sentences[clientID] = { votes: 0, arr: sentenceArr };
-		}
-	}
-
-	clearSentences ()
-	{
-		this.sentences = {};
 	}
 
 	/**
@@ -217,20 +186,6 @@ class GameRoom
 		{
 			callback (id);
 		}
-	}
-
-	async fetchWords ()
-	{
-		const { wordbanks } = this;
-
-		const promises =
-		[
-			wordbanks.adjectives.fetchWords (),
-			wordbanks.nouns.fetchWords (),
-			wordbanks.verbs.fetchWords (),
-		];
-
-		return Promise.all (promises);
 	}
 
 	/**
