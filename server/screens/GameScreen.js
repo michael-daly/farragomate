@@ -1,10 +1,12 @@
 class GameScreen
 {
 	/**
+	 * @param {string}       name
 	 * @param {integer|null} [startTime=null] - null sets it to the GameRoomInfo's `timeLimit` field.
 	 */
-	constructor ( startTime = null )
+	constructor ( name, startTime = null )
 	{
+		this.name      = name;
 		this.startTime = startTime;
 	}
 
@@ -18,30 +20,6 @@ class GameScreen
 	}
 
 	/**
-	 * @param {GameRoom} room
-	 */
-	onEnterScreen ( room )
-	{
-		throw new Error (`${this.constructor.name}::onEnterScreen () - Not implemented!`);
-	}
-
-	/**
-	 * @param {GameRoom} room
-	 */
-	onLeaveScreen ( room )
-	{
-		throw new Error (`${this.constructor.name}::onLeaveScreen () - Not implemented!`);
-	}
-
-	/**
-	 * @param {GameRoom} room
-	 */
-	onTick ( room )
-	{
-		throw new Error (`${this.constructor.name}::onTick () - Not implemented!`);
-	}
-
-	/**
 	 * @param   {GameRoom} room
 	 * @returns {GameScreen}
 	 */
@@ -49,6 +27,16 @@ class GameScreen
 	{
 		throw new Error (`${this.constructor.name}::getNextScreen () - Not implemented!`);
 	}
+
+	/**
+	 * @param {GameRoom} room
+	 */
+	async onEnterScreen ( room ) { /* Stub method to be implemented. */ }
+
+	/**
+	 * @param {GameRoom} room
+	 */
+	async onLeaveScreen ( room ) { /* Stub method to be implemented. */ }
 }
 
 

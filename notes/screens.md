@@ -17,4 +17,4 @@
 
 #### FinalScores
 
-* Start time: 30
+* Start time: 20

@@ -2,8 +2,9 @@ const { v4: uuid } = require ('uuid');
 
 const { has } = require ('~/util/has.js');
 
-const Timer        = require ('~/Timer.js');
-const GameWordbank = require ('$/wordbanks/GameWordbank.js');
+const Timer            = require ('~/Timer.js');
+const GameWordbank     = require ('$/wordbanks/GameWordbank.js');
+const SentenceCreation = require ('$/screens/SentenceCreation.js');
 
 const words     = require ('$/config/words.js');
 const fieldData = require ('$/rooms/fieldData.js');
@@ -22,12 +23,14 @@ class GameRoom
 		this.ownerID = ownerID;
 		this.info    = info;
 
+		this.currRound = 0;
 		this.clientIDs = new Set ();
 		this.bannedIDs = new Set ();
-		this.currRound = 0;
 
-		this.timer = new Timer ();
+		this.timer  = new Timer ();
+		this.screen = SentenceCreation;
 
+		this.sentences = {};
 		this.wordbanks =
 		{
 			adjectives: new GameWordbank ('adjective'),
@@ -49,14 +52,23 @@ class GameRoom
 		}
 
 		this.timer.delete ();
+
+		this.wordbanks.adjectives.delete ();
+		this.wordbanks.nouns.delete ();
+		this.wordbanks.verbs.delete ();
+
 		this.clientIDs.clear ();
 
 		delete this.id;
 		delete this.ownerID;
 		delete this.info;
-		delete this.clientIDs;
 		delete this.currRound;
+		delete this.clientIDs;
+		delete this.bannedIDs;
 		delete this.timer;
+		delete this.screen;
+		delete this.sentences;
+		delete this.wordbanks;
 
 		this.isDeleted = true;
 	}
@@ -108,6 +120,23 @@ class GameRoom
 	offTimer ( event, callback )
 	{
 		this.timer.events.off (event, callback);
+	}
+
+	/**
+	 * @param {string}    clientID
+	 * @param {Integer[]} sentenceArr
+	 */
+	addSentence ( clientID, sentenceArr )
+	{
+		if ( !has (this.sentences, clientID) )
+		{
+			this.sentences[clientID] = { votes: 0, arr: sentenceArr };
+		}
+	}
+
+	clearSentences ()
+	{
+		this.sentences = {};
 	}
 
 	/**
