@@ -1,5 +1,5 @@
 const applyDefaultValues = require ('$/fields/applyDefaultValues.js');
-const fieldData          = require ('$/rooms/fieldData.js');
+const fieldData          = require ('$/rooms/info/fieldData.js');
 
 const { has } = require ('~/util/has.js');
 

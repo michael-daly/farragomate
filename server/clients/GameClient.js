@@ -3,7 +3,7 @@ const { v4: uuid } = require ('uuid');
 const { has } = require ('~/util/has.js');
 
 const PacketManager = require ('~/packets/PacketManager.js');
-const fieldData     = require ('$/clients/fieldData.js');
+const fieldData     = require ('$/clients/info/fieldData.js');
 
 const { addClientName, removeClientName } = require ('$/clients/GameClientNames.js');
 

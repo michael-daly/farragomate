@@ -7,7 +7,7 @@ const GameWordbank     = require ('$/wordbanks/GameWordbank.js');
 const SentenceCreation = require ('$/screens/SentenceCreation.js');
 
 const words     = require ('$/config/words.js');
-const fieldData = require ('$/rooms/fieldData.js');
+const fieldData = require ('$/rooms/info/fieldData.js');
 
 
 class GameRoom

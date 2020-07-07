@@ -1,4 +1,4 @@
-const GameRoomEvents = require ('$/rooms/GameRoomEvents.js');
+const GameRoomEvents = require ('$/rooms/events/GameRoomEvents.js');
 
 const
 {

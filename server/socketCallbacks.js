@@ -1,5 +1,5 @@
-require ('$/clients/registerEvents.js');
-require ('$/rooms/registerEvents.js');
+require ('$/clients/events/registerEvents.js');
+require ('$/rooms/events/registerEvents.js');
 require ('$/packets/registerHandlers.js');
 
 const isValidPacket = require ('~/packets/isValidPacket.js');
@@ -7,7 +7,7 @@ const isValidPacket = require ('~/packets/isValidPacket.js');
 const { handlePacket } = require ('$/packets/PacketHandlers.js');
 
 const { InvalidPacketError } = require ('$/errors.js');
-const { createClientInfo }   = require ('$/clients/GameClientInfo.js');
+const { createClientInfo }   = require ('$/clients/info/GameClientInfo.js');
 
 const { addNewClient, deleteClient } = require ('$/clients/GameClientMap.js');
 

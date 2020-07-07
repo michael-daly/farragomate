@@ -1,5 +1,5 @@
-const fieldData        = require ('$/rooms/fieldData.js');
-const validateRoomInfo = require ('$/rooms/validateRoomInfo.js');
+const fieldData        = require ('$/rooms/info/fieldData.js');
+const validateRoomInfo = require ('$/rooms/info/validateRoomInfo.js');
 
 const { GameRoom } = require ('$/rooms/GameRoom.js');
 

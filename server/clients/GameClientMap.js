@@ -1,8 +1,8 @@
 const GameObjectMap    = require ('$/misc/GameObjectMap.js');
-const GameClientEvents = require ('$/clients/GameClientEvents.js');
+const GameClientEvents = require ('$/clients/events/GameClientEvents.js');
 
 const { createClient }     = require ('$/clients/GameClient.js');
-const { createClientInfo } = require ('$/clients/GameClientInfo.js');
+const { createClientInfo } = require ('$/clients/info/GameClientInfo.js');
 
 
 const GameClientMap = new GameObjectMap ();

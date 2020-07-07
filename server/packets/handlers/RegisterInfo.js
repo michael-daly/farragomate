@@ -1,5 +1,5 @@
-const fieldData          = require ('$/clients/fieldData.js');
-const validateClientInfo = require ('$/clients/validateClientInfo.js');
+const fieldData          = require ('$/clients/info/fieldData.js');
+const validateClientInfo = require ('$/clients/info/validateClientInfo.js');
 
 const { addPacketHandler } = require ('$/packets/PacketHandlers.js');
 const { mapStringFields }  = require ('$/fields/mapFields.js');

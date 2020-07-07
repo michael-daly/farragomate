@@ -1,8 +1,8 @@
 const GameObjectMap  = require ('$/misc/GameObjectMap.js');
-const GameRoomEvents = require ('$/rooms/GameRoomEvents.js');
+const GameRoomEvents = require ('$/rooms/events/GameRoomEvents.js');
 
 const { createRoom }     = require ('$/rooms/GameRoom.js');
-const { createRoomInfo } = require ('$/rooms/GameRoomInfo.js');
+const { createRoomInfo } = require ('$/rooms/info/GameRoomInfo.js');
 const { getClient }      = require ('$/clients/GameClientMap.js');
 
 const { ERROR_ROOM_LIMIT } = require ('~/errorCodes.js');

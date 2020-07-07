@@ -1,4 +1,4 @@
-const GameClientEvents = require ('$/clients/GameClientEvents.js');
+const GameClientEvents = require ('$/clients/events/GameClientEvents.js');
 
 const { removeClientName } = require ('$/clients/GameClientNames.js');
 
