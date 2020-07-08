@@ -1,14 +1,10 @@
 const { v4: uuid } = require ('uuid');
 
-const { has } = require ('~/util/has.js');
-
 const Timer = require ('~/Timer.js');
 
 const GameRoomClients   = require ('$/rooms/GameRoomClients.js');
 const GameRoomSentences = require ('$/rooms/GameRoomSentences.js');
 const SentenceCreation  = require ('$/screens/SentenceCreation.js');
-
-const fieldData = require ('$/rooms/info/fieldData.js');
 
 
 class GameRoom
