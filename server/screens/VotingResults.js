@@ -13,7 +13,6 @@ VotingResults.onEnterScreen = async function ( room )
 VotingResults.onLeaveScreen = async function ( room )
 {
 	room.sentences.clearSentences ();
-
 	room.currRound++;
 
 	if ( room.currRound < room.info.getField ('numRounds') )

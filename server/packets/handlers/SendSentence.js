@@ -5,7 +5,7 @@ const { GameRoomHandlers } = require ('$/packets/handlerMaps.js');
 
 const { getRoom } = require ('$/rooms/GameRoomMap.js');
 
-const { ERROR_NONE, ERROR_WRONG_SCREEN } = require ('~/errorCodes.js');
+const { ERROR_NONE, ERROR_REPEAT_DATA, ERROR_WRONG_SCREEN } = require ('~/errorCodes.js');
 
 
 GameRoomHandlers.addHandler ('Request', 'SendSentence', ( client, packet ) =>
@@ -19,6 +19,10 @@ GameRoomHandlers.addHandler ('Request', 'SendSentence', ( client, packet ) =>
 	{
 		error = ERROR_WRONG_SCREEN;
 	}
+	else if ( room.sentences.hasSentence (client.id) )
+	{
+		error = ERROR_REPEAT_DATA;
+	}
 	else
 	{
 		error = validateSentence (room.sentences, sentence);
@@ -30,7 +34,7 @@ GameRoomHandlers.addHandler ('Request', 'SendSentence', ( client, packet ) =>
 	}
 	else
 	{
-		room.sentences.addSentence (sentence);
+		room.sentences.addSentence (client.id, sentence);
 		client.sendPacket ('Accept', packet);
 	}
 });

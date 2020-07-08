@@ -53,11 +53,11 @@ const validateSentence = ( roomSentences, sentenceArr ) =>
 
 			if ( !isValidIndex (wordbanks, bankIndex) )
 			{
-				error = ERROR_INVALID_BANK;
+				error = [bankIndex, ERROR_INVALID_BANK];
 			}
-			else if ( !isValidIndex (wordbanks[bankIndex], wordIndex) )
+			else if ( !wordbanks[bankIndex].isValidWord (wordIndex) )
 			{
-				error = ERROR_INVALID_WORD;
+				error = [wordIndex, ERROR_INVALID_WORD];
 			}
 		}
 	}

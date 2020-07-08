@@ -1,6 +1,9 @@
-const GameWordbank = require ('$/wordbanks/GameWordbank.js');
-const words        = require ('$/config/words.js');
+const GameWordbank  = require ('$/wordbanks/GameWordbank.js');
+const FixedWordbank = require ('$/wordbanks/FixedWordbank.js');
 
+const words = require ('$/config/words.js');
+
+const { has }          = require ('~/util/has.js');
 const { isValidIndex } = require ('~/util/arrays.js');
 
 
@@ -14,9 +17,10 @@ class GameRoomSentences
 			new GameWordbank ('adjective'),
 			new GameWordbank ('noun'),
 			new GameWordbank ('verb'),
-			[ ...words.grammar ],
-			[ ...words.pronouns ],
-			[ ...words.misc ],
+
+			new FixedWordbank (words.grammar.slice ()),
+			new FixedWordbank (words.pronouns.slice ()),
+			new FixedWordbank (words.misc.slice ()),
 		];
 
 		this.isDeleted = false;
@@ -29,9 +33,13 @@ class GameRoomSentences
 			return;
 		}
 
-		this.wordbanks[0].delete ();
-		this.wordbanks[1].delete ();
-		this.wordbanks[2].delete ();
+		const { wordbanks } = this;
+		const { length }    = wordbanks;
+
+		for ( let i = 0; i < length; i++ )
+		{
+			wordbanks[i].delete ();
+		}
 
 		delete this.sentences;
 		delete this.wordbanks;
@@ -45,15 +53,21 @@ class GameRoomSentences
 	 */
 	addSentence ( clientID, sentenceArr )
 	{
-		if ( !has (this.sentences, clientID) )
-		{
-			this.sentences[clientID] = { votes: 0, arr: sentenceArr };
-		}
+		this.sentences[clientID] = { votes: 0, arr: sentenceArr };
 	}
 
 	clearSentences ()
 	{
 		this.sentences = {};
+	}
+
+	/**
+	 * @param   {string} clientID
+	 * @returns {boolean}
+	 */
+	hasSentence ( clientID )
+	{
+		return has (this.sentences, clientID);
 	}
 
 	getSentences ()
@@ -70,16 +84,7 @@ class GameRoomSentences
 
 		for ( let i = 0; i < length; i++ )
 		{
-			const wordbank = wordbanks[i];
-
-			if ( Array.isArray (wordbank) )
-			{
-				arr.push (wordbank);
-			}
-			else
-			{
-				arr.push (wordbank.toJSON ());
-			}
+			arr.push (wordbanks[i].toJSON ());
 		}
 
 		return arr;
@@ -88,13 +93,14 @@ class GameRoomSentences
 	async fetchWords ()
 	{
 		const { wordbanks } = this;
+		const { length }    = wordbanks;
 
-		const promises =
-		[
-			wordbanks[0].fetchWords (),
-			wordbanks[1].fetchWords (),
-			wordbanks[2].fetchWords (),
-		];
+		const promises = [];
+
+		for ( let i = 0; i < length; i++ )
+		{
+			promises.push (wordbanks[i].fetchWords ());
+		}
 
 		return Promise.all (promises);
 	}

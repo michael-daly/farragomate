@@ -3,6 +3,8 @@ const got = require ('got');
 const objectToURL = require ('~/util/objectToURL.js');
 const apiRequest  = require ('$/config/apiRequest.js');
 
+const { isValidIndex } = require ('~/util/arrays.js');
+
 const API_KEY = require ('$/config/apiKey.js');
 
 
@@ -10,26 +12,24 @@ class GameWordbank
 {
 	/**
 	 * @param {string|null} [include=null] - Parts of speech to include in the request.
-	 * @param {string|null} [exclude=null] - Parts of speech to exclude in the request.
 	 */
-	constructor ( include = null, exclude = null )
+	constructor ( include = null )
 	{
-		const request = { ...apiRequest };
+		let request = null;
 
 		if ( include !== null )
 		{
-			request.includePartOfSpeech = include;
-		}
+			request = objectToURL (
+			{
+				...apiRequest,
 
-		if ( exclude !== null )
-		{
-			request.excludePartOfSpeech = exclude;
+				includePartOfSpeech: include,
+				api_key:             API_KEY,
+			});
 		}
-
-		request.api_key = API_KEY;
 
 		this.words      = [];
-		this.requestURL = objectToURL (request);
+		this.requestURL = request;
 		this.isDeleted  = false;
 	}
 
@@ -46,9 +46,18 @@ class GameWordbank
 		this.isDeleted = true;
 	}
 
+	/**
+	 * @param   {Integer} index
+	 * @returns {boolean}
+	 */
+	isValidWord ( index )
+	{
+		return isValidIndex (this.words, index);
+	}
+
 	async fetchWords ()
 	{
-		if ( this.isDeleted )
+		if ( this.isDeleted || this.requestURL === null )
 		{
 			return;
 		}

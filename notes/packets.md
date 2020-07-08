@@ -69,7 +69,7 @@
 
 * [ ]  SendSentence
 	* [ ]  Request
-	* [ ]  Response
+	* [X]  Response
 
 * [ ]  ClientSentences
 	* [X]  DataPacket from server to client.

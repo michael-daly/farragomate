@@ -1,4 +1,7 @@
-module.exports =
+const deepFreeze = require ('~/util/deepFreeze.js');
+
+
+module.exports = deepFreeze (
 {
 	grammar:
 	[
@@ -22,4 +25,4 @@ module.exports =
 		'have', 'has', 'had', 'do',  'does', 'did',
 		'yes',  'no',
 	],
-};
+});
