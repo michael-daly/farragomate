@@ -34,7 +34,7 @@ const mapStringFields = ( inputFields, fieldData, callback ) =>
 {
 	return mapFields (inputFields, fieldData, ( field, fieldName, data ) =>
 	{
-		if ( data.type === 'string' )
+		if ( data.type === 'string' && typeof field === 'string' )
 		{
 			return callback (field, fieldName, data);
 		}
