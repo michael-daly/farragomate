@@ -44,7 +44,7 @@ const deleteRoom = roomID =>
 
 	GameRoomEvents.emit ('deleteRoom', room);
 
-	room.forEachClient (clientID =>
+	room.clients.forEach (clientID =>
 	{
 		getClient (clientID).roomID = null;
 	});
@@ -70,7 +70,7 @@ const addClientToRoom = ( room, client ) =>
 	GameRoomEvents.emit ('joinRoom', room, client);
 
 	client.roomID = room.id;
-	room.addClientID (client.id);
+	room.clients.addClientID (client.id);
 };
 
 /**
@@ -88,7 +88,7 @@ const removeClientFromRoom = ( room, client ) =>
 		GameRoomEvents.emit ('leaveRoom', room, client);
 
 		client.roomID = null;
-		room.removeClientID (client.id);
+		room.clients.removeClientID (client.id);
 	}
 };
 
@@ -99,7 +99,7 @@ const removeClientFromRoom = ( room, client ) =>
  */
 const sendDataToRoom = ( room, command, body ) =>
 {
-	room.forEachClient (clientID =>
+	room.clients.forEach (clientID =>
 	{
 		getClient (clientID).sendPacket ('Data', command, body);
 	});
@@ -164,7 +164,7 @@ const getRoomClientList = room =>
 {
 	const list = {};
 
-	room.forEachClient (clientID =>
+	room.clients.forEach (clientID =>
 	{
 		list[clientID] = getClient (clientID).toJSON ();
 	});

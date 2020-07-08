@@ -13,7 +13,7 @@ GameRoomHandlers.addHandler ('Request', 'KickClient', ( client, packet ) =>
 
 	let error = null;
 
-	if ( !room.hasClientID (victimID) )
+	if ( !room.clients.hasClientID (victimID) )
 	{
 		error = ERROR_NOT_FOUND;
 	}

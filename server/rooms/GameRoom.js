@@ -4,6 +4,7 @@ const { has } = require ('~/util/has.js');
 
 const Timer = require ('~/Timer.js');
 
+const GameRoomClients   = require ('$/rooms/GameRoomClients.js');
 const GameRoomSentences = require ('$/rooms/GameRoomSentences.js');
 const SentenceCreation  = require ('$/screens/SentenceCreation.js');
 
@@ -24,12 +25,12 @@ class GameRoom
 		this.info    = info;
 
 		this.currRound = 0;
-		this.clientIDs = new Set ();
-		this.bannedIDs = new Set ();
 
-		this.timer     = new Timer ();
+		this.clients   = new GameRoomClients ();
 		this.sentences = new GameRoomSentences ();
-		this.screen    = SentenceCreation;
+		this.timer     = new Timer ();
+
+		this.screen = SentenceCreation;
 
 		this.isDeleted = false;
 	}
@@ -41,19 +42,17 @@ class GameRoom
 			return;
 		}
 
-		this.timer.delete ();
+		this.clients.delete ();
 		this.sentences.delete ();
-
-		this.clientIDs.clear ();
+		this.timer.delete ();
 
 		delete this.id;
 		delete this.ownerID;
 		delete this.info;
 		delete this.currRound;
-		delete this.clientIDs;
-		delete this.bannedIDs;
-		delete this.timer;
+		delete this.clients;
 		delete this.sentences;
+		delete this.timer;
 		delete this.screen;
 
 		this.isDeleted = true;
@@ -109,83 +108,12 @@ class GameRoom
 	}
 
 	/**
-	 * @returns {boolean}
-	 */
-	isFull ()
-	{
-		return this.clientIDs.size >= this.info.maxClients;
-	}
-
-	/**
 	 * @param   {string} clientID
 	 * @returns {boolean}
 	 */
 	isOwner ( clientID )
 	{
 		return clientID === this.ownerID;
-	}
-
-	/**
-	 * @param {string} clientID
-	 */
-	addClientID ( clientID )
-	{
-		this.clientIDs.add (clientID);
-	}
-
-	/**
-	 * @param {string} clientID
-	 */
-	removeClientID ( clientID )
-	{
-		this.clientIDs.delete (clientID);
-	}
-
-	/**
-	 * @param   {string} clientID
-	 * @returns {boolean}
-	 */
-	hasClientID ( clientID )
-	{
-		return this.clientIDs.has (clientID);
-	}
-
-	/**
-	 * @param {string} clientID
-	 */
-	addBannedID ( clientID )
-	{
-		this.bannedIDs.add (clientID);
-	}
-
-	/**
-	 * @param {string} clientID
-	 */
-	removeBannedID ( clientID )
-	{
-		this.bannedIDs.delete (clientID);
-	}
-
-	/**
-	 * @param   {string} clientID
-	 * @returns {boolean}
-	 */
-	isBannedID ( clientID )
-	{
-		return this.bannedIDs.has (clientID);
-	}
-
-	/**
-	 * @param {Function} callback
-	 */
-	forEachClient ( callback )
-	{
-		const { clientIDs } = this;
-
-		for ( let id of clientIDs )
-		{
-			callback (id);
-		}
 	}
 
 	/**
@@ -207,6 +135,11 @@ class GameRoom
 	toString ()
 	{
 		return JSON.stringify (this.toJSON ());
+	}
+
+	get isFull ()
+	{
+		return this.clients.size >= this.info.maxClients;
 	}
 
 	get timeLeft ()

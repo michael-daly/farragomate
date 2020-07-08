@@ -14,11 +14,11 @@ MainMenuHandlers.addHandler ('Request', 'JoinRoom', ( client, packet ) =>
 	{
 		error = ERROR_NOT_FOUND;
 	}
-	else if ( room.isBannedID (client.id) )
+	else if ( room.clients.isBannedID (client.id) )
 	{
 		error = ERROR_BANNED;
 	}
-	else if ( room.isFull () )
+	else if ( room.isFull )
 	{
 		error = ERROR_ROOM_FULL;
 	}
