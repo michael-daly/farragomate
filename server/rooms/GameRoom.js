@@ -1,11 +1,12 @@
 const { v4: uuid } = require ('uuid');
 
-const Timer = require ('~/Timer.js');
+const Timer        = require ('~/Timer.js');
+const EventEmitter = require ('~/EventEmitter.js');
 
 const GameRoomClients   = require ('$/rooms/GameRoomClients.js');
 const GameRoomSentences = require ('$/rooms/GameRoomSentences.js');
 
-const getGameScreen = require ('$/screens/getGameScreen.js');
+const SentenceCreation = require ('$/screens/SentenceCreation.js');
 
 
 class GameRoom
@@ -23,11 +24,12 @@ class GameRoom
 
 		this.currRound = 0;
 
+		this.timer     = new Timer ();
+		this.events    = new EventEmitter ();
 		this.clients   = new GameRoomClients ();
 		this.sentences = new GameRoomSentences ();
-		this.timer     = new Timer ();
 
-		this.screen = null;
+		this.screen = SentenceCreation;
 
 		this.isDeleted = false;
 	}
@@ -43,43 +45,43 @@ class GameRoom
 		this.sentences.delete ();
 		this.timer.delete ();
 
+		this.events.clear ();
+
 		delete this.id;
 		delete this.ownerID;
 		delete this.info;
 		delete this.currRound;
 		delete this.clients;
 		delete this.sentences;
+		delete this.events;
 		delete this.timer;
 		delete this.screen;
 
 		this.isDeleted = true;
 	}
 
-	/**
-	 * @param {GameScreen} screen
-	 */
-	setScreen ( screen )
+	start ()
 	{
-		this.timer.stop ();
-		this.screen = screen;
+		this.enterScreen ();
+	}
 
-		const room = this;
+	enterScreen ()
+	{
+		const { events, screen } = this;
 
-		screen.onEnterScreen (room).then (() =>
+		screen.onEnterScreen (this).then (() =>
 		{
-			room.timer.start (screen.getStartTime (room));
+			events.emit ('enterScreen', screen);
 		});
 	}
 
-	nextScreen ()
+	leaveScreen ()
 	{
-		const room = this;
+		const { events, screen } = this;
 
-		this.screen.onLeaveScreen (room).then (() =>
+		screen.onLeaveScreen (this).then (() =>
 		{
-			const next = getGameScreen (room.screen.getNextScreen (room));
-
-			room.setScreen (next);
+			events.emit ('leaveScreen', screen);
 		});
 	}
 

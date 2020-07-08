@@ -1,5 +1,6 @@
 const GameRoomEvents   = require ('$/rooms/events/GameRoomEvents.js');
-const SentenceCreation = require ('$/screens/SentenceCreation.js');
+
+const getGameScreen = require ('$/screens/getGameScreen.js');
 
 const
 {
@@ -22,11 +23,22 @@ GameRoomEvents.on ('createRoom', ( room, owner ) =>
 	{
 		if ( !wasForced )
 		{
-			room.nextScreen ();
+			room.leaveScreen ();
 		}
 	});
 
-	room.setScreen (SentenceCreation);
+	room.events.on ('enterScreen', screen =>
+	{
+		room.timer.start (screen.getStartTime (room));
+	});
+
+	room.events.on ('leaveScreen', screen =>
+	{
+		room.screen = getGameScreen (screen.getNextScreen (room));
+		room.enterScreen ();
+	});
+
+	room.start ();
 });
 
 GameRoomEvents.on ('joinRoom', ( room, client ) =>

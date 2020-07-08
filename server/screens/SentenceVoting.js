@@ -7,7 +7,7 @@ const SentenceVoting = new GameScreen ('SentenceVoting', 30);
 
 SentenceVoting.onEnterScreen = async function ( room )
 {
-	sendDataToRoom (room, 'ClientSentences', room.sentences);
+	sendDataToRoom (room, 'ClientSentences', room.sentences.getSentences ());
 };
 
 SentenceVoting.onLeaveScreen = async function ( room )

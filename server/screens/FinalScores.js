@@ -1,6 +1,6 @@
 const GameScreen = require ('$/screens/GameScreen.js');
 
-const { sendDataToRoom } = require ('$/rooms/GameRoomMap.js');
+const { sendInfoToRoom } = require ('$/rooms/GameRoomMap.js');
 
 
 const FinalScores = new GameScreen ('FinalScores', 20);

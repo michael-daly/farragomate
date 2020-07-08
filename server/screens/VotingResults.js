@@ -1,29 +1,30 @@
 const GameScreen = require ('$/screens/GameScreen.js');
 
-const { sendInfoToRoom } = require ('$/rooms/GameRoomMap.js');
+const { sendDataToRoom } = require ('$/rooms/GameRoomMap.js');
 
 
 const VotingResults = new GameScreen ('VotingResults', 15);
 
 VotingResults.onEnterScreen = async function ( room )
 {
-	sendDataToRoom (room, 'ClientSentences', room.sentences);
+	sendDataToRoom (room, 'ClientSentences', room.sentences.getSentences ());
 };
 
 VotingResults.onLeaveScreen = async function ( room )
 {
 	room.sentences.clearSentences ();
 
-	if ( room.currRound < room.info.getField ('numRounds') - 1 )
+	room.currRound++;
+
+	if ( room.currRound < room.info.getField ('numRounds') )
 	{
-		room.currRound++;
-		sendInfoToRoom (room);
+		sendDataToRoom (room, 'RoomInfo', { currRound: room.currRound });
 	}
 };
 
 VotingResults.getNextScreen = function ( room )
 {
-	if ( room.currRound >= room.info.getField ('numRounds') - 1 )
+	if ( room.currRound < room.info.getField ('numRounds') )
 	{
 		return 'SentenceCreation';
 	}

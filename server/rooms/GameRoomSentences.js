@@ -55,6 +55,11 @@ class GameRoomSentences
 		this.sentences = {};
 	}
 
+	getSentences ()
+	{
+		return this.sentences;
+	}
+
 	async fetchWords ()
 	{
 		const { wordbanks } = this;
