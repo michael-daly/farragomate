@@ -6,8 +6,6 @@ const EventEmitter = require ('~/EventEmitter.js');
 const GameRoomClients   = require ('$/rooms/GameRoomClients.js');
 const GameRoomSentences = require ('$/rooms/GameRoomSentences.js');
 
-const SentenceCreation = require ('$/screens/SentenceCreation.js');
-
 
 class GameRoom
 {
@@ -29,7 +27,7 @@ class GameRoom
 		this.clients   = new GameRoomClients ();
 		this.sentences = new GameRoomSentences ();
 
-		this.screen = SentenceCreation;
+		this.screen = null;
 
 		this.isDeleted = false;
 	}
@@ -60,8 +58,12 @@ class GameRoom
 		this.isDeleted = true;
 	}
 
-	start ()
+	/**
+	 * @param {GameScreen} screen
+	 */
+	start ( screen )
 	{
+		this.screen = screen;
 		this.enterScreen ();
 	}
 

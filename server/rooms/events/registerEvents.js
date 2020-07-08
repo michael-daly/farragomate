@@ -1,4 +1,5 @@
 const GameRoomEvents   = require ('$/rooms/events/GameRoomEvents.js');
+const SentenceCreation = require ('$/screens/SentenceCreation.js');
 
 const getGameScreen = require ('$/screens/getGameScreen.js');
 
@@ -38,7 +39,7 @@ GameRoomEvents.on ('createRoom', ( room, owner ) =>
 		room.enterScreen ();
 	});
 
-	room.start ();
+	room.start (SentenceCreation);
 });
 
 GameRoomEvents.on ('joinRoom', ( room, client ) =>

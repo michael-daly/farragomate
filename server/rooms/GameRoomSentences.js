@@ -60,6 +60,22 @@ class GameRoomSentences
 		return this.sentences;
 	}
 
+	getWordbanks ()
+	{
+		const { wordbanks } = this;
+
+		const object =
+		{
+			...wordbanks,
+
+			adjectives: wordbanks.adjectives.toJSON (),
+			nouns:      wordbanks.nouns.toJSON (),
+			verbs:      wordbanks.verbs.toJSON (),
+		};
+
+		return object;
+	}
+
 	async fetchWords ()
 	{
 		const { wordbanks } = this;

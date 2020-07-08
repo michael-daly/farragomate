@@ -1,11 +1,15 @@
 const GameScreen = require ('$/screens/GameScreen.js');
 
+const { sendDataToRoom } = require ('$/rooms/GameRoomMap.js');
+
 
 const SentenceCreation = new GameScreen ('SentenceCreation');
 
 SentenceCreation.onEnterScreen = async function ( room )
 {
 	await room.sentences.fetchWords ();
+
+	sendDataToRoom (room, 'Wordbanks', room.sentences.getWordbanks ());
 };
 
 SentenceCreation.onLeaveScreen = async function ( room )
