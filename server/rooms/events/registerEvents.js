@@ -12,12 +12,12 @@ const
 
 GameRoomEvents.on ('createRoom', ( room, owner ) =>
 {
-	room.onTimer ('tick', time =>
+	room.timer.on ('tick', time =>
 	{
 		sendDataToRoom (room, 'RoomInfo', { timeLeft: room.timeLeft });
 	});
 
-	room.startTimer (room.getInfoField ('timeLimit'));
+	room.timer.start (room.info.getField ('timeLimit'));
 });
 
 GameRoomEvents.on ('joinRoom', ( room, client ) =>

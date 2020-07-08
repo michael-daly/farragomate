@@ -14,7 +14,7 @@ VotingResults.onLeaveScreen = async function ( room )
 {
 	room.sentences.clearSentences ();
 
-	if ( room.currRound < room.getInfoField ('numRounds') - 1 )
+	if ( room.currRound < room.info.getField ('numRounds') - 1 )
 	{
 		room.currRound++;
 		sendInfoToRoom (room);
@@ -23,7 +23,7 @@ VotingResults.onLeaveScreen = async function ( room )
 
 VotingResults.getNextScreen = function ( room )
 {
-	if ( room.currRound >= room.getInfoField ('numRounds') - 1 )
+	if ( room.currRound >= room.info.getField ('numRounds') - 1 )
 	{
 		return 'SentenceCreation';
 	}

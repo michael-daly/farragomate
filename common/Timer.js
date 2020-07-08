@@ -53,6 +53,24 @@ class Timer
 		return this.timeLeft;
 	}
 
+	/**
+	 * @param {string}   event
+	 * @param {Function} callback
+	 */
+	on ( event, callback )
+	{
+		this.events.on (event, callback);
+	}
+
+	/**
+	 * @param {string}   event
+	 * @param {Function} callback
+	 */
+	off ( event, callback )
+	{
+		this.events.off (event, callback);
+	}
+
 	_tick ()
 	{
 		this.events.emit ('tick', this.timeLeft);

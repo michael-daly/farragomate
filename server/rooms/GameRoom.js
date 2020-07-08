@@ -59,55 +59,6 @@ class GameRoom
 	}
 
 	/**
-	 * @param {string} field
-	 * @param {*}      value
-	 */
-	setInfoField ( field, value )
-	{
-		this.info.setField (field, value);
-	}
-
-	/**
-	 * @param   {string} field
-	 * @returns {*} null if not valid
-	 */
-	getInfoField ( field )
-	{
-		return this.info.getField (field);
-	}
-
-	/**
-	 * @param {Integer} startTime
-	 */
-	startTimer ( startTime )
-	{
-		this.timer.start (startTime);
-	}
-
-	stopTimer ()
-	{
-		this.timer.stop ();
-	}
-
-	/**
-	 * @param {string}   event
-	 * @param {Function} callback
-	 */
-	onTimer ( event, callback )
-	{
-		this.timer.events.on (event, callback);
-	}
-
-	/**
-	 * @param {string}   event
-	 * @param {Function} callback
-	 */
-	offTimer ( event, callback )
-	{
-		this.timer.events.off (event, callback);
-	}
-
-	/**
 	 * @param   {string} clientID
 	 * @returns {boolean}
 	 */

@@ -16,7 +16,7 @@ class GameScreen
 	 */
 	getStartTime ( room )
 	{
-		return this.startTime === null ? room.getInfoField ('timeLimit') : this.startTime;
+		return this.startTime === null ? room.info.getField ('timeLimit') : this.startTime;
 	}
 
 	/**
