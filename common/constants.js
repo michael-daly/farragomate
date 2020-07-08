@@ -1,4 +1,6 @@
 const ROOM_LIST_TIMEOUT = 1500;
+const MIN_SENTENCE_LEN  = 1;
+const MAX_SENTENCE_LEN  = 30;
 
 
-module.exports = { ROOM_LIST_TIMEOUT };
+module.exports = { ROOM_LIST_TIMEOUT, MIN_SENTENCE_LEN, MAX_SENTENCE_LEN };
