@@ -1,5 +1,5 @@
 const applyDefaultValues = require ('$/fields/applyDefaultValues.js');
-const fieldData          = require ('$/clients/info/fieldData.js');
+const fieldData          = require ('~/clients/fieldData.js');
 
 
 class GameClientInfo

@@ -1,4 +1,4 @@
-const fieldData      = require ('$/clients/info/fieldData.js');
+const fieldData      = require ('~/clients/fieldData.js');
 const validateFields = require ('$/fields/validateFields.js');
 
 
