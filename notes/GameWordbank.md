@@ -1,11 +1,11 @@
 ## GameWordbank
 
-* [ ]  String[] adjectives
-* [ ]  String[] nouns
-* [ ]  String[] verbs
-* [ ]  String[] grammar
-* [ ]  String[] pronouns
-* [ ]  String[] misc
+* [X]  String[] adjectives
+* [X]  String[] nouns
+* [X]  String[] verbs
+* [X]  String[] grammar
+* [X]  String[] pronouns
+* [X]  String[] misc
 
 
 #### addWordbank ( String name, String[] words )

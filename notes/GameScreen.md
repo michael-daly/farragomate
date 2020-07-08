@@ -2,7 +2,7 @@
 
 > Singleton strategy
 
-* [ ]  Integer|null startTime=null (null means set to GameRoomInfo's timeLimit)
+* [X]  Integer|null startTime=null (null means set to GameRoomInfo's timeLimit)
 
 
 #### onEnterScreen ( GameRoom room )

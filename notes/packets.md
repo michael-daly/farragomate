@@ -64,13 +64,16 @@
 * [ ]  ClientList
 	* [X]  DataPacket from server to client when the client first joins the room.
 
+* [ ]  Wordbanks
+	* [X]  DataPacket from server to client to send available words at beginning of each round.
+
 * [ ]  SendSentence
 	* [ ]  Request
 	* [ ]  Response
 
 * [ ]  ClientSentences
-	* [ ]  DataPacket from server to client.
-	* [ ]  Used in both the "SentenceVoting" screen and the "VotingResults" screen.
+	* [X]  DataPacket from server to client.
+	* [X]  Used in both the "SentenceVoting" screen and the "VotingResults" screen.
 
 * [ ]  CastVote
 	* [ ]  Request
