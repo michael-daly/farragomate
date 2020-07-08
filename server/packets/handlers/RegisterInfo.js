@@ -20,22 +20,26 @@ MainMenuHandlers.addHandler ('Request', 'RegisterInfo', ( client, packet ) =>
 	}
 	else
 	{
-		const info        = mapStringFields (body, fieldData, field => stripNonASCII (field).trim ());
-		const result      = validateClientInfo (info);
-		const displayName = sanitizeString (info.displayName);
+		const info   = mapStringFields (body, fieldData, field => stripNonASCII (field).trim ());
+		const result = validateClientInfo (info);
 
 		if ( result !== ERROR_NONE )
 		{
 			client.sendPacket ('Reject', packet, result);
 		}
-		else if ( hasClientName (displayName) )
-		{
-			client.sendPacket ('Reject', packet, ['displayName', FIELD_ERR_UNIQUE]);
-		}
 		else
 		{
-			client.setDisplayName (displayName);
-			client.sendPacket ('Accept', packet, { id: client.id, displayName });
+			const displayName = sanitizeString (info.displayName);
+
+			if ( hasClientName (displayName) )
+			{
+				client.sendPacket ('Reject', packet, ['displayName', FIELD_ERR_UNIQUE]);
+			}
+			else
+			{
+				client.setDisplayName (displayName);
+				client.sendPacket ('Accept', packet, { id: client.id, displayName });
+			}
 		}
 	}
 });
