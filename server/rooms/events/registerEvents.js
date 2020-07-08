@@ -1,4 +1,5 @@
-const GameRoomEvents = require ('$/rooms/events/GameRoomEvents.js');
+const GameRoomEvents   = require ('$/rooms/events/GameRoomEvents.js');
+const SentenceCreation = require ('$/screens/SentenceCreation.js');
 
 const
 {
@@ -17,7 +18,15 @@ GameRoomEvents.on ('createRoom', ( room, owner ) =>
 		sendDataToRoom (room, 'RoomInfo', { timeLeft: room.timeLeft });
 	});
 
-	room.timer.start (room.info.getField ('timeLimit'));
+	room.timer.on ('stop', ( time, wasForced ) =>
+	{
+		if ( !wasForced )
+		{
+			room.nextScreen ();
+		}
+	});
+
+	room.setScreen (SentenceCreation);
 });
 
 GameRoomEvents.on ('joinRoom', ( room, client ) =>

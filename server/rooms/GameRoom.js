@@ -4,7 +4,8 @@ const Timer = require ('~/Timer.js');
 
 const GameRoomClients   = require ('$/rooms/GameRoomClients.js');
 const GameRoomSentences = require ('$/rooms/GameRoomSentences.js');
-const SentenceCreation  = require ('$/screens/SentenceCreation.js');
+
+const getGameScreen = require ('$/screens/getGameScreen.js');
 
 
 class GameRoom
@@ -26,7 +27,7 @@ class GameRoom
 		this.sentences = new GameRoomSentences ();
 		this.timer     = new Timer ();
 
-		this.screen = SentenceCreation;
+		this.screen = null;
 
 		this.isDeleted = false;
 	}
@@ -52,6 +53,34 @@ class GameRoom
 		delete this.screen;
 
 		this.isDeleted = true;
+	}
+
+	/**
+	 * @param {GameScreen} screen
+	 */
+	setScreen ( screen )
+	{
+		this.timer.stop ();
+		this.screen = screen;
+
+		const room = this;
+
+		screen.onEnterScreen (room).then (() =>
+		{
+			room.timer.start (screen.getStartTime (room));
+		});
+	}
+
+	nextScreen ()
+	{
+		const room = this;
+
+		this.screen.onLeaveScreen (room).then (() =>
+		{
+			const next = getGameScreen (room.screen.getNextScreen (room));
+
+			room.setScreen (next);
+		});
 	}
 
 	/**

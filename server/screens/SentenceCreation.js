@@ -5,7 +5,7 @@ const SentenceCreation = new GameScreen ('SentenceCreation');
 
 SentenceCreation.onEnterScreen = async function ( room )
 {
-	await room.fetchWords ();
+	await room.sentences.fetchWords ();
 };
 
 SentenceCreation.onLeaveScreen = async function ( room )
