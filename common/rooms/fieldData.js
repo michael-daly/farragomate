@@ -13,6 +13,8 @@ const fieldData =
 		required: true,
 
 		defaultValue: 'Farragomate Server',
+
+		label: 'Title',
 	},
 
 	password:
@@ -25,6 +27,8 @@ const fieldData =
 		required: false,
 
 		defaultValue: '',
+
+		label: 'Password',
 	},
 
 	maxClients:
@@ -37,6 +41,8 @@ const fieldData =
 		required: true,
 
 		defaultValue: 8,
+
+		label: 'Player Limit',
 	},
 
 	timeLimit:
@@ -49,6 +55,8 @@ const fieldData =
 		required: true,
 
 		defaultValue: 60,
+
+		label: 'Time Limit',
 	},
 
 	numRounds:
@@ -61,6 +69,8 @@ const fieldData =
 		required: true,
 
 		defaultValue: 10,
+
+		label: 'Rounds',
 	},
 };
 
