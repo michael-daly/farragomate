@@ -77,4 +77,4 @@
 
 * [ ]  CastVote
 	* [ ]  Request
-	* [ ]  Response
+	* [X]  Response

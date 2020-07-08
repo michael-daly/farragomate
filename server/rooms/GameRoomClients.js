@@ -4,6 +4,7 @@ class GameRoomClients
 	{
 		this.clientIDs = new Set ();
 		this.bannedIDs = new Set ();
+		this.votedIDs  = new Set ();
 
 		this.isDeleted = false;
 	}
@@ -72,6 +73,28 @@ class GameRoomClients
 	isBannedID ( clientID )
 	{
 		return this.bannedIDs.has (clientID);
+	}
+
+	/**
+	 * @param {string} clientID
+	 */
+	addVotedID ( clientID )
+	{
+		this.votedIDs.add (clientID);
+	}
+
+	clearVotedIDs ()
+	{
+		this.votedIDs.clear ();
+	}
+
+	/**
+	 * @param   {string} clientID
+	 * @returns {boolean}
+	 */
+	hasVotedID ( clientID )
+	{
+		return this.votedIDs.has (clientID);
 	}
 
 	/**

@@ -75,6 +75,17 @@ class GameRoomSentences
 		return this.sentences;
 	}
 
+	/**
+	 * @param {string} clientID
+	 */
+	addVote ( clientID )
+	{
+		if ( this.hasSentence (clientID) )
+		{
+			this.sentences[clientID].votes++;
+		}
+	}
+
 	getWordbanks ()
 	{
 		const { wordbanks } = this;
