@@ -1,3 +1,9 @@
+@font-face
+{
+	font-family: 'Indie Flower';
+	src: url('/fonts/IndieFlower.ttf');
+}
+
 html, body
 {
 	width:  100%;
@@ -10,7 +16,12 @@ html, body
 
 	color:       #AAFF66;
 	font-size:   2vw;
-	font-family: 'Helvetica', sans-serif;
+	font-family: 'Indie Flower';
+
+	user-select:         none;
+	-moz-user-select:    none;
+	-ms-user-select:     none;
+	-webkit-user-select: none;
 }
 
 .chalkboard
@@ -32,7 +43,69 @@ html, body
 .title-logo
 {
 	width: 100%;
+}
 
-	margin: 5vh auto;
+.button, .magnet
+{
+	margin: 0.15em;
+
+	padding:       0.5em;
+	padding-left:  1em;
+	padding-right: 1em;
+
+	/*min-height: 1em;*/
+}
+
+.button:hover
+{
+	cursor: pointer;
+}
+
+.magnet
+{
+	background-color: #EEE;
+
+	box-shadow: inset -0.1vw -0.1vw 1px 0px rgba(0, 0, 0, 0.5),
+	            inset 0.1vw 0.1vw 1px 0px rgba(255, 255, 255, 0.5);
+
+	font-family: 'Helvetica', sans-serif;
+	color:       #000;
+}
+
+.magnet.button:hover
+{
+	background-color: #FEFEFE;
+	color:            #111;
+}
+
+.magnet.button:active
+{
+	background-color: #DEDEDE;
+}
+
+.chalk
+{
+	margin: 0.15em;
+
+	border: 0.1em dashed;
+
+	padding:       0.3em;
+	padding-left:  0.75em;
+	padding-right: 0.75em;
+}
+
+.chalk.button:hover
+{
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.chalk.button:active
+{
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.center-content
+{
+	margin: 5vw auto;
 	text-align: center;
 }
