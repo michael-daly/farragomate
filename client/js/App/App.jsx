@@ -32,9 +32,9 @@ class App extends Component
 }
 
 
-const mapStateToProps = props =>
+const mapStateToProps = ({ app }) =>
 {
-	return { screen: props.global.screen };
+	return { screen: app.screen };
 };
 
 const mapDispatchToProps = dispatch =>
