@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-const UIButton = ({ type, text, onClick }) =>
+const UIButton = ({ type, text, onClick, inline = true }) =>
 {
 	let classNames = 'button ';
 
@@ -14,7 +14,12 @@ const UIButton = ({ type, text, onClick }) =>
 		classNames += 'chalk';
 	}
 
-	return <span className={classNames} onClick={onClick}>{text}</span>;
+	if ( inline )
+	{
+		return <span className={classNames} onClick={onClick}>{text}</span>;
+	}
+
+	return <div className={classNames} onClick={onClick}>{text}</div>;
 };
 
 
