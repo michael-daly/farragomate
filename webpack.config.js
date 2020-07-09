@@ -12,6 +12,8 @@ module.exports =
 		path: path.join (__dirname + '/client/dist')
 	},
 
+	mode: 'development',
+
 	module:
 	{
 		rules:
@@ -32,7 +34,8 @@ module.exports =
 	{
 		alias:
 		{
-			'!': path.resolve (__dirname, './client/js/'),
+			'#/App': path.resolve (__dirname, './client/js/App/'),
+			'#':     path.resolve (__dirname, './client/js/'),
 
 			'~/util': path.resolve (__dirname, './common/util/'),
 			'~':      path.resolve (__dirname, './common/'),

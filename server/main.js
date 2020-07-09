@@ -1,6 +1,7 @@
 // Register custom module paths (see _moduleAliases in package.json)
 require ('module-alias/register');
 
+const path    = require ('path');
 const express = require ('express');
 const app     = express ();
 
@@ -10,6 +11,13 @@ const onNewConnection = require ('$/socketCallbacks.js');
 
 const PORT = 3000;
 
+
+app.use ('/', express.static (path.join (__dirname, '../client')));
+
+app.get ('/*', ( req, res ) =>
+{
+	res.sendFile ('index.html', { root: path.join (__dirname, '../client') });
+});
 
 app.listen (PORT, () =>
 {
