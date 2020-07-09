@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import TitleLogo from '#/misc/TitleLogo.jsx';
+import MainMenu from '#/MainMenu/MainMenu.jsx';
 
 
 class App extends Component
@@ -14,7 +14,11 @@ class App extends Component
 
 	render ()
 	{
-		return <div className='chalkboard'><TitleLogo /></div>;
+		return (
+			<div className='chalkboard'>
+				<MainMenu />
+			</div>
+		);
 	}
 }
 
