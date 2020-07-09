@@ -33,7 +33,7 @@ class MainMenu extends Component
 }
 
 
-const mapStateToProps = ({ global, popup, tempCanvas }) =>
+const mapStateToProps = () =>
 {
 	return {};
 };
