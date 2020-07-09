@@ -45,6 +45,11 @@ html, body
 	width: 100%;
 }
 
+.title-logo-img
+{
+	transform: scale(1.1);
+}
+
 .button, .magnet
 {
 	margin: 0.15em;
