@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
+import TitleLogo from '#/misc/TitleLogo.jsx';
+
 
 class App extends Component
 {
@@ -12,7 +14,7 @@ class App extends Component
 
 	render ()
 	{
-		return <div>Hello! :)</div>;
+		return <div className='chalkboard'><TitleLogo /></div>;
 	}
 }
 
