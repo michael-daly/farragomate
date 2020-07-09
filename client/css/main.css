@@ -104,6 +104,21 @@ html, body, .chalkboard
 	background-color: rgba(128, 128, 128, 0.1);
 }
 
+input[type=text].chalk
+{
+	background: none;
+
+	border: 0.2vw dotted;
+
+	color:       #AAFF66;
+	font-size:   1.75vw;
+	font-family: 'Indie Flower';
+
+	padding:       0.2em;
+	padding-left:  0.7em;
+	padding-right: 0.7em;
+}
+
 .center-content
 {
 	margin: 5vw auto;
