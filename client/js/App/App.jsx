@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import MainMenu from '#/MainMenu/MainMenu.jsx';
+import MainMenu   from '#/MainMenu/MainMenu.jsx';
+import CreateRoom from '#/CreateRoom/CreateRoom.jsx';
 
 
 class App extends Component
@@ -21,6 +22,10 @@ class App extends Component
 		if ( screen === 'MainMenu' )
 		{
 			component = <MainMenu />;
+		}
+		else if ( screen === 'CreateRoom' )
+		{
+			component = <CreateRoom />;
 		}
 		else
 		{
