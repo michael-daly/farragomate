@@ -52,8 +52,6 @@ html, body, .chalkboard
 	padding:       0.5em;
 	padding-left:  1em;
 	padding-right: 1em;
-
-	/*min-height: 1em;*/
 }
 
 .button:hover
@@ -108,9 +106,9 @@ input[type=text].chalk
 {
 	background: none;
 
-	border: 0.2vw dotted;
+	border: 0.2vw #AAFF66 dotted;
 
-	color:       #AAFF66;
+	color:       #CCFF77;
 	font-size:   1.75vw;
 	font-family: 'Indie Flower';
 
@@ -125,7 +123,7 @@ input[type=text].chalk
 	text-align: center;
 }
 
-.main-menu
+.button-menu
 {
 	width: 20%;
 }
