@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import UIButton   from '#/ui/UIButton.jsx';
-import UITextbox  from '#/ui/UITextbox.jsx';
-import UIDropdown from '#/ui/UIDropdown.jsx';
+import UIButton from '#/ui/UIButton.jsx';
+import UIFields from '#/ui/UIFields.jsx';
+
+import fieldData from '~/rooms/fieldData.js';
 
 
 class CreateRoom extends Component
@@ -12,8 +13,6 @@ class CreateRoom extends Component
 	constructor ( props )
 	{
 		super (props);
-
-		this.state = { value: 'Hello :)' };
 	}
 
 	render ()
@@ -24,9 +23,7 @@ class CreateRoom extends Component
 			<div className='center-content'>
 				<h1>Create a Room</h1>
 
-				<div className='button-menu center-content'>
-
-				</div>
+				<UIFields fieldData={fieldData} />
 			</div>
 		);
 	}

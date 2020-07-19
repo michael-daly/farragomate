@@ -127,3 +127,21 @@ input[type=text].chalk
 {
 	width: 20%;
 }
+
+.field
+{
+	display: inline-flex;
+	margin: 1vw;
+}
+
+.field-label
+{
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.fields-container
+{
+	width: 60%;
+}

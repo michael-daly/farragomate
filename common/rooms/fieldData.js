@@ -21,6 +21,8 @@ const fieldData =
 	{
 		type: 'string',
 
+		isPassword: true,
+
 		min: 0,
 		max: 12,
 

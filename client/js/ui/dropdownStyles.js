@@ -5,7 +5,7 @@ const chalk =
 	boxShadow:  'none',
 
 	color:       '#AAFF66',
-	borderColor: '#AAFF66 !important',  // I hate doing it, but it must be done.
+	borderColor: '#AAFF66 !important',  // I hate doing this, but it must be done.
 
 	border:       '0.1em dashed',
 	borderRadius: '0px',
@@ -25,7 +25,8 @@ const dropdownStyles =
 
 		margin: '0.15em',
 
-		width: '40%',
+		width:  '7vw',
+		height: '3.5vw',
 
 		'&:hover':
 		{
@@ -35,8 +36,10 @@ const dropdownStyles =
 
 	menu: provided =>
 	({
-		background: 'rgba(0, 0, 0, 0.2)',
-		width: '40%',
+		position: 'absolute',
+
+		width:  '7vw',
+		height: '3.5vw',
 	}),
 
 	option: provided =>
@@ -50,9 +53,11 @@ const dropdownStyles =
 
 		overflow: 'hidden',
 
+		background: 'rgba(0, 0, 0, 0.1)',
+
 		'&:hover':
 		{
-			backgroundColor: 'rgba(0, 0, 0, 0.1)',
+			backgroundColor: 'rgba(0, 0, 0, 0.2)',
 		},
 	}),
 
