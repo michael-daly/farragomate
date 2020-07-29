@@ -10,12 +10,76 @@ class UIFields extends Component
 	constructor ( props )
 	{
 		super (props);
-		this.state = {};
+
+		this.requiredFields = new Set ();
+		this.state          = {};
+	}
+
+	componentDidMount ()
+	{
+		const { fieldData } = this.props;
+
+		for ( let fieldName in fieldData )
+		{
+			const field = fieldData[fieldName];
+
+			this.updateRequired (field, field.defaultValue, fieldName);
+			this.setFieldValue (field, field.defaultValue, fieldName);
+		}
+	}
+
+	setFieldValue ( field, value, fieldName )
+	{
+		if ( field.type === 'string' )
+		{
+			this.setState ({ [fieldName]: value });
+		}
+		else
+		{
+			this.setState ({ [fieldName]: { label: value, value } });
+		}
+	}
+
+	updateRequired ( field, value, fieldName )
+	{
+		if ( field.required )
+		{
+			let size = value;
+
+			if ( field.type === 'string' )
+			{
+				size = value.length;
+			}
+
+			if ( size < field.min || size > field.max )
+			{
+				this.requiredFields.add (fieldName);
+			}
+			else
+			{
+				this.requiredFields.delete (fieldName);
+			}
+		}
+	}
+
+	onFieldChange ( field, value, fieldName )
+	{
+		if ( this.props.onChange )
+		{
+			value = this.props.onChange (field, value, fieldName);
+		}
+
+		this.updateRequired (field, value, fieldName);
+
+		return value;
 	}
 
 	render ()
 	{
-		const { fieldData, onChange = () => {} } = this.props;
+		const { state, requiredFields } = this;
+		const { fieldData } = this.props;
+
+		const self = this;
 
 		const fields =
 		(
@@ -23,25 +87,38 @@ class UIFields extends Component
 			{
 				Object.keys (fieldData).map (( fieldName, index ) =>
 				{
-					const { type, min, max, defaultValue, label } = fieldData[fieldName];
+					const field = fieldData[fieldName];
 
-					const onControlChange = event => onChange (event, fieldName, fieldData);
+					const { type, min, max, label } = field;
 
 					let control;
 
 					if ( type === 'string' )
 					{
+						const onTextboxChange = event =>
+						{
+							const value = self.onFieldChange (field, event.target.value, fieldName);
+
+							self.setFieldValue (field, value, fieldName);
+						};
+
 						control = <UITextbox
 							maxLength={max}
-							value={defaultValue}
-							onChange={onControlChange}
+							value={state[fieldName] || ''}
+							onChange={onTextboxChange}
+							highlight={requiredFields.has (fieldName)}
 						/>;
 					}
 					else
 					{
-						const options = [];
+						const onDropdownChange = option =>
+						{
+							const value = self.onFieldChange (field, option.value, fieldName);
 
-						let selection = { label: defaultValue, value: defaultValue };
+							self.setFieldValue (field, value, fieldName);
+						};
+
+						const options = [];
 
 						for ( let i = min; i <= max; i++ )
 						{
@@ -50,8 +127,9 @@ class UIFields extends Component
 
 						control = <UIDropdown
 							options={options}
-							value={selection}
-							onChange={onControlChange}
+							value={state[fieldName] || ''}
+							onChange={onDropdownChange}
+							highlight={requiredFields.has (fieldName)}
 						/>;
 					}
 

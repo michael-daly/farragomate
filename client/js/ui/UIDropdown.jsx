@@ -5,15 +5,15 @@ import Select from 'react-select';
 import dropdownStyles from '#/ui/dropdownStyles.js';
 
 
-const UIDropdown = ({ options, value, placeholder, onChange }) =>
+const UIDropdown = ({ options, value, onChange, placeholder = '', highlight = false }) =>
 (
 	<Select
 		classNamePrefix='dropdown'
-		styles={dropdownStyles}
+		styles={dropdownStyles (highlight)}
 		isSearchable={false}
 		options={options}
 		value={value}
-		placeholder={placeholder || ''}
+		placeholder={placeholder}
 		onChange={onChange}
 	/>
 );

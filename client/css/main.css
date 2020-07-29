@@ -102,6 +102,11 @@ html, body, .chalkboard
 	background-color: rgba(128, 128, 128, 0.1);
 }
 
+.chalk.highlighted
+{
+	border-color: #FF5154 !important;
+}
+
 input[type=text].chalk
 {
 	background: none;

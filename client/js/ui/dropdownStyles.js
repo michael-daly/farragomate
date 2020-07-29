@@ -1,74 +1,76 @@
-const chalk =
+const dropdownStyles = ( highlight = false ) =>
 {
-	background: 'none',
-	outline:    'none',
-	boxShadow:  'none',
+	const boxColor = highlight ? '#FF5154' : '#AAFF66';
 
-	color:       '#AAFF66',
-	borderColor: '#AAFF66 !important',  // I hate doing this, but it must be done.
+	const styles =
+	{
+		control: provided =>
+		({
+			...provided,
 
-	border:       '0.1em dashed',
-	borderRadius: '0px',
+			background: 'none',
+			outline:    'none',
+			boxShadow:  'none',
 
-	padding:      '0.3em',
-	paddingLeft:  '0.75em',
-	paddingRight: '0.75em',
-};
+			color:       boxColor,
+			borderColor: `${boxColor} !important`,
 
+			border:       '0.1em dashed',
+			borderRadius: '0px',
 
-const dropdownStyles =
-{
-	control: provided =>
-	({
-		...provided,
-		...chalk,
+			padding:      '0.3em',
+			paddingLeft:  '0.75em',
+			paddingRight: '0.75em',
 
-		margin: '0.15em',
+			margin: '0.15em',
 
-		width:  '7vw',
-		height: '3.5vw',
+			width:  '7vw',
+			height: '3.5vw',
 
-		'&:hover':
-		{
-			backgroundColor: 'rgba(0, 0, 0, 0.1)',
-		},
-	}),
+			'&:hover':
+			{
+				backgroundColor: 'rgba(0, 0, 0, 0.1)',
+			},
+		}),
 
-	menu: provided =>
-	({
-		position: 'absolute',
+		menu: provided =>
+		({
+			position: 'absolute',
 
-		width:  '7vw',
-		height: '3.5vw',
-	}),
+			width:  '7vw',
+			height: '3.5vw',
+		}),
 
-	option: provided =>
-	({
-		...provided,
+		option: provided =>
+		({
+			...provided,
 
-		color: '#AAFF66',
+			color: '#AAFF66',
 
-		textAlign:  'left',
-		background: 'none',
+			textAlign:  'left',
+			background: 'none',
 
-		overflow: 'hidden',
+			overflow: 'hidden',
 
-		background: 'rgba(0, 0, 0, 0.1)',
+			background: 'rgba(0, 0, 0, 0.1)',
 
-		'&:hover':
-		{
-			backgroundColor: 'rgba(0, 0, 0, 0.2)',
-		},
-	}),
+			'&:hover':
+			{
+				backgroundColor: 'rgba(0, 0, 0, 0.2)',
+			},
+		}),
 
-	singleValue: provided =>
-	({
-		color:    '#CCFF77',
-		overflow: 'hidden',
-	}),
+		singleValue: provided =>
+		({
+			color:    '#CCFF77',
+			overflow: 'hidden',
+		}),
 
-	dropdownIndicator () {},
-	indicatorSeparator () {},
+		dropdownIndicator () {},
+		indicatorSeparator () {},
+	};
+
+	return styles;
 };
 
 
