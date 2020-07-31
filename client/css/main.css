@@ -107,7 +107,7 @@ html, body, .chalkboard
 	border-color: #FF5154 !important;
 }
 
-input[type=text].chalk
+input[type=text].chalk, input[type=password].chalk
 {
 	background: none;
 

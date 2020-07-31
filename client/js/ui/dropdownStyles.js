@@ -24,7 +24,7 @@ const dropdownStyles = ( highlight = false ) =>
 
 			margin: '0.15em',
 
-			width:  '7vw',
+			width:  '7.5vw',
 			height: '3.5vw',
 
 			'&:hover':

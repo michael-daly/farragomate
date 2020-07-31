@@ -17,8 +17,6 @@ class CreateRoom extends Component
 
 	render ()
 	{
-		const room = this;
-
 		return (
 			<div className='center-content'>
 				<h1>Create a Room</h1>

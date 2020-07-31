@@ -81,8 +81,7 @@ class UIFields extends Component
 
 		const self = this;
 
-		const fields =
-		(
+		return (
 			<div className='center-content fields-container'>
 			{
 				Object.keys (fieldData).map (( fieldName, index ) =>
@@ -105,8 +104,9 @@ class UIFields extends Component
 						control = <UITextbox
 							maxLength={max}
 							value={state[fieldName] || ''}
-							onChange={onTextboxChange}
+							isPassword={field.isPassword}
 							highlight={requiredFields.has (fieldName)}
+							onChange={onTextboxChange}
 						/>;
 					}
 					else
@@ -148,8 +148,6 @@ class UIFields extends Component
 			}
 			</div>
 		);
-
-		return fields;
 	}	
 }
 
