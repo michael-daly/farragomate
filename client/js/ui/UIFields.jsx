@@ -4,6 +4,8 @@ import UIButton   from '#/ui/UIButton.jsx';
 import UIDropdown from '#/ui/UIDropdown.jsx';
 import UITextbox  from '#/ui/UITextbox.jsx';
 
+import { stripNonASCII } from '~/util/sanitization.js';
+
 
 class UIFields extends Component
 {
@@ -64,6 +66,8 @@ class UIFields extends Component
 
 	onFieldChange ( field, value, fieldName )
 	{
+		value = stripNonASCII (value);
+
 		if ( this.props.onChange )
 		{
 			value = this.props.onChange (field, value, fieldName);
