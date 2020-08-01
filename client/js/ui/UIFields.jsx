@@ -66,7 +66,10 @@ class UIFields extends Component
 
 	onFieldChange ( field, value, fieldName )
 	{
-		value = stripNonASCII (value);
+		if ( field.type === 'string' )
+		{
+			value = stripNonASCII (value);
+		}
 
 		if ( this.props.onChange )
 		{
