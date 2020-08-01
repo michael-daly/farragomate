@@ -105,6 +105,7 @@ class GameRoom
 
 		object.timeLeft  = this.timeLeft;
 		object.currRound = this.currRound;
+		object.screen    = this.screen !== null ? this.screen.name : null;
 
 		return object;
 	}

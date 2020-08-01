@@ -31,6 +31,7 @@ GameRoomEvents.on ('createRoom', ( room, owner ) =>
 	room.events.on ('enterScreen', screen =>
 	{
 		room.timer.start (screen.getStartTime (room));
+		sendDataToRoom (room, 'RoomInfo', room.toString ());
 	});
 
 	room.events.on ('leaveScreen', screen =>
