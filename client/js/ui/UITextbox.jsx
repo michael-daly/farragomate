@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 const UITextbox = props =>
 {
-	const { value, maxLength, onChange, isPassword = false, placeholder = '', highlight = false } = props;
+	const { value, maxLength, onChange, placeholder = '', isPassword = false, highlight = false } = props;
 
 	return (
 		<input

@@ -20,7 +20,18 @@ MainMenuHandlers.addHandler ('Request', 'RegisterInfo', ( client, packet ) =>
 	}
 	else
 	{
-		const info   = mapStringFields (body, fieldData, field => stripNonASCII (field).trim ());
+		const info = mapStringFields (body, fieldData, ( field, fieldName, data ) =>
+		{
+			field = stripNonASCII (field);
+
+			if ( !data.isPassword )
+			{
+				return field.trim ();
+			}
+
+			return field;
+		});
+
 		const result = validateClientInfo (info);
 
 		if ( result !== ERROR_NONE )

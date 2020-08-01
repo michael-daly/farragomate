@@ -25,7 +25,18 @@ MainMenuHandlers.addHandler ('Request', 'CreateRoom', ( client, packet ) =>
 	}
 	else
 	{
-		info  = mapStringFields (body, fieldData, field => stripNonASCII (field).trim ());
+		info = mapStringFields (body, fieldData, ( field, fieldName, data ) =>
+		{
+			field = stripNonASCII (field);
+
+			if ( !data.isPassword )
+			{
+				return field.trim ();
+			}
+
+			return field;
+		});
+
 		error = validateRoomInfo (info, client);
 	}
 
