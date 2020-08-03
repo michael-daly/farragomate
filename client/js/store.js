@@ -8,7 +8,7 @@ const reducers = combineReducers (
 
 const middleware =
 [
-	// require ('path/to/middleware.js'),
+	require ('#/socket/middleware.js'),
 ];
 
 const store = createStore (reducers, undefined, applyMiddleware (...middleware));

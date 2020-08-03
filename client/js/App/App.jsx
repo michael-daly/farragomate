@@ -5,12 +5,28 @@ import { connect } from 'react-redux';
 import MainMenu   from '#/MainMenu/MainMenu.jsx';
 import CreateRoom from '#/CreateRoom/CreateRoom.jsx';
 
+import { socketPort }      from '~/config.js';
+import { useSecureSocket } from '#/config.js';
+import { socketConnect }   from '#/socket/actions.js';
+
 
 class App extends Component
 {
 	constructor ( props )
 	{
 		super (props);
+	}
+
+	componentDidMount ()
+	{
+		if ( this.props.socketState !== 'CLOSED' )
+		{
+			return;
+		}
+
+		const protocol = useSecureSocket ? 'wss://' : 'ws://';
+
+		this.props.socketConnect (protocol + window.location.hostname + ':' + socketPort);
 	}
 
 	render ()
@@ -39,12 +55,20 @@ class App extends Component
 
 const mapStateToProps = ({ app }) =>
 {
-	return { screen: app.screen };
+	return { ...app };
 };
 
 const mapDispatchToProps = dispatch =>
 {
-	return {};
+	const props =
+	{
+		socketConnect ( url )
+		{
+			dispatch (socketConnect (url));
+		},
+	};
+
+	return props;
 };
 
 

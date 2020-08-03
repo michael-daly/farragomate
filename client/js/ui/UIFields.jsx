@@ -50,7 +50,7 @@ class UIFields extends Component
 
 			if ( field.type === 'string' )
 			{
-				size = value.length;
+				size = value.trim ().length;
 			}
 
 			if ( size < field.min || size > field.max )
