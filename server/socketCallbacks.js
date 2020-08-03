@@ -10,6 +10,8 @@ const { createClientInfo }   = require ('$/clients/info/GameClientInfo.js');
 const { MainMenuHandlers, GameRoomHandlers } = require ('$/packets/handlerMaps.js');
 const { addNewClient, deleteClient }         = require ('$/clients/GameClientMap.js');
 
+const { ERROR_NAME_NOT_SET } = require ('~/errorCodes.js');
+
 
 /**
  * Handler for a new connection.  Creates a GameClient instance with the socket.
@@ -80,7 +82,7 @@ const onSocketMessage = function ( message )
 
 	if ( gameClient.getDisplayName () === null && packet.command !== 'RegisterInfo' )
 	{
-		gameClient.sendPacket ('Reject', packet, 'Please set your name first.');
+		gameClient.sendPacket ('Reject', packet, ERROR_NAME_NOT_SET);
 		return;
 	}
 
