@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 
 
-const UIButton = ({ type, text, onClick, inline = true }) =>
+const UIButton = ({ type, text, onClick, disabled = false, inline = true }) =>
 {
-	let classNames = 'button ';
+	let classNames = ['button'];
 
 	if ( type === 'magnet' )
 	{
-		classNames += 'magnet';
+		classNames.push ('magnet');
 	}
 	else if ( type === 'chalk' )
 	{
-		classNames += 'chalk';
+		classNames.push ('chalk');
 	}
+
+	classNames.push (disabled ? 'disabled' : 'enabled');
 
 	if ( inline )
 	{
-		return <span className={classNames} onClick={onClick}>{text}</span>;
+		return <span className={classNames.join (' ')} onClick={onClick}>{text}</span>;
 	}
 
-	return <div className={classNames} onClick={onClick}>{text}</div>;
+	return <div className={classNames.join (' ')} onClick={onClick}>{text}</div>;
 };
 
 

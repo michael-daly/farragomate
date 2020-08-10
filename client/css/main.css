@@ -59,6 +59,11 @@ html, body, .chalkboard
 	cursor: pointer;
 }
 
+.button.disabled:hover
+{
+	cursor: not-allowed;
+}
+
 .magnet
 {
 	background-color: #EEE;
@@ -70,15 +75,20 @@ html, body, .chalkboard
 	color:       #000;
 }
 
-.magnet.button:hover
+.magnet.button.enabled:hover
 {
 	background-color: #FEFEFE;
 	color:            #111;
 }
 
-.magnet.button:active
+.magnet.button.enabled:active
 {
 	background-color: #DEDEDE;
+}
+
+.magnet.button.disabled
+{
+	color: #AAA;
 }
 
 .chalk

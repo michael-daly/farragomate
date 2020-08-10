@@ -71,20 +71,26 @@ class UIFields extends Component
 			value = stripNonASCII (value);
 		}
 
-		if ( this.props.onChange )
+		if ( this.props.sanitizeField )
 		{
-			value = this.props.onChange (field, value, fieldName);
+			value = this.props.sanitizeField (field, value, fieldName);
 		}
 
 		this.updateRequired (field, value, fieldName);
+
+		if ( this.props.onChange )
+		{
+			this.props.onChange (field, value, fieldName, this.requiredFields.size);
+		}
 
 		return value;
 	}
 
 	render ()
 	{
-		const { state, requiredFields }      = this;
-		const { fieldData, className = '' }  = this.props;
+		const { state, requiredFields } = this;
+
+		const { fieldData, disabled = false, className = '' }  = this.props;
 
 		const self = this;
 
@@ -113,6 +119,7 @@ class UIFields extends Component
 							value={state[fieldName] || ''}
 							isPassword={field.isPassword}
 							highlight={requiredFields.has (fieldName)}
+							disabled={disabled}
 							onChange={onTextboxChange}
 						/>;
 					}
@@ -135,8 +142,9 @@ class UIFields extends Component
 						control = <UIDropdown
 							options={options}
 							value={state[fieldName] || ''}
-							onChange={onDropdownChange}
 							highlight={requiredFields.has (fieldName)}
+							disabled={disabled}
+							onChange={onDropdownChange}
 						/>;
 					}
 
