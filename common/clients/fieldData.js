@@ -12,7 +12,9 @@ const fieldData =
 
 		required: true,
 
-		defaultValue: null,
+		defaultValue: '',
+
+		label: 'Display Name',
 	},
 };
 

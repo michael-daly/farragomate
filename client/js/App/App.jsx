@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
+import Register   from '#/Register/Register.jsx';
 import MainMenu   from '#/MainMenu/MainMenu.jsx';
 import CreateRoom from '#/CreateRoom/CreateRoom.jsx';
 
@@ -35,7 +36,11 @@ class App extends Component
 
 		let component = '';
 
-		if ( screen === 'MainMenu' )
+		if ( screen === 'Register' )
+		{
+			component = <Register />;
+		}
+		else if ( screen === 'MainMenu' )
 		{
 			component = <MainMenu />;
 		}

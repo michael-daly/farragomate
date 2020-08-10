@@ -83,13 +83,13 @@ class UIFields extends Component
 
 	render ()
 	{
-		const { state, requiredFields } = this;
-		const { fieldData } = this.props;
+		const { state, requiredFields }      = this;
+		const { fieldData, className = '' }  = this.props;
 
 		const self = this;
 
 		return (
-			<div className='center-content fields-container'>
+			<div className={`center-content fields-container ${className}`}>
 			{
 				Object.keys (fieldData).map (( fieldName, index ) =>
 				{

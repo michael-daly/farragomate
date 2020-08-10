@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import UIButton from '#/ui/UIButton.jsx';
 import UIFields from '#/ui/UIFields.jsx';
+import UIButton from '#/ui/UIButton.jsx';
 
 import fieldData from '~/rooms/fieldData.js';
 
