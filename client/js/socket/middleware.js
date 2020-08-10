@@ -1,4 +1,8 @@
-let socket;
+const PacketManager = require ('~/packets/PacketManager.js');
+
+
+let socket        = null;
+let packetManager = null;
 
 
 module.exports = store => next => action =>
@@ -7,25 +11,72 @@ module.exports = store => next => action =>
 	{
 		case 'SOCKET_CONNECT':
 		{
-			socket = new WebSocket (action.payload);
+			socket        = new WebSocket (action.payload);
+			packetManager = new PacketManager ();
 
-			socket.onopen    = event => store.dispatch ({ type: 'SOCKET_OPEN',    payload: event });
-			socket.onclose   = event => store.dispatch ({ type: 'SOCKET_CLOSE',   payload: event });
-			socket.onmessage = event => store.dispatch ({ type: 'SOCKET_MESSAGE', payload: event });
-			socket.onerror   = event => store.dispatch ({ type: 'SOCKET_ERROR',   payload: event });
+			socket.onopen    = event => store.dispatch ({ type: 'SOCKET_OPEN',  payload: event });
+			socket.onclose   = event => store.dispatch ({ type: 'SOCKET_CLOSE', payload: event });
+			socket.onerror   = event => store.dispatch ({ type: 'SOCKET_ERROR', payload: event });
 
-			break;
-		}
+			socket.onmessage = event =>
+			{
+				const { data } = event;
 
-		case 'SOCKET_SEND':
-		{
-			socket.send (JSON.stringify (action.payload));
+				let response;
+
+				try
+				{
+					response = JSON.parse (data);
+				}
+				catch ( error )
+				{
+					store.dispatch ({ type: 'FATAL_ERROR', payload: error.message });
+					return;
+				}
+
+				store.dispatch ({ type: 'SOCKET_MESSAGE', payload: response });
+			};
+
 			break;
 		}
 
 		case 'SOCKET_DISCONNECT':
 		{
 			socket.close ();
+
+			socket        = null;
+			packetManager = null;
+
+			break;
+		}
+
+		case 'SOCKET_MESSAGE':
+		{
+			const { type, command, body } = action.payload;
+
+			if ( type === 'Response' )
+			{
+				packetManager.removePendingPacket (action.payload.requestSeq);
+			}
+
+			break;
+		}
+
+		case 'SEND_DATA_PACKET':
+		{
+			const { command, body } = action.payload;
+
+			socket.send (packetManager.createDataPacket (command, body));
+
+			break;
+		}
+
+		case 'SEND_REQUEST_PACKET':
+		{
+			const { command, body } = action.payload;
+
+			socket.send (packetManager.createRequestPacket (command, body));
+
 			break;
 		}
 	}

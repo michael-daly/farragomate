@@ -1,6 +1,10 @@
 const deepFreeze = require ('~/util/deepFreeze.js');
 
-const defaultState = deepFreeze ({ screen: 'Register', socketState: 'CLOSED' });
+const defaultState = deepFreeze (
+{
+	screen:      'Register',
+	socketState: 'CLOSED',
+});
 
 
 module.exports = ( state = defaultState, action ) =>
