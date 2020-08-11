@@ -9,6 +9,7 @@ const reducers = combineReducers (
 
 const middleware =
 [
+	require ('#/App/middleware.js'),
 	require ('#/socket/middleware.js'),
 ];
 

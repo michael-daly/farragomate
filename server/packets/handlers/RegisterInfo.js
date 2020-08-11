@@ -42,7 +42,7 @@ MainMenuHandlers.addHandler ('Request', 'RegisterInfo', ( client, packet ) =>
 		{
 			const displayName = sanitizeString (info.displayName);
 
-			if ( hasClientName (displayName) )
+			if ( hasClientName (displayName) && displayName !== client.getDisplayName () )
 			{
 				client.sendPacket ('Reject', packet, ['displayName', FIELD_ERR_UNIQUE]);
 			}

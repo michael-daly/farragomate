@@ -24,7 +24,7 @@ module.exports = ( state = defaultState, action ) =>
 		{
 			if ( payload.command === 'RegisterInfo' )
 			{
-				return { ...state, info: { ...state.info, ...payload.body.data } };
+				return { ...state, info: { ...state.info, ...payload.body.data }, errorMessage: '' };
 			}
 
 			break;

@@ -19,14 +19,14 @@ class UIFields extends Component
 
 	componentDidMount ()
 	{
-		const { fieldData } = this.props;
+		const { fieldData, initialValues = {} } = this.props;
 
 		for ( let fieldName in fieldData )
 		{
 			const field = fieldData[fieldName];
 
-			this.updateRequired (field, field.defaultValue, fieldName);
-			this.setFieldValue (field, field.defaultValue, fieldName);
+			this.updateRequired (field, initialValues[fieldName] || field.defaultValue, fieldName);
+			this.setFieldValue (field, initialValues[fieldName] || field.defaultValue, fieldName);
 		}
 	}
 
@@ -90,7 +90,15 @@ class UIFields extends Component
 	{
 		const { state, requiredFields } = this;
 
-		const { fieldData, style = {}, disabled = false, className = '' } = this.props;
+		const
+		{
+			fieldData,
+
+			style     = {},
+			disabled  = false,
+			className = '',
+		}
+		= this.props;
 
 		const self = this;
 

@@ -20,9 +20,21 @@ class MainMenu extends Component
 		this.props.setScreen ('CreateRoom');
 	}
 
+	joinRoom ()
+	{
+		this.props.setScreen ('JoinRoom');
+	}
+
+	changeName ()
+	{
+		this.props.setScreen ('Register');
+	}
+
 	render ()
 	{
 		const createRoom = this.createRoom.bind (this);
+		const joinRoom   = this.joinRoom.bind (this);
+		const changeName = this.changeName.bind (this);
 
 		return (
 			<div className='center-content'>
@@ -30,10 +42,10 @@ class MainMenu extends Component
 
 				<div className='button-menu center-content'>
 					<UIButton type='magnet' inline={false} text='Create Room' onClick={createRoom} />
-					<UIButton type='magnet' inline={false} text='Join Room' />
+					<UIButton type='magnet' inline={false} text='Join Room' onClick={joinRoom} />
 
 					<div style={{ marginTop: '25%' }}>
-						<UIButton type='chalk' inline={false} text='Change Name' />
+						<UIButton type='chalk' inline={false} text='Change Name' onClick={changeName} />
 					</div>
 				</div>
 			</div>

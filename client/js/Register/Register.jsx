@@ -19,33 +19,28 @@ class Register extends Component
 
 		this.state =
 		{
-			enablePlayBtn: false,
+			enablePlayBtn: props.info.displayName !== '',
 			sentInfo:      false,
 
-			fields: {},
+			fields: { ...props.info },
 		};
 	}
 
 	onFieldChange ( field, value, fieldName, numRequired )
 	{
-		if ( this.state.sentInfo )
-		{
-			return;
-		}
-
 		this.setState ({ enablePlayBtn: numRequired <= 0, fields: { [fieldName]: value } });
 	}
 
 	onClickPlay ( event )
 	{
 		this.setState ({ enablePlayBtn: false, sentInfo: true });
-
 		this.props.sendRegisterInfo (this.state.fields);
 	}
 
 	render ()
 	{
-		const { errorMessage } = this.props;
+		const { props }        = this;
+		const { errorMessage } = props;
 
 		return (
 			<div className='center-content'>
@@ -55,7 +50,8 @@ class Register extends Component
 					<UIFields
 						className='button-menu'
 						fieldData={fieldData}
-						disabled={this.state.sentInfo}
+						initialValues={{ displayName: props.info.displayName }}
+						disabled={this.state.sentInfo && errorMessage === ''}
 						style={{ container: { marginBottom: '0px' } }}
 						onChange={this.onFieldChange.bind (this)}
 					/>
@@ -70,7 +66,7 @@ class Register extends Component
 							text='Play >>'
 							inline={true}
 							onClick={this.onClickPlay.bind (this)}
-							disabled={!this.state.enablePlayBtn || errorMessage !== ''}
+							disabled={!this.state.enablePlayBtn && errorMessage === ''}
 						/>
 					</div>
 				</div>
@@ -82,7 +78,7 @@ class Register extends Component
 
 const mapStateToProps = state =>
 {
-	return { errorMessage: state.register.errorMessage };
+	return { ...state.register };
 };
 
 const mapDispatchToProps = dispatch =>
