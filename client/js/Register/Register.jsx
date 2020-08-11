@@ -45,6 +45,8 @@ class Register extends Component
 
 	render ()
 	{
+		const { errorMessage } = this.props;
+
 		return (
 			<div className='center-content'>
 				<div>
@@ -54,16 +56,23 @@ class Register extends Component
 						className='button-menu'
 						fieldData={fieldData}
 						disabled={this.state.sentInfo}
+						style={{ container: { marginBottom: '0px' } }}
 						onChange={this.onFieldChange.bind (this)}
 					/>
 
-					<UIButton
-						type='magnet'
-						inline={true}
-						text='Play >>'
-						onClick={this.onClickPlay.bind (this)}
-						disabled={!this.state.enablePlayBtn}
-					/>
+					<div className='error-message' style={{ marginBottom: '2vw' }}>
+						{errorMessage}
+					</div>
+
+					<div>
+						<UIButton
+							type='magnet'
+							text='Play >>'
+							inline={true}
+							onClick={this.onClickPlay.bind (this)}
+							disabled={!this.state.enablePlayBtn || errorMessage !== ''}
+						/>
+					</div>
 				</div>
 			</div>
 		);
@@ -73,7 +82,7 @@ class Register extends Component
 
 const mapStateToProps = state =>
 {
-	return {};
+	return { errorMessage: state.register.errorMessage };
 };
 
 const mapDispatchToProps = dispatch =>

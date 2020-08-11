@@ -22,11 +22,11 @@ module.exports = store => next => action =>
 			{
 				const { data } = event;
 
-				let response;
+				let packet;
 
 				try
 				{
-					response = JSON.parse (data);
+					packet = JSON.parse (data);
 				}
 				catch ( error )
 				{
@@ -34,7 +34,7 @@ module.exports = store => next => action =>
 					return;
 				}
 
-				store.dispatch ({ type: 'SOCKET_MESSAGE', payload: response });
+				store.dispatch ({ type: 'SOCKET_MESSAGE', payload: packet });
 			};
 
 			break;
@@ -57,6 +57,15 @@ module.exports = store => next => action =>
 			if ( type === 'Response' )
 			{
 				packetManager.removePendingPacket (action.payload.requestSeq);
+
+				if ( body.response === 'OK' )
+				{
+					store.dispatch ({ type: 'ACCEPT_PACKET', payload: action.payload });
+				}
+				else
+				{
+					store.dispatch ({ type: 'REJECT_PACKET', payload: action.payload });
+				}
 			}
 
 			break;

@@ -3,7 +3,8 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 
 const reducers = combineReducers (
 {
-	app: require ('#/App/reducer.js'),
+	app:      require ('#/App/reducer.js'),
+	register: require ('#/Register/reducer.js'),
 });
 
 const middleware =

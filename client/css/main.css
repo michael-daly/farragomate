@@ -117,6 +117,11 @@ html, body, .chalkboard
 	border-color: #FF5154 !important;
 }
 
+.error-message
+{
+	color: #FF5154;
+}
+
 input[type=text].chalk, input[type=password].chalk
 {
 	background: none;
