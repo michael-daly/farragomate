@@ -90,12 +90,12 @@ class UIFields extends Component
 	{
 		const { state, requiredFields } = this;
 
-		const { fieldData, disabled = false, className = '' }  = this.props;
+		const { fieldData, style = {}, disabled = false, className = '' } = this.props;
 
 		const self = this;
 
 		return (
-			<div className={`center-content fields-container ${className}`}>
+			<div className={`center-content fields-container ${className}`} style={style.container || {}}>
 			{
 				Object.keys (fieldData).map (( fieldName, index ) =>
 				{
