@@ -1,13 +1,14 @@
-const deepFreeze       = require ('~/util/deepFreeze.js');
-const fieldData        = require ('~/clients/fieldData.js');
-const getFieldErrorMsg = require ('#/fields/getFieldErrorMsg.js');
+const deepFreeze          = require ('~/util/deepFreeze.js');
+const fieldData           = require ('~/clients/fieldData.js');
+const getDefaultFieldVals = require ('#/fields/getDefaultFieldVals.js');
+const getFieldErrorMsg    = require ('#/fields/getFieldErrorMsg.js');
 
 const defaultState = deepFreeze (
 {
 	info:
 	{
-		id:          '',
-		displayName: '',
+		id: '',
+		...getDefaultFieldVals (fieldData),
 	},
 
 	errorMessage: '',
