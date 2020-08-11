@@ -16,6 +16,11 @@ const UIButton = ({ type, text, onClick, disabled = false, inline = true }) =>
 
 	classNames.push (disabled ? 'disabled' : 'enabled');
 
+	if ( disabled )
+	{
+		onClick = function () {};
+	}
+
 	if ( inline )
 	{
 		return <span className={classNames.join (' ')} onClick={onClick}>{text}</span>;
