@@ -52,11 +52,11 @@ const dropdownStyles = ( highlight = false ) =>
 
 			overflow: 'hidden',
 
-			background: 'rgba(0, 0, 0, 0.1)',
+			background: 'rgba(0, 0, 0, 0.15)',
 
 			'&:hover':
 			{
-				backgroundColor: 'rgba(0, 0, 0, 0.2)',
+				backgroundColor: 'rgba(0, 0, 0, 0.25)',
 			},
 		}),
 

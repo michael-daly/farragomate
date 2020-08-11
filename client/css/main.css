@@ -143,6 +143,16 @@ input[type=text].chalk, input[type=password].chalk
 	text-align: center;
 }
 
+.left
+{
+	float: left;
+}
+
+.right
+{
+	float: right;
+}
+
 .button-menu
 {
 	width: 20%;

@@ -7,6 +7,8 @@ import UIButton from '#/ui/UIButton.jsx';
 
 import fieldData from '~/rooms/fieldData.js';
 
+import { setScreen } from '#/App/actions.js';
+
 
 class CreateRoom extends Component
 {
@@ -22,6 +24,16 @@ class CreateRoom extends Component
 				<h1>Create a Room</h1>
 
 				<UIFields fieldData={fieldData} />
+
+				<div className='center-content' style={{ width: '54%' }}>
+					<span className='left' onClick={this.props.mainMenu}>
+						<UIButton type='magnet' text='<< Back' />
+					</span>
+
+					<span className='right'>
+						<UIButton type='magnet' text='Create Room >>' />
+					</span>
+				</div>
 			</div>
 		);
 	}
@@ -35,7 +47,15 @@ const mapStateToProps = () =>
 
 const mapDispatchToProps = dispatch =>
 {
-	return {};
+	const props =
+	{
+		mainMenu ()
+		{
+			dispatch (setScreen ('MainMenu'));
+		},
+	};
+
+	return props;
 };
 
 
