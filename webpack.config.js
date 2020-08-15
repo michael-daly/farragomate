@@ -34,8 +34,9 @@ module.exports =
 	{
 		alias:
 		{
-			'#/App': path.resolve (__dirname, './client/js/App/'),
-			'#':     path.resolve (__dirname, './client/js/'),
+			'#/App':        path.resolve (__dirname, './client/js/App/'),
+			'#/CreateRoom': path.resolve (__dirname, './client/js/room/CreateRoom/'),
+			'#':            path.resolve (__dirname, './client/js/'),
 
 			'~/util': path.resolve (__dirname, './common/util/'),
 			'~':      path.resolve (__dirname, './common/'),

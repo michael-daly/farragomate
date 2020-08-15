@@ -5,6 +5,7 @@ const reducers = combineReducers (
 {
 	app:      require ('#/App/reducer.js'),
 	register: require ('#/Register/reducer.js'),
+	room:     require ('#/room/reducer.js'),
 });
 
 const middleware =
