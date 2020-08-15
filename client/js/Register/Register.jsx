@@ -28,7 +28,15 @@ class Register extends Component
 
 	onFieldChange ( field, value, fieldName, numRequired )
 	{
-		this.setState ({ enablePlayBtn: numRequired <= 0, fields: { [fieldName]: value } });
+		this.setState (
+		{
+			enablePlayBtn: numRequired <= 0,
+			fields:
+			{
+				...this.state.fields,
+				[fieldName]: value,
+			},
+		});
 	}
 
 	onClickPlay ( event )
@@ -78,7 +86,7 @@ class Register extends Component
 
 const mapStateToProps = state =>
 {
-	return { ...state.register };
+	return { info: { ...state.register }, errorMessage: state.errors.registerError };
 };
 
 const mapDispatchToProps = dispatch =>

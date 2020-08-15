@@ -28,7 +28,15 @@ class CreateRoom extends Component
 
 	onFieldChange ( field, value, fieldName, numRequired )
 	{
-		this.setState ({ enableCreateBtn: numRequired <= 0, fields: { [fieldName]: value } });
+		this.setState (
+		{
+			enableCreateBtn: numRequired <= 0,
+			fields:
+			{
+				...this.state.fields,
+				[fieldName]: value,
+			},
+		});
 	}
 
 	onClickCreate ( event )
@@ -82,7 +90,7 @@ class CreateRoom extends Component
 
 const mapStateToProps = state =>
 {
-	return { ...state.room };
+	return { info: { ...state.room }, errorMessage: state.errors.createRoomError };
 };
 
 const mapDispatchToProps = dispatch =>
