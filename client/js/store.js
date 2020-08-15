@@ -4,6 +4,7 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 const reducers = combineReducers (
 {
 	app:      require ('#/App/reducer.js'),
+	errors:   require ('#/errors/reducer.js'),
 	register: require ('#/Register/reducer.js'),
 	room:     require ('#/room/reducer.js'),
 });
