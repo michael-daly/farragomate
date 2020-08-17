@@ -4,7 +4,11 @@ const getDefaultFieldVals = require ('#/fields/getDefaultFieldVals.js');
 
 const defaultState = deepFreeze (
 {
-	id: '',
+	id:        '',
+	timeLeft:  0,
+	currRound: 0,
+	screen:    'SentenceCreation',
+
 	...getDefaultFieldVals (fieldData),
 });
 
@@ -15,9 +19,19 @@ module.exports = ( state = defaultState, action ) =>
 
 	switch ( type )
 	{
-		case 'ACCEPT_PACKET':
+		case 'RECV_ACCEPT_PACKET':
 		{
 			if ( payload.command === 'CreateRoom' )
+			{
+				return { ...state, id: payload.body.data };
+			}
+
+			break;
+		}
+
+		case 'RECV_DATA_PACKET':
+		{
+			if ( payload.command === 'RoomInfo' )
 			{
 				return { ...state, ...payload.body.data };
 			}

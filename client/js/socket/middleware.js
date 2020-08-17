@@ -60,12 +60,16 @@ module.exports = store => next => action =>
 
 				if ( body.response === 'OK' )
 				{
-					store.dispatch ({ type: 'ACCEPT_PACKET', payload: action.payload });
+					store.dispatch ({ type: 'RECV_ACCEPT_PACKET', payload: action.payload });
 				}
 				else
 				{
-					store.dispatch ({ type: 'REJECT_PACKET', payload: action.payload });
+					store.dispatch ({ type: 'RECV_REJECT_PACKET', payload: action.payload });
 				}
+			}
+			else if ( type === 'Data' )
+			{
+				store.dispatch ({ type: 'RECV_DATA_PACKET', payload: action.payload });
 			}
 
 			break;
