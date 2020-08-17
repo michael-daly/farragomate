@@ -31,7 +31,7 @@ GameRoomEvents.on ('createRoom', ( room, owner ) =>
 	room.events.on ('enterScreen', screen =>
 	{
 		room.timer.start (screen.getStartTime (room));
-		sendDataToRoom (room, 'RoomInfo', room.toString ());
+		sendDataToRoom (room, 'RoomInfo', room.toJSON ());
 	});
 
 	room.events.on ('leaveScreen', screen =>
@@ -45,7 +45,7 @@ GameRoomEvents.on ('createRoom', ( room, owner ) =>
 
 GameRoomEvents.on ('joinRoom', ( room, client ) =>
 {
-	sendDataToRoom (room, 'JoinRoom', client.toString ());
+	sendDataToRoom (room, 'JoinRoom', client.toJSON ());
 	client.sendPacket ('Data', 'ClientList', getRoomClientList (room));
 
 	sendRoomInfo (room, client);

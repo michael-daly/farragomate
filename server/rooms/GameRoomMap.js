@@ -111,7 +111,7 @@ const sendDataToRoom = ( room, command, body ) =>
  */
 const sendRoomInfo = ( room, client ) =>
 {
-	client.sendPacket ('Data', 'RoomInfo', room.toString ());
+	client.sendPacket ('Data', 'RoomInfo', room.toJSON ());
 };
 
 /**
@@ -120,7 +120,7 @@ const sendRoomInfo = ( room, client ) =>
  */
 const sendInfoToRoom = ( room ) =>
 {
-	sendDataToRoom (room, 'RoomInfo', room.toString ());
+	sendDataToRoom (room, 'RoomInfo', room.toJSON ());
 };
 
 /**
