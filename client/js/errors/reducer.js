@@ -14,7 +14,7 @@ module.exports = ( state = defaultState, action ) =>
 {
 	const { type, payload } = action;
 
-	if ( type === 'ACCEPT_PACKET' )
+	if ( type === 'RECV_ACCEPT_PACKET' )
 	{
 		switch ( payload.command )
 		{
@@ -29,7 +29,7 @@ module.exports = ( state = defaultState, action ) =>
 			}
 		}
 	}
-	else if ( type === 'REJECT_PACKET' )
+	else if ( type === 'RECV_REJECT_PACKET' )
 	{
 		switch ( payload.command )
 		{

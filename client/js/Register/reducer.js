@@ -15,7 +15,7 @@ module.exports = ( state = defaultState, action ) =>
 
 	switch ( type )
 	{
-		case 'ACCEPT_PACKET':
+		case 'RECV_ACCEPT_PACKET':
 		{
 			if ( payload.command === 'RegisterInfo' )
 			{
