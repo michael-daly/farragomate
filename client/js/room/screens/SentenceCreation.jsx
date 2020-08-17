@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 
-class MainGame extends Component
+class SentenceCreation extends Component
 {
 	constructor ( props )
 	{
@@ -12,7 +12,7 @@ class MainGame extends Component
 
 	render ()
 	{
-		return 'MainGame';
+		return 'SentenceCreation';
 	}
 }
 
@@ -28,4 +28,4 @@ const mapDispatchToProps = dispatch =>
 };
 
 
-export default connect (mapStateToProps, mapDispatchToProps) (MainGame);
+export default connect (mapStateToProps, mapDispatchToProps) (SentenceCreation);
