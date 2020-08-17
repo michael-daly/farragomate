@@ -4,7 +4,7 @@ module.exports = store => next => action =>
 
 	const state = store.getState ();
 
-	if ( type === 'ACCEPT_PACKET' )
+	if ( type === 'RECV_ACCEPT_PACKET' )
 	{
 		switch ( state.app.screen )
 		{
@@ -13,6 +13,16 @@ module.exports = store => next => action =>
 				if ( payload.command === 'RegisterInfo' )
 				{
 					store.dispatch ({ type: 'SET_SCREEN', payload: 'MainMenu' });
+				}
+
+				break;
+			}
+
+			case 'CreateRoom':
+			{
+				if ( payload.command === 'CreateRoom' )
+				{
+					store.dispatch ({ type: 'SET_SCREEN', payload: 'MainGame' });
 				}
 
 				break;
