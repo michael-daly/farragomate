@@ -9,7 +9,10 @@ SentenceCreation.onEnterScreen = async function ( room )
 {
 	await room.sentences.fetchWords ();
 
-	sendDataToRoom (room, 'Wordbanks', room.sentences.getWordbanks ());
+	if ( !room.isDeleted )
+	{
+		sendDataToRoom (room, 'Wordbanks', room.sentences.getWordbanks ());
+	}
 };
 
 SentenceCreation.onLeaveScreen = async function ( room )
