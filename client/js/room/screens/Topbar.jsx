@@ -31,7 +31,7 @@ class Topbar extends Component
 					Time Left: {this.props.timeLeft}
 				</span>
 
-				<span style={{ left: '30%', position: 'relative' }}>
+				<span style={{ left: '25%', position: 'relative' }}>
 					Round {this.props.currRound + 1} of {this.props.numRounds}
 				</span>
 			</div>
