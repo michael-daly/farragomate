@@ -75,18 +75,18 @@ html, body, .chalkboard
 	color:       #000;
 }
 
-.magnet.button.enabled:hover
+.magnet.button.enabled:hover, .magnet-small.button.enabled:hover
 {
 	background-color: #FEFEFE;
 	color:            #111;
 }
 
-.magnet.button.enabled:active
+.magnet.button.enabled:active, .magnet-small.button.enabled:active
 {
 	background-color: #DEDEDE;
 }
 
-.magnet.button.disabled
+.magnet.button.disabled, .magnet-small.button.disabled
 {
 	color: #AAA;
 }
