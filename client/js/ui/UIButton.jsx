@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-const UIButton = ({ text, onClick, className = '', disabled = false, inline = true }) =>
+const UIButton = ({ text, onClick, className = '', disabled = false, inline = true, style = {} }) =>
 {
 	let classNames = ['button', className];
 
@@ -14,10 +14,10 @@ const UIButton = ({ text, onClick, className = '', disabled = false, inline = tr
 
 	if ( inline )
 	{
-		return <span className={classNames.join (' ')} onClick={onClick}>{text}</span>;
+		return <span style={style} className={classNames.join (' ')} onClick={onClick}>{text}</span>;
 	}
 
-	return <div className={classNames.join (' ')} onClick={onClick}>{text}</div>;
+	return <div style={style} className={classNames.join (' ')} onClick={onClick}>{text}</div>;
 };
 
 

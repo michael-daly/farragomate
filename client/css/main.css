@@ -45,6 +45,21 @@ html, body, .chalkboard
 	transform: scale(1.1);
 }
 
+.topbar
+{
+	background:      url('/img/blackboard.png');
+	background-size: cover;
+
+	position: static;
+
+	top:     0vw;
+	padding: 0.75vw;
+
+	font-size: 1.5vw;
+
+	color: #FFFF99;
+}
+
 .button, .magnet
 {
 	margin: 0.15em;
@@ -93,7 +108,7 @@ html, body, .chalkboard
 
 .magnet-small
 {
-	font-size: 0.75vw;
+	font-size: 0.9vw;
 }
 
 .chalk, .chalk-small
@@ -107,12 +122,12 @@ html, body, .chalkboard
 	padding-right: 0.75em;
 }
 
-.chalk.button:hover
+.chalk.button.enabled:hover, .chalk-small.enabled:hover
 {
 	background-color: rgba(255, 255, 255, 0.1);
 }
 
-.chalk.button:active
+.chalk.button.enabled:active, .chalk-small.enabled:active
 {
 	background-color: rgba(128, 128, 128, 0.1);
 }
@@ -126,6 +141,10 @@ html, body, .chalkboard
 {
 	border:    0.05em dashed;
 	font-size: 1.3vw;
+
+	padding:       0.2em;
+	padding-left:  0.8em;
+	padding-right: 0.8em;
 }
 
 .error-message

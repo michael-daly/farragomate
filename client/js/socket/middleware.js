@@ -77,7 +77,7 @@ module.exports = store => next => action =>
 
 		case 'SEND_DATA_PACKET':
 		{
-			const { command, body } = action.payload;
+			const { command, body = '' } = action.payload;
 
 			socket.send (packetManager.createDataPacket (command, body));
 
@@ -90,6 +90,12 @@ module.exports = store => next => action =>
 
 			socket.send (packetManager.createRequestPacket (command, body));
 
+			break;
+		}
+
+		case 'LEAVE_ROOM':
+		{
+			store.dispatch ({ type: 'SEND_DATA_PACKET', payload: { command: 'LeaveRoom' } });
 			break;
 		}
 	}

@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import { connect } from 'react-redux';
+
+import Topbar from '#/screens/Topbar.jsx';
 
 import SentenceCreation from '#/screens/SentenceCreation.jsx';
 
@@ -27,7 +29,7 @@ class MainGame extends Component
 			component = <div className='center-content'>Invalid screen: `{screen}`</div>;
 		}
 
-		return component;
+		return <Fragment><Topbar />{component}</Fragment>;
 	}
 }
 
