@@ -20,9 +20,9 @@ class SentenceCreation extends Component
 		return (
 			<Fragment>
 			{
-				wordbanks.map (words =>
+				wordbanks.map (( words, index ) =>
 				{
-					return <Wordbank words={words} />;
+					return <Wordbank key={`words-${index}`} words={words} index={index} />;
 				})
 			}
 			</Fragment>
