@@ -70,7 +70,7 @@ class Register extends Component
 
 					<div>
 						<UIButton
-							type='magnet'
+							className='magnet'
 							text='Play >>'
 							inline={true}
 							onClick={this.onClickPlay.bind (this)}

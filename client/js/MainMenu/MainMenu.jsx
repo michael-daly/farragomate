@@ -41,11 +41,11 @@ class MainMenu extends Component
 				<TitleLogo />
 
 				<div className='button-menu center-content'>
-					<UIButton type='magnet' inline={false} text='Create Room' onClick={createRoom} />
-					<UIButton type='magnet' inline={false} text='Join Room' onClick={joinRoom} />
+					<UIButton className='magnet' inline={false} text='Create Room' onClick={createRoom} />
+					<UIButton className='magnet' inline={false} text='Join Room' onClick={joinRoom} />
 
 					<div style={{ marginTop: '25%' }}>
-						<UIButton type='chalk' inline={false} text='Change Name' onClick={changeName} />
+						<UIButton className='chalk' inline={false} text='Change Name' onClick={changeName} />
 					</div>
 				</div>
 			</div>

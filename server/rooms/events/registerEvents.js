@@ -46,7 +46,9 @@ GameRoomEvents.on ('createRoom', ( room, owner ) =>
 GameRoomEvents.on ('joinRoom', ( room, client ) =>
 {
 	sendDataToRoom (room, 'JoinRoom', client.toJSON ());
+
 	client.sendPacket ('Data', 'ClientList', getRoomClientList (room));
+	client.sendPacket ('Data', 'Wordbanks', room.sentences.getWordbanks ());
 
 	sendRoomInfo (room, client);
 });

@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 
 
-const UIButton = ({ type, text, onClick, disabled = false, inline = true }) =>
+const UIButton = ({ text, onClick, className = '', disabled = false, inline = true }) =>
 {
-	let classNames = ['button'];
-
-	if ( type === 'magnet' )
-	{
-		classNames.push ('magnet');
-	}
-	else if ( type === 'chalk' )
-	{
-		classNames.push ('chalk');
-	}
+	let classNames = ['button', className];
 
 	classNames.push (disabled ? 'disabled' : 'enabled');
 

@@ -32,9 +32,9 @@ class MainGame extends Component
 }
 
 
-const mapStateToProps = state =>
+const mapStateToProps = ({ room }) =>
 {
-	return { screen: state.room.screen };
+	return { screen: room.info.screen };
 };
 
 const mapDispatchToProps = dispatch =>

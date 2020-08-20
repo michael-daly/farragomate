@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import { connect } from 'react-redux';
+
+import Wordbank from '#/screens/Wordbank.jsx';
 
 
 class SentenceCreation extends Component
@@ -12,14 +14,26 @@ class SentenceCreation extends Component
 
 	render ()
 	{
-		return 'SentenceCreation';
+		const { props }     = this;
+		const { wordbanks } = props;
+
+		return (
+			<Fragment>
+			{
+				wordbanks.map (words =>
+				{
+					return <Wordbank words={words} />;
+				})
+			}
+			</Fragment>
+		);
 	}
 }
 
 
-const mapStateToProps = () =>
+const mapStateToProps = ({ room }) =>
 {
-	return {};
+	return { wordbanks: room.wordbanks };
 };
 
 const mapDispatchToProps = dispatch =>

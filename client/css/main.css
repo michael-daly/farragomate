@@ -64,7 +64,7 @@ html, body, .chalkboard
 	cursor: not-allowed;
 }
 
-.magnet
+.magnet, .magnet-small
 {
 	background-color: #EEE;
 
@@ -91,7 +91,12 @@ html, body, .chalkboard
 	color: #AAA;
 }
 
-.chalk
+.magnet-small
+{
+	font-size: 0.75vw;
+}
+
+.chalk, .chalk-small
 {
 	margin: 0.15em;
 
@@ -115,6 +120,12 @@ html, body, .chalkboard
 .chalk.highlighted
 {
 	border-color: #FF5154 !important;
+}
+
+.chalk-small
+{
+	border:    0.05em dashed;
+	font-size: 1.3vw;
 }
 
 .error-message

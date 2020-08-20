@@ -69,12 +69,12 @@ class CreateRoom extends Component
 
 				<div className='center-content' style={{ width: '54%' }}>
 					<span className='left' onClick={props.gotoMainMenu}>
-						<UIButton type='magnet' text='<< Back' />
+						<UIButton className='magnet' text='<< Back' />
 					</span>
 
 					<span className='right'>
 						<UIButton
-							type='magnet'
+							className='magnet'
 							text='Create Room >>'
 							inline={true}
 							onClick={this.onClickCreate.bind (this)}
@@ -88,9 +88,9 @@ class CreateRoom extends Component
 }
 
 
-const mapStateToProps = state =>
+const mapStateToProps = ({ room, errors }) =>
 {
-	return { info: { ...state.room }, errorMessage: state.errors.createRoomError };
+	return { info: { ...room.info }, errorMessage: errors.createRoomError };
 };
 
 const mapDispatchToProps = dispatch =>
