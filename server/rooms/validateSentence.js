@@ -16,7 +16,7 @@ const
 
 /**
  * @param {GameRoomSentences} roomSentences
- * @param {Integer[]}         sentenceArr
+ * @param {Integer[]}         sentenceArr   - A flat array in this format: [wordbankIdx, wordIdx, ...]
  *
  * @returns {Integer} ERROR_NONE if no error.
  */
