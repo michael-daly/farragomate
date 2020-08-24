@@ -32,7 +32,7 @@ module.exports = ( state = defaultState, action ) =>
 		{
 			const sentenceArray = state.sentenceArray.slice ();
 
-			sentenceArray.splice (payload, 1);
+			sentenceArray.splice (payload, 2);
 
 			return { ...state, sentenceArray };
 		}

@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import Wordbank from '#/screens/Wordbank.jsx';
+import UIButton from '#/ui/UIButton.jsx';
 
 import { sentenceToStr, sentenceToStrArr }   from '#/sentenceArray.js';
 import { addToSentence, removeFromSentence } from '#/room/actions.js';
@@ -23,33 +24,44 @@ class SentenceCreation extends Component
 
 		const { wordbanks, sentences } = props;
 
+		const sentenceArray = sentenceToStrArr (wordbanks, sentences.sentenceArray);
+
 		return (
-			<div>
+			<div style={{ padding: '2vw' }}>
 			{
 				wordbanks.length <= 0 ? <div className='center-content'>Loading...</div> :
 					<Fragment>
-					{
-						wordbanks.map (( words, index ) =>
 						{
-							return <Wordbank
-								key={`words-${index}`}
-								words={words}
-								bankIndex={index}
-								onClickWord={props.addWord}
-							/>;
-						})
-					}
+							wordbanks.map (( words, index ) =>
+							{
+								return <Wordbank
+									key={`words-${index}`}
+									words={words}
+									bankIndex={index}
+									onClickWord={props.addWord}
+								/>;
+							})
+						}
 
-					<div
-						className='chalk'
-						style={{ margin: '1vw', marginTop: '5vw', minHeight: '2.6vw' }}
-					>
-					{
-						wordbanks.length <= 0 ? '\u00A0' :
-							sentenceToStr (sentenceToStrArr (wordbanks, sentences.sentenceArray))
-					}
-					</div>
-				</Fragment>
+						<div style={{ minHeight: '2.6vw' }}>{sentenceToStr (sentenceArray)}</div>
+
+						<div
+							className='chalk'
+							style={{ marginTop: '1vw', minHeight: '2.6vw', overflowWrap: 'normal' }}
+						>
+						{
+							sentenceArray.map (( word, index ) =>
+							(
+								<UIButton
+									key={`sentence-tile-${index}-${word}`}
+									className='magnet-small'
+									text={word}
+									onClick={() => props.removeWord (index * 2)}
+								/>
+							))
+						}
+						</div>
+					</Fragment>
 			}
 			</div>
 		);
