@@ -20,7 +20,7 @@ module.exports = ( state = defaultState, action ) =>
 		{
 			const { sentenceArray } = state;
 
-			if ( sentenceArray.length >= MAX_SENTENCE_LEN )
+			if ( sentenceArray.length >= MAX_SENTENCE_LEN * 2 )
 			{
 				break;
 			}

@@ -13,5 +13,10 @@ const removeFromSentence = index =>
 	return { type: 'REMOVE_FROM_SENTENCE', payload: index };
 };
 
+const clearSentence = () =>
+{
+	return { type: 'CLEAR_SENTENCE' };
+};
 
-export { leaveRoom, addToSentence, removeFromSentence };
+
+export { leaveRoom, addToSentence, removeFromSentence, clearSentence };

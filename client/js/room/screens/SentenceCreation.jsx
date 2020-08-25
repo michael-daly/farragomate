@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import Wordbank from '#/screens/Wordbank.jsx';
 import UIButton from '#/ui/UIButton.jsx';
 
-import { sentenceToStr, sentenceToStrArr }   from '#/sentenceArray.js';
-import { addToSentence, removeFromSentence } from '#/room/actions.js';
+import { sentenceToStr, sentenceToStrArr } from '#/sentenceArray.js';
+
+import { addToSentence, removeFromSentence, clearSentence } from '#/room/actions.js';
 
 import { MAX_SENTENCE_LEN } from '~/constants.js';
 
@@ -45,16 +46,19 @@ class SentenceCreation extends Component
 
 						<div style={{ minHeight: '2.6vw' }}>{sentenceToStr (sentenceArray)}</div>
 
-						<div
-							className='chalk'
-							style={{ marginTop: '1vw', minHeight: '2.6vw', overflowWrap: 'normal' }}
-						>
+						<div className='chalk sentence-tile-container'>
+							<UIButton
+								style={{ color: '#FF5154', paddingLeft: '0vw' }}
+								text='X'
+								onClick={props.clearWords}
+							/>
 						{
 							sentenceArray.map (( word, index ) =>
 							(
 								<UIButton
 									key={`sentence-tile-${index}-${word}`}
 									className='magnet-small'
+									style={{ display: 'inline-block' }}
 									text={word}
 									onClick={() => props.removeWord (index * 2)}
 								/>
@@ -86,6 +90,11 @@ const mapDispatchToProps = dispatch =>
 		removeWord ( index )
 		{
 			dispatch (removeFromSentence (index));
+		},
+
+		clearWords ()
+		{
+			dispatch (clearSentence ());
 		},
 	};
 

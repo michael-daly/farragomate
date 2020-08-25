@@ -205,3 +205,11 @@ input[type=text].chalk, input[type=password].chalk
 {
 	width: 60%;
 }
+
+.sentence-tile-container
+{
+	margin-top:    1vw;
+	min-height:    2.6vw;
+	overflow-wrap: normal;
+	overflow:      wrap;
+}
