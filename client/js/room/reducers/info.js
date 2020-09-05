@@ -33,7 +33,7 @@ module.exports = ( state = defaultState, action ) =>
 		{
 			if ( payload.command === 'RoomInfo' )
 			{
-				return { ...state, ...payload.body.data };
+				return { ...state, ...payload.body };
 			}
 
 			break;

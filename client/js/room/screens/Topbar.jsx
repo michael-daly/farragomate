@@ -27,11 +27,11 @@ class Topbar extends Component
 					/>
 				</span>
 
-				<span style={{ left: '10%', position: 'relative' }}>
+				<span style={{ paddingLeft: '3%', width: '33%', display: 'inline-block' }}>
 					Time Left: {this.props.timeLeft}
 				</span>
 
-				<span style={{ left: '25%', position: 'relative' }}>
+				<span style={{ width: '33%', display: 'inline-block' }}>
 					Round {this.props.currRound + 1} of {this.props.numRounds}
 				</span>
 			</div>
