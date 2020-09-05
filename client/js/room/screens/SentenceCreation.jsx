@@ -47,11 +47,14 @@ class SentenceCreation extends Component
 						<div style={{ minHeight: '2.6vw' }}>{sentenceToStr (sentenceArray)}</div>
 
 						<div className='chalk sentence-tile-container'>
-							<UIButton
-								style={{ color: '#FF5154', paddingLeft: '0vw' }}
-								text='X'
-								onClick={props.clearWords}
-							/>
+						{
+							sentenceArray.length <= 0 ? '' :
+								<UIButton
+									style={{ color: '#FF5154', paddingLeft: '0vw' }}
+									text='X'
+									onClick={props.clearWords}
+								/>
+						}
 						{
 							sentenceArray.map (( word, index ) =>
 							(
