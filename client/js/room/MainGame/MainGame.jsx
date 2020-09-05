@@ -2,9 +2,10 @@ import React, { Component, Fragment } from 'react';
 
 import { connect } from 'react-redux';
 
-import Topbar from '#/screens/Topbar.jsx';
-
+import Topbar           from '#/screens/Topbar.jsx';
 import SentenceCreation from '#/screens/SentenceCreation.jsx';
+
+import UITable from '#/ui/UITable.jsx';
 
 
 class MainGame extends Component
@@ -20,7 +21,7 @@ class MainGame extends Component
 
 		let component = '';
 
-		if ( screen === 'SentenceCreation' )
+		if ( screen === 'SentenceCreation' || screen === null )
 		{
 			component = <SentenceCreation />;
 		}
