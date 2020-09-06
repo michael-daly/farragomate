@@ -13,6 +13,7 @@ const middleware =
 [
 	require ('#/App/middleware.js'),
 	require ('#/socket/middleware.js'),
+	require ('#/room/middleware.js'),
 ];
 
 const store = createStore (reducers, undefined, applyMiddleware (...middleware));

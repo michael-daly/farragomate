@@ -1,5 +1,7 @@
 const PacketManager = require ('~/packets/PacketManager.js');
 
+const { has } = require ('~/util/has.js');
+
 
 let socket        = null;
 let packetManager = null;
@@ -7,6 +9,8 @@ let packetManager = null;
 
 module.exports = store => next => action =>
 {
+	const state = store.getState ();
+
 	switch ( action.type )
 	{
 		case 'SOCKET_CONNECT':

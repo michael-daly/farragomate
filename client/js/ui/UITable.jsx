@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 
+import { sentenceToStr, sentenceToStrArr } from '#/sentenceArray.js';
+
 
 const UITable = props =>
 {

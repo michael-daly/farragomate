@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 
 import Topbar           from '#/screens/Topbar.jsx';
 import SentenceCreation from '#/screens/SentenceCreation.jsx';
-
-import UITable from '#/ui/UITable.jsx';
+import SentenceVoting   from '#/screens/SentenceVoting.jsx';
 
 
 class MainGame extends Component
@@ -24,6 +23,10 @@ class MainGame extends Component
 		if ( screen === 'SentenceCreation' || screen === null )
 		{
 			component = <SentenceCreation />;
+		}
+		else if ( screen === 'SentenceVoting' )
+		{
+			component = <SentenceVoting />;
 		}
 		else
 		{

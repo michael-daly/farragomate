@@ -12,7 +12,7 @@ const
 /**
  * @param {Object}  fields
  * @param {string}  name
- * @param {integer} error
+ * @param {Integer} error
  *
  * @returns {string}
  */

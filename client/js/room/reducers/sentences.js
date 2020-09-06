@@ -6,7 +6,8 @@ const { MAX_SENTENCE_LEN } = require ('~/constants.js');
 const defaultState = deepFreeze (
 {
 	sentenceArray:   [],
-	clientSentences: [],
+	clientSentences: {},
+	sentenceVote:    '',
 });
 
 
@@ -37,7 +38,17 @@ module.exports = ( state = defaultState, action ) =>
 			return { ...state, sentenceArray };
 		}
 
+		case 'CAST_VOTE':
+		{
+			return { ...state, sentenceVote: action.payload };
+		}
+
 		case 'RECV_DATA_PACKET':
+			if ( payload.command === 'ClientSentences' )
+			{
+				return { ...state, clientSentences: payload.body }
+			}
+
 			if ( payload.command !== 'Wordbanks' )
 			{
 				break;

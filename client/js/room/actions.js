@@ -18,5 +18,10 @@ const clearSentence = () =>
 	return { type: 'CLEAR_SENTENCE' };
 };
 
+const castVote = id =>
+{
+	return { type: 'CAST_VOTE', payload: id };
+};
 
-export { leaveRoom, addToSentence, removeFromSentence, clearSentence };
+
+export { leaveRoom, addToSentence, removeFromSentence, clearSentence, castVote };

@@ -2,6 +2,7 @@ const deepFreeze          = require ('~/util/deepFreeze.js');
 const fieldData           = require ('~/rooms/fieldData.js');
 const getDefaultFieldVals = require ('#/fields/getDefaultFieldVals.js');
 
+
 const defaultState = deepFreeze (
 {
 	id:        '',
@@ -31,6 +32,8 @@ module.exports = ( state = defaultState, action ) =>
 
 		case 'RECV_DATA_PACKET':
 		{
+			const { body } = payload;
+
 			if ( payload.command === 'RoomInfo' )
 			{
 				return { ...state, ...payload.body };

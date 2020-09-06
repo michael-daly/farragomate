@@ -263,3 +263,14 @@ input[type=text].chalk, input[type=password].chalk
 {
 	border-width: 0.1em;
 }
+
+.table-container
+{
+	width:      54%;
+	max-height: 50%;
+
+	text-align: left;
+
+	overflow-x: hidden;
+	overflow-y: auto;
+}

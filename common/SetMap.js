@@ -15,7 +15,7 @@ class SetMap
 	 * @param {*} key
 	 * @param {*} value
 	 *
-	 * @returns {integer} Number of values now at the key.
+	 * @returns {Integer} Number of values now at the key.
 	 */
 	add ( key, value )
 	{
