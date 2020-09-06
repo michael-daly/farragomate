@@ -7,7 +7,7 @@ module.exports = deepFreeze (
 	[
 		' ',     '-.',    '-,',    '-!', '-?', '-\'', '"-', '-"',
 		'-\'ll', '-\'re', '-\'ve', '-n\'t',
-		'-ing',  '-ly',   '-y',    '-t', '-s', '-e', '-d',
+		'-ing',  '-ly',   '-y',    '-t', '-m', '-r', '-s', '-e', '-d',
 	],
 
 	pronouns:
@@ -20,7 +20,7 @@ module.exports = deepFreeze (
 
 	misc:
 	[
-		'the',  'a',   'an',  'if',  'in',   'on',   'to',   'and', 'but', 'or',
+		'the',  'a',   'an',  'if',  'in',   'of',   'on',   'to',   'for', 'and', 'but', 'or',
 		'be',   'am',  'is',  'are', 'was',  'were', 'been', 'will',
 		'have', 'has', 'had', 'do',  'does', 'did',
 		'yes',  'no',
