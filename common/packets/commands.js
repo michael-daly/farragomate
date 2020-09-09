@@ -22,6 +22,13 @@ const commands = new Set (
 	// DataPacket sent from server to client notifying that the room they were in was deleted.
 	'DeleteRoom',
 
+	// DataPacket sent from server to client notifying that the room is entering a new screen, and
+	// which one.
+	'EnterScreen',
+
+	// DataPacket sent from server to client notifying that the room is leaving the current screen.
+	'LeaveScreen',
+
 	// When a DataPacket sent from server to client, it's a notification that someone was kicked.
 	// When a RequestPacket->ResponsePacket, it's a request/response to kick a client.
 	'KickClient',
