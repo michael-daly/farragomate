@@ -2,6 +2,8 @@ const PacketManager = require ('~/packets/PacketManager.js');
 
 const { has } = require ('~/util/has.js');
 
+const { sendRequestPacket } = require ('#/socket/actions.js');
+
 
 let socket        = null;
 let packetManager = null;
@@ -24,16 +26,11 @@ module.exports = store => next => action =>
 			{
 				if ( body === 'SentenceCreation' )
 				{
-					store.dispatch (
-					{
-						type: 'SEND_REQUEST_PACKET',
-
-						payload:
-						{
-							command: 'SendSentence',
-							body:    room.sentences.array,
-						},
-					});
+					store.dispatch (sendRequestPacket ('SendSentence', room.sentences.array));
+				}
+				else if ( body === 'SentenceVoting' )
+				{
+					store.dispatch (sendRequestPacket ('CastVote', room.sentences.vote));
 				}
 			}
 
