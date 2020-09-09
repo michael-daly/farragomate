@@ -17,22 +17,25 @@ class SentenceVoting extends Component
 	render ()
 	{
 		const { props }           = this;
-		const { wordbanks }       = props;
+		const { id, wordbanks }   = props;
 		const { clientSentences } = props.sentences;
 
 		const rowValues = [];
 
-		for ( let i in clientSentences )
+		for ( let authorID in clientSentences )
 		{
-			const sentence = clientSentences[i];
+			const sentence = clientSentences[authorID];
 
-			rowValues.push ([sentenceToStr (sentenceToStrArr (wordbanks, sentence.arr))]);
+			if ( authorID !== id )
+			{
+				rowValues.push ([sentenceToStr (sentenceToStrArr (wordbanks, sentence.arr))]);
+			}
 		}
 
 		return (
 			<div className='center-content'>
 			{
-				Object.keys (clientSentences).length <= 0 ?
+				rowValues.length <= 0 ?
 					<div className='center-content'>No sentences to vote for!</div> :
 
 					<Fragment>
@@ -52,9 +55,9 @@ class SentenceVoting extends Component
 }
 
 
-const mapStateToProps = ({ room }) =>
+const mapStateToProps = ({ register, room }) =>
 {
-	return { wordbanks: room.wordbanks, sentences: room.sentences };
+	return { id: register.id, wordbanks: room.wordbanks, sentences: room.sentences };
 };
 
 const mapDispatchToProps = dispatch =>
