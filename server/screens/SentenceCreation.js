@@ -1,5 +1,6 @@
 const GameScreen = require ('$/screens/GameScreen.js');
 
+const { sleep }          = require ('~/util/promises.js');
 const { sendDataToRoom } = require ('$/rooms/GameRoomMap.js');
 
 
@@ -17,8 +18,8 @@ SentenceCreation.onEnterScreen = async function ( room )
 
 SentenceCreation.onLeaveScreen = async function ( room )
 {
-	// Pause for 1.5 seconds to receive all the sentences.
-	await setTimeout (() => {}, 1500);
+	// Wait 2 seconds for sentences to be sent.
+	await sleep (2000);
 };
 
 SentenceCreation.getNextScreen = function ()

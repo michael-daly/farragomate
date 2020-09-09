@@ -24,6 +24,7 @@ GameRoomEvents.on ('createRoom', ( room, owner ) =>
 	{
 		if ( !wasForced )
 		{
+			sendDataToRoom (room, 'LeaveScreen', room.screen.name);
 			room.leaveScreen ();
 		}
 	});
@@ -37,6 +38,8 @@ GameRoomEvents.on ('createRoom', ( room, owner ) =>
 	room.events.on ('leaveScreen', screen =>
 	{
 		room.screen = getGameScreen (screen.getNextScreen (room));
+
+		sendDataToRoom (room, 'EnterScreen', room.screen.name);
 		room.enterScreen ();
 	});
 

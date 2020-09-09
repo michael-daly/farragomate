@@ -18,9 +18,11 @@ module.exports = store => next => action =>
 	{
 		case 'RECV_DATA_PACKET':
 		{
-			if ( payload.command === 'RoomInfo' && room.info.screen === 'SentenceCreation' )
+			const { command, body } = payload;
+
+			if ( command === 'LeaveScreen' )
 			{
-				if ( payload.body.timeLeft <= 0 )
+				if ( body === 'SentenceCreation' )
 				{
 					store.dispatch (
 					{

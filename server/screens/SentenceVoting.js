@@ -1,5 +1,6 @@
 const GameScreen = require ('$/screens/GameScreen.js');
 
+const { sleep }          = require ('~/util/promises.js');
 const { sendDataToRoom } = require ('$/rooms/GameRoomMap.js');
 
 
@@ -12,8 +13,8 @@ SentenceVoting.onEnterScreen = async function ( room )
 
 SentenceVoting.onLeaveScreen = async function ( room )
 {
-	// Pause for 1.5 seconds to receive all the votes.
-	await setTimeout (() => {}, 1500);
+	// Wait 2 seconds for votes to be sent.
+	await sleep (2000);
 };
 
 SentenceVoting.getNextScreen = function ()
