@@ -31,7 +31,7 @@ module.exports = store => next => action =>
 						payload:
 						{
 							command: 'SendSentence',
-							body:    room.sentences.sentenceArray,
+							body:    room.sentences.array,
 						},
 					});
 				}

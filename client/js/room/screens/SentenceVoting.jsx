@@ -16,15 +16,15 @@ class SentenceVoting extends Component
 
 	render ()
 	{
-		const { props }           = this;
-		const { id, wordbanks }   = props;
-		const { clientSentences } = props.sentences;
+		const { props }         = this;
+		const { id, wordbanks } = props;
+		const { sentences }     = props.sentences;
 
 		const rowValues = [];
 
-		for ( let authorID in clientSentences )
+		for ( let authorID in sentences )
 		{
-			const sentence = clientSentences[authorID];
+			const sentence = sentences[authorID];
 
 			if ( authorID !== id )
 			{

@@ -5,9 +5,9 @@ const { MAX_SENTENCE_LEN } = require ('~/constants.js');
 
 const defaultState = deepFreeze (
 {
-	sentenceArray:   [],
-	clientSentences: {},
-	sentenceVote:    '',
+	array:     [],
+	sentences: {},
+	vote:      '',
 });
 
 
@@ -19,34 +19,34 @@ module.exports = ( state = defaultState, action ) =>
 	{
 		case 'ADD_TO_SENTENCE':
 		{
-			const { sentenceArray } = state;
+			const { array } = state;
 
-			if ( sentenceArray.length >= MAX_SENTENCE_LEN * 2 )
+			if ( array.length >= MAX_SENTENCE_LEN * 2 )
 			{
 				break;
 			}
 
-			return { ...state, sentenceArray: [...sentenceArray, payload.bankIndex, payload.wordIndex] };
+			return { ...state, array: [...array, payload.bankIndex, payload.wordIndex] };
 		}
 
 		case 'REMOVE_FROM_SENTENCE':
 		{
-			const sentenceArray = state.sentenceArray.slice ();
+			const array = state.array.slice ();
 
-			sentenceArray.splice (payload, 2);
+			array.splice (payload, 2);
 
-			return { ...state, sentenceArray };
+			return { ...state, array };
 		}
 
 		case 'CAST_VOTE':
 		{
-			return { ...state, sentenceVote: action.payload };
+			return { ...state, vote: action.payload };
 		}
 
 		case 'RECV_DATA_PACKET':
 			if ( payload.command === 'ClientSentences' )
 			{
-				return { ...state, clientSentences: payload.body }
+				return { ...state, sentences: payload.body }
 			}
 
 			if ( payload.command !== 'Wordbanks' )
@@ -56,7 +56,7 @@ module.exports = ( state = defaultState, action ) =>
 
 		case 'CLEAR_SENTENCE':
 		{
-			return { ...state, sentenceArray: [] };
+			return { ...state, array: [] };
 		}
 	}
 

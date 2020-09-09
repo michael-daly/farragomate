@@ -25,7 +25,7 @@ class SentenceCreation extends Component
 
 		const { wordbanks, sentences } = props;
 
-		const sentenceArray = sentenceToStrArr (wordbanks, sentences.sentenceArray);
+		const sentenceArray = sentenceToStrArr (wordbanks, sentences.array);
 
 		return (
 			<div style={{ padding: '2vw' }}>
