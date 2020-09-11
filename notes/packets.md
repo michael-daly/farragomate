@@ -26,16 +26,16 @@
 * [ ]  Warning
 * [ ]  Message
 
-* [ ]  RegisterInfo
-	* [ ]  Request
+* [X]  RegisterInfo
+	* [X]  Request
 	* [X]  Response
 
-* [ ]  CreateRoom
-	* [ ]  Request
+* [X]  CreateRoom
+	* [X]  Request
 	* [X]  Response
 
-* [ ]  JoinRoom
-	* [ ]  Request
+* [X]  JoinRoom
+	* [X]  Request
 	* [X]  Response
 	* [X]  Can also be used as a DataPacket to notify members of the room someone joined.
 
@@ -53,7 +53,7 @@
 	* [ ]  Response
 	* [ ]  Can also be used as a DataPacket from server to client to notify members of the room someone (potentially them) got banned.
 
-* [ ]  RoomInfo
+* [X]  RoomInfo
 	* [X]  DataPacket from server to client.
 	* [X]  Does not have to contain all fields as it's also used to send time updates.
 
@@ -64,17 +64,17 @@
 * [ ]  ClientList
 	* [X]  DataPacket from server to client when the client first joins the room.
 
-* [ ]  Wordbanks
+* [X]  Wordbanks
 	* [X]  DataPacket from server to client to send available words at beginning of each round.
 
-* [ ]  SendSentence
-	* [ ]  Request
+* [X]  SendSentence
+	* [X]  Request
 	* [X]  Response
 
-* [ ]  ClientSentences
+* [X]  ClientSentences
 	* [X]  DataPacket from server to client.
 	* [X]  Used in both the "SentenceVoting" screen and the "VotingResults" screen.
 
-* [ ]  CastVote
-	* [ ]  Request
+* [X]  CastVote
+	* [X]  Request
 	* [X]  Response
