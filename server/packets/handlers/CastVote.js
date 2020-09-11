@@ -31,10 +31,9 @@ GameRoomHandlers.addHandler ('Request', 'CastVote', ( client, packet ) =>
 	{
 		error = ERROR_REPEAT_DATA;
 	}
-	else if ( !room.sentences.hasSentence (client.id) || voteID === client.id )
+	else if ( voteID === client.id )
 	{
-		// Players cannot vote unless they made a sentence themselves.
-		// And they most certainly can't vote for their own.
+		// Players cannot vote for their own sentence.
 		error = ERROR_NOT_ALLOWED;
 	}
 	else if ( !room.sentences.hasSentence (voteID) )
