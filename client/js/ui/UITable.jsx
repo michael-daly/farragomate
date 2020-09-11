@@ -62,7 +62,6 @@ const UITable = props =>
 							columnInfo.map (( column, colIndex ) =>
 							{
 								const colSize  = column.size;
-								const colValue = row[colIndex] || '';
 								const colStyle = { width: `${colSize}%` };
 								const colKey   = `table-column-${colIndex}-${colSize}-${isSelected}`;
 
@@ -72,7 +71,7 @@ const UITable = props =>
 
 								return (
 									<span key={colKey} className={colClass} style={colStyle}>
-										{colValue}
+										{row[colIndex]}
 									</span>
 								);
 							})

@@ -3,6 +3,7 @@ const GameScreen = require ('$/screens/GameScreen.js');
 const { sendDataToRoom } = require ('$/rooms/GameRoomMap.js');
 
 
+// TODO: Skip this screen if there were no sentences submitted.
 const VotingResults = new GameScreen ('VotingResults', 15);
 
 VotingResults.onEnterScreen = async function ( room )
