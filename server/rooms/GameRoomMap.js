@@ -67,10 +67,10 @@ const getRoom = roomID =>
  */
 const addClientToRoom = ( room, client ) =>
 {
-	GameRoomEvents.emit ('joinRoom', room, client);
-
 	client.roomID = room.id;
 	room.clients.addClientID (client.id);
+
+	GameRoomEvents.emit ('joinRoom', room, client);
 };
 
 /**
