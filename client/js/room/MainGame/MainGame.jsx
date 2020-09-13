@@ -6,6 +6,7 @@ import Topbar           from '#/screens/Topbar.jsx';
 import SentenceCreation from '#/screens/SentenceCreation.jsx';
 import SentenceVoting   from '#/screens/SentenceVoting.jsx';
 import VotingResults    from '#/screens/VotingResults.jsx';
+import FinalScores      from '#/screens/FinalScores.jsx';
 
 
 class MainGame extends Component
@@ -32,6 +33,10 @@ class MainGame extends Component
 		else if ( screen === 'VotingResults' )
 		{
 			component = <VotingResults />;
+		}
+		else if ( screen === 'FinalScores' )
+		{
+			component = <FinalScores />;
 		}
 		else
 		{
