@@ -2,10 +2,9 @@ import React, { Component, Fragment } from 'react';
 
 import { connect } from 'react-redux';
 
-import UITable from '#/ui/UITable.jsx';
+import UITable from '#/ui/table/UITable.jsx';
 
-import { castVote }                        from '#/room/actions.js';
-import { sentenceToStr, sentenceToStrArr } from '#/sentenceArray.js';
+import { castVote } from '#/room/actions.js';
 
 
 class SentenceVoting extends Component
@@ -35,8 +34,6 @@ class SentenceVoting extends Component
 
 		for ( let authorID in sentences )
 		{
-			const sentence = sentences[authorID];
-
 			if ( authorID !== id )
 			{
 				if ( authorID === vote )
@@ -44,32 +41,22 @@ class SentenceVoting extends Component
 					selected = currIndex;
 				}
 
-				rowValues.push ([sentenceToStr (sentenceToStrArr (wordbanks, sentence.arr))]);
+				rowValues.push ([sentences[authorID].str]);
 			}
 
 			currIndex++;
 		}
 
 		return (
-			<div className='center-content'>
-			{
-				rowValues.length <= 0 ?
-					<div className='center-content'>No sentences to vote for!</div> :
-
-					<Fragment>
-						<h3 style={{ color: '#FFBB88' }}>Pick your favorite sentence!</h3>
-
-						<div className='center-content table-container'>
-							<UITable
-								columnInfo={[{ label: '', size: 100 }]}
-								rowValues={rowValues}
-								onClick={onClick}
-								selected={selected}
-							/>
-						</div>
-					</Fragment>
-			}
-			</div>
+			<UITable
+				columnInfo={[{ label: '', size: 100 }]}
+				rowValues={rowValues}
+				selected={selected}
+				tableSize='medium'
+				headerText='Pick your favorite sentence!'
+				emptyMessage='No sentences to vote for!'
+				onClick={onClick}
+			/>
 		);
 	}
 }

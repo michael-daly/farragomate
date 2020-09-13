@@ -2,9 +2,7 @@ import React, { Component, Fragment } from 'react';
 
 import { connect } from 'react-redux';
 
-import UITable from '#/ui/UITable.jsx';
-
-import { sentenceToStr, sentenceToStrArr } from '#/sentenceArray.js';
+import UITable from '#/ui/table/UITable.jsx';
 
 
 const columnInfo =
@@ -36,38 +34,27 @@ class VotingResults extends Component
 
 		for ( let authorID in sentences )
 		{
-			const sentence    = sentences[authorID];
-			const sentenceStr = sentenceToStr (sentenceToStrArr (wordbanks, sentence.arr));
+			const sentence = sentences[authorID];
 
 			if ( authorID === vote )
 			{
 				selected = currIndex;
 			}
 
-			rowValues.push ([sentence.votes, list[authorID].displayName, sentenceStr]);
+			rowValues.push ([sentence.votes, list[authorID].displayName, sentence.str]);
 
 			currIndex++;
 		}
 
 		return (
-			<div className='center-content'>
-			{
-				rowValues.length <= 0 ?
-					<div className='center-content'>No results to show!</div> :
-
-					<Fragment>
-						<h3 style={{ color: '#FFBB88' }}>Voting Results</h3>
-
-						<div className='center-content table-container-large'>
-							<UITable
-								columnInfo={columnInfo}
-								rowValues={rowValues}
-								selected={selected}
-							/>
-						</div>
-					</Fragment>
-			}
-			</div>
+			<UITable
+				columnInfo={columnInfo}
+				rowValues={rowValues}
+				selected={selected}
+				tableSize='large'
+				headerText='Voting Results'
+				emptyMessage='No results to show!'
+			/>
 		);
 	}
 }

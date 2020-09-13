@@ -2,7 +2,8 @@ const PacketManager = require ('~/packets/PacketManager.js');
 
 const { has } = require ('~/util/has.js');
 
-const { sendRequestPacket } = require ('#/socket/actions.js');
+const { sendRequestPacket }               = require ('#/socket/actions.js');
+const { sentenceToStr, sentenceToStrArr } = require ('#/sentenceArray.js');
 
 
 let socket        = null;
@@ -32,6 +33,26 @@ module.exports = store => next => action =>
 				{
 					store.dispatch (sendRequestPacket ('CastVote', room.sentences.vote));
 				}
+			}
+			else if ( command === 'ClientSentences' )
+			{
+				const { wordbanks } = state.room;
+				const { body }      = payload;
+
+				const sentences = {};
+
+				for ( let authorID in body )
+				{
+					const sentence = body[authorID];
+
+					sentences[authorID] =
+					{
+						...sentence,
+						str: sentenceToStr (sentenceToStrArr (wordbanks, sentence.arr)),
+					}
+				}
+
+				payload.body = sentences;
 			}
 
 			break;
