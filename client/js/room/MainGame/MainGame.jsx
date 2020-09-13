@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 
 import Topbar           from '#/screens/Topbar.jsx';
 import SentenceCreation from '#/screens/SentenceCreation.jsx';
-import SentenceVoting   from '#/screens/SentenceVoting.jsx';
-import VotingResults    from '#/screens/VotingResults.jsx';
+import Voting           from '#/screens/Voting.jsx';
 import FinalScores      from '#/screens/FinalScores.jsx';
 
 
@@ -28,11 +27,11 @@ class MainGame extends Component
 		}
 		else if ( screen === 'SentenceVoting' )
 		{
-			component = <SentenceVoting />;
+			component = <Voting votingEnabled={true} />;
 		}
 		else if ( screen === 'VotingResults' )
 		{
-			component = <VotingResults />;
+			component = <Voting votingEnabled={false} />;
 		}
 		else if ( screen === 'FinalScores' )
 		{

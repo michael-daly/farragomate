@@ -44,15 +44,19 @@ module.exports = ( state = defaultState, action ) =>
 		}
 
 		case 'RECV_DATA_PACKET':
+		{
 			if ( payload.command === 'ClientSentences' )
 			{
 				return { ...state, sentences: payload.body }
 			}
 
-			if ( payload.command !== 'Wordbanks' )
+			if ( payload.command === 'Wordbanks' )
 			{
-				break;
+				return { ...state, array: [], vote: '' };
 			}
+
+			break;
+		}
 
 		case 'CLEAR_SENTENCE':
 		{
