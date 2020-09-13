@@ -86,6 +86,15 @@ class GameRoomSentences
 		}
 	}
 
+	/**
+	 * @param   {string} clientID
+	 * @returns {integer} -1 if invalid clientID
+	 */
+	getNumVotes ( clientID )
+	{
+		return this.hasSentence (clientID) ? this.sentences[clientID].votes : -1;
+	}
+
 	getWordbanks ()
 	{
 		const { wordbanks } = this;

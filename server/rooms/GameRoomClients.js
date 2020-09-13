@@ -2,9 +2,8 @@ class GameRoomClients
 {
 	constructor ()
 	{
-		this.clientIDs = new Set ();
-		this.bannedIDs = new Set ();
-		this.votedIDs  = new Set ();
+		this.clientData = new Map ();
+		this.bannedIDs  = new Set ();
 
 		this.isDeleted = false;
 	}
@@ -16,10 +15,10 @@ class GameRoomClients
 			return;
 		}
 
-		this.clientIDs.clear ();
+		this.clientData.clear ();
 		this.bannedIDs.clear ();
 
-		delete this.clientIDs;
+		delete this.clientData;
 		delete this.bannedIDs;
 
 		this.isDeleted = true;
@@ -30,7 +29,7 @@ class GameRoomClients
 	 */
 	addClientID ( clientID )
 	{
-		this.clientIDs.add (clientID);
+		this.clientData.set (clientID, { id: clientID, hasVoted: false, score: 0 });
 	}
 
 	/**
@@ -38,7 +37,7 @@ class GameRoomClients
 	 */
 	removeClientID ( clientID )
 	{
-		this.clientIDs.delete (clientID);
+		this.clientData.delete (clientID);
 	}
 
 	/**
@@ -47,7 +46,7 @@ class GameRoomClients
 	 */
 	hasClientID ( clientID )
 	{
-		return this.clientIDs.has (clientID);
+		return this.clientData.has (clientID);
 	}
 
 	/**
@@ -80,12 +79,17 @@ class GameRoomClients
 	 */
 	addVotedID ( clientID )
 	{
-		this.votedIDs.add (clientID);
+		this.clientData.get (clientID).hasVoted = true;
 	}
 
 	clearVotedIDs ()
 	{
-		this.votedIDs.clear ();
+		const { clientData } = this;
+
+		for ( let [id, data] of clientData )
+		{
+			data.hasVoted = false;
+		}
 	}
 
 	/**
@@ -94,7 +98,51 @@ class GameRoomClients
 	 */
 	hasVotedID ( clientID )
 	{
-		return this.votedIDs.has (clientID);
+		return this.clientData.get (clientID).hasVoted;
+	}
+
+	/**
+	 * @param {string}  clientID
+	 * @param {integer} [amount=1]
+	 */
+	addScore ( clientID, amount = 1 )
+	{
+		this.clientData.get (clientID).score += amount;
+	}
+
+	/**
+	 * @param {string}  clientID
+	 * @param {integer} [amount=0]
+	 */
+	setScore ( clientID, amount = 0 )
+	{
+		this.clientData.get (clientID).score = amount;
+	}
+
+	/**
+	 * @param   {string} clientID
+	 * @returns {integer|null} null if clientID not found
+	 */
+	getScore ( clientID )
+	{
+		return this.clientData.has (clientID) ? this.clientData.get (clientID).score : null;
+	}
+
+	/**
+	 * @returns {Object} An id=>score dictionary.
+	 */
+	getAllScores ()
+	{
+		const scores = {};
+
+		const { clientData } = this;
+
+		for ( let [id, data] of clientData )
+		{
+			scores[id] = data.score;
+		}
+
+		return scores;
 	}
 
 	/**
@@ -102,17 +150,17 @@ class GameRoomClients
 	 */
 	forEach ( callback )
 	{
-		const { clientIDs } = this;
+		const { clientData } = this;
 
-		for ( let id of clientIDs )
+		for ( let [id, data] of clientData )
 		{
-			callback (id);
+			callback (id, data);
 		}
 	}
 
 	get size ()
 	{
-		return this.clientIDs.size;
+		return this.clientData.size;
 	}
 }
 

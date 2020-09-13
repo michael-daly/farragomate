@@ -162,11 +162,11 @@ const getRoomList = () =>
  */
 const getRoomClientList = room =>
 {
-	const list = {};
+	const list = { ...room.clients.getAllScores () };
 
-	room.clients.forEach (clientID =>
+	room.clients.forEach (( clientID, clientData ) =>
 	{
-		list[clientID] = getClient (clientID).toJSON ();
+		list[clientID] = { ...getClient (clientID).toJSON (), score: clientData.score };
 	});
 
 	return list;

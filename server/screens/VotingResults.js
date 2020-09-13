@@ -1,6 +1,6 @@
 const GameScreen = require ('$/screens/GameScreen.js');
 
-const { sendDataToRoom } = require ('$/rooms/GameRoomMap.js');
+const { sendDataToRoom, getRoomClientList } = require ('$/rooms/GameRoomMap.js');
 
 
 // TODO: Skip this screen if there were no sentences submitted.
@@ -13,10 +13,22 @@ VotingResults.onEnterScreen = async function ( room )
 
 VotingResults.onLeaveScreen = async function ( room )
 {
-	room.clients.clearVotedIDs ();
-	room.sentences.clearSentences ();
+	const { clients, sentences } = room;
+
+	clients.forEach (( id, data ) =>
+	{
+		if ( sentences.hasSentence (id) )
+		{
+			clients.addScore (id, sentences.getNumVotes (id));
+		}
+	});
+
+	clients.clearVotedIDs ();
+	sentences.clearSentences ();
 
 	room.currRound++;
+
+	sendDataToRoom (room, 'ClientList', getRoomClientList (room));
 
 	if ( room.currRound < room.info.getField ('numRounds') )
 	{
