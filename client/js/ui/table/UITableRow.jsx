@@ -33,7 +33,7 @@ const UITableRow = props =>
 			{
 				const colSize  = column.size;
 				const colStyle = { width: `${colSize}%` };
-				const colKey   = `table-column-${colIndex}-${colSize}-${isSelected}`;
+				const colKey   = `table-column-${colIndex}-${colSize}-${values[colIndex]}-${isSelected}`;
 
 				const colClass = 'table-column' +
 				                 (colIndex >= numCols - 1 ? ' no-border' : '') +

@@ -8,7 +8,6 @@ const UITable = props =>
 	const
 	{
 		className  = '',
-		selected   = -1,
 		columnInfo = [],
 		rowValues  = [],
 
@@ -20,6 +19,18 @@ const UITable = props =>
 		onClick = null,
 	}
 	= props;
+
+	let { selected = [-1] } = props;
+
+	if ( !Array.isArray (selected) )
+	{
+		selected = [selected];
+	}
+
+	if ( !(selected instanceof Set) )
+	{
+		selected = new Set (selected);
+	}
 
 	const numCols = columnInfo.length;
 	const labels  = [];
@@ -45,11 +56,11 @@ const UITable = props =>
 		{
 			rowValues.map (( row, rowIndex ) =>
 			{
-				const isSelected = rowIndex === selected;
+				const isSelected = selected.has (rowIndex);
 
 				return (
 					<UITableRow
-						key={`table-row-${rowIndex}-${isSelected}`}
+						key={`table-row-${rowIndex}-${isSelected}-${row.join ('-')}`}
 						rowIndex={rowIndex}
 						values={row}
 						columnInfo={columnInfo}
