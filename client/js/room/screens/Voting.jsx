@@ -40,9 +40,6 @@ class Voting extends Component
 		const { sentences, vote } = props.sentences;
 		const { list }            = props.clients;
 
-		const columnInfo = votingEnabled ? votingColumns : resultsColumns;
-		const onClick    = votingEnabled ? this.selectSentence.bind (this) : null;
-
 		const rowValues = [];
 
 		let selected  = -1;
@@ -50,38 +47,60 @@ class Voting extends Component
 
 		for ( let authorID in sentences )
 		{
-			if ( !votingEnabled || authorID !== id )
+			if ( votingEnabled && authorID === id )
 			{
-				const sentence = sentences[authorID];
-
-				if ( authorID === vote )
-				{
-					selected = currIndex;
-				}
-
-				const rowArr = [];
-
-				if ( !votingEnabled )
-				{
-					rowArr.push (sentence.votes, list[authorID].displayName);
-				}
-
-				rowArr.push (sentence.str);
-				rowValues.push (rowArr);
+				currIndex++;
+				continue;
 			}
+
+			const sentence = sentences[authorID];
+			const rowArr   = [];
+
+			if ( !votingEnabled )
+			{
+				rowArr.push (sentence.votes, list[authorID].displayName);
+			}
+
+			if ( authorID === vote )
+			{
+				selected = currIndex;
+			}
+
+			rowArr.push (sentence.str);
+			rowValues.push (rowArr);
 
 			currIndex++;
 		}
 
+		if ( !votingEnabled )
+		{
+			const selectedArr = selected >= 0 ? rowValues[selected] : null;
+
+			rowValues.sort (( row1, row2 ) =>
+			{
+				return row2[0] - row1[0];
+			});
+
+			const { length } = rowValues;
+
+			for ( let i = 0; i < length; i++ )
+			{
+				if ( rowValues[i] === selectedArr )
+				{
+					selected = i;
+				}
+			}
+		}
+
 		return (
 			<UITable
-				columnInfo={columnInfo}
+				columnInfo={votingEnabled ? votingColumns : resultsColumns}
 				rowValues={rowValues}
 				selected={selected}
-				tableSize='large'
-				headerText='Voting Results'
-				emptyMessage='No results to show!'
-				onClick={onClick}
+				tableSize={votingEnabled ? 'medium' : 'large'}
+				headerText={votingEnabled ? 'Pick your favorite sentence!' : 'Voting Results'}
+				emptyMessage={votingEnabled ? 'No sentences to vote for!' : 'No results to show!'}
+				onClick={votingEnabled ? this.selectSentence.bind (this) : null}
 			/>
 		);
 	}

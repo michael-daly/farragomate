@@ -8,7 +8,7 @@ import UITable from '#/ui/table/UITable.jsx';
 const columnInfo =
 [
 	{ label: 'Score',  size: 5 },
-	{ label: 'Author', size: 10 },
+	{ label: 'Author', size: 20 },
 ];
 
 class FinalScores extends Component
@@ -28,6 +28,11 @@ class FinalScores extends Component
 		{
 			rowValues.push ([list[id].score, list[id].displayName]);
 		}
+
+		rowValues.sort (( row1, row2 ) =>
+		{
+			return row2[0] - row1[0];
+		});
 
 		return (
 			<UITable
