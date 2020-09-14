@@ -1,7 +1,8 @@
 const GameScreen = require ('$/screens/GameScreen.js');
 
-const { sleep }          = require ('~/util/promises.js');
-const { sendDataToRoom } = require ('$/rooms/GameRoomMap.js');
+const { sleep } = require ('~/util/promises.js');
+
+const { sendDataToRoom, getRoomClientList } = require ('$/rooms/GameRoomMap.js');
 
 
 const SentenceCreation = new GameScreen ('SentenceCreation');
@@ -13,6 +14,7 @@ SentenceCreation.onEnterScreen = async function ( room )
 	if ( !room.isDeleted )
 	{
 		sendDataToRoom (room, 'Wordbanks', room.sentences.getWordbanks ());
+		sendDataToRoom (room, 'ClientList', getRoomClientList (room));
 	}
 };
 
