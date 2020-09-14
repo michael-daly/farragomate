@@ -135,14 +135,20 @@ class GameRoomClients
 	{
 		const scores = {};
 
-		const { clientData } = this;
-
-		for ( let [id, data] of clientData )
+		this.forEach (( id, data ) =>
 		{
 			scores[id] = data.score;
-		}
+		});
 
 		return scores;
+	}
+
+	clearScores ()
+	{
+		this.forEach (( id, data ) =>
+		{
+			data.score = 0;
+		});
 	}
 
 	/**
