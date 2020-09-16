@@ -17,7 +17,7 @@ VotingResults.onLeaveScreen = async function ( room )
 
 	clients.forEach (( id, data ) =>
 	{
-		if ( sentences.hasSentence (id) )
+		if ( sentences.hasSentence (id) && clients.hasClientID (id) )
 		{
 			clients.addScore (id, sentences.getNumVotes (id));
 		}
