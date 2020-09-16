@@ -20,7 +20,7 @@ class GameRoom
 		this.ownerID = ownerID;
 		this.info    = info;
 
-		this.numRounds = 0;
+		this.numRounds = -1;
 
 		this.timer     = new Timer ();
 		this.events    = new EventEmitter ();

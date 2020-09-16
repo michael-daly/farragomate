@@ -26,19 +26,12 @@ VotingResults.onLeaveScreen = async function ( room )
 	clients.clearVotedIDs ();
 	sentences.clearSentences ();
 
-	room.numRounds++;
-
 	sendDataToRoom (room, 'ClientList', getRoomClientList (room));
-
-	if ( room.numRounds < room.info.getField ('maxRounds') )
-	{
-		sendDataToRoom (room, 'RoomInfo', { numRounds: room.numRounds });
-	}
 };
 
 VotingResults.getNextScreen = function ( room )
 {
-	if ( room.numRounds < room.info.getField ('maxRounds') )
+	if ( room.numRounds + 1 < room.info.getField ('maxRounds') )
 	{
 		return 'SentenceCreation';
 	}

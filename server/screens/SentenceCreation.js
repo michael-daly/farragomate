@@ -2,7 +2,7 @@ const GameScreen = require ('$/screens/GameScreen.js');
 
 const { sleep } = require ('~/util/promises.js');
 
-const { sendDataToRoom, getRoomClientList } = require ('$/rooms/GameRoomMap.js');
+const { sendInfoToRoom, sendDataToRoom, getRoomClientList } = require ('$/rooms/GameRoomMap.js');
 
 
 const SentenceCreation = new GameScreen ('SentenceCreation');
@@ -13,6 +13,14 @@ SentenceCreation.onEnterScreen = async function ( room )
 
 	if ( !room.isDeleted )
 	{
+		room.numRounds++;
+
+		if ( room.numRounds >= room.info.getField ('maxRounds') )
+		{
+			room.numRounds = 0;
+		}
+
+		sendInfoToRoom (room);
 		sendDataToRoom (room, 'Wordbanks', room.sentences.getWordbanks ());
 		sendDataToRoom (room, 'ClientList', getRoomClientList (room));
 	}

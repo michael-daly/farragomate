@@ -7,9 +7,7 @@ const FinalScores = new GameScreen ('FinalScores', 20);
 
 FinalScores.onLeaveScreen = async function ( room )
 {
-	room.numRounds = 0;
 	room.clients.clearScores ();
-
 	sendInfoToRoom (room);
 };
 
