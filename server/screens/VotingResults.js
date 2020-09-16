@@ -26,19 +26,19 @@ VotingResults.onLeaveScreen = async function ( room )
 	clients.clearVotedIDs ();
 	sentences.clearSentences ();
 
-	room.currRound++;
+	room.numRounds++;
 
 	sendDataToRoom (room, 'ClientList', getRoomClientList (room));
 
-	if ( room.currRound < room.info.getField ('numRounds') )
+	if ( room.numRounds < room.info.getField ('maxRounds') )
 	{
-		sendDataToRoom (room, 'RoomInfo', { currRound: room.currRound });
+		sendDataToRoom (room, 'RoomInfo', { numRounds: room.numRounds });
 	}
 };
 
 VotingResults.getNextScreen = function ( room )
 {
-	if ( room.currRound < room.info.getField ('numRounds') )
+	if ( room.numRounds < room.info.getField ('maxRounds') )
 	{
 		return 'SentenceCreation';
 	}

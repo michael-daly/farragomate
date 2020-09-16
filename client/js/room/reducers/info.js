@@ -7,7 +7,7 @@ const defaultState = deepFreeze (
 {
 	id:        '',
 	timeLeft:  0,
-	currRound: 0,
+	numRounds: 0,
 	screen:    'SentenceCreation',
 
 	...getDefaultFieldVals (fieldData),

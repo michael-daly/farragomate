@@ -61,7 +61,7 @@ const fieldData =
 		label: 'Time Limit',
 	},
 
-	numRounds:
+	maxRounds:
 	{
 		type: 'number',
 

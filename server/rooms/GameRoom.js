@@ -20,7 +20,7 @@ class GameRoom
 		this.ownerID = ownerID;
 		this.info    = info;
 
-		this.currRound = 0;
+		this.numRounds = 0;
 
 		this.timer     = new Timer ();
 		this.events    = new EventEmitter ();
@@ -48,7 +48,7 @@ class GameRoom
 		delete this.id;
 		delete this.ownerID;
 		delete this.info;
-		delete this.currRound;
+		delete this.numRounds;
 		delete this.clients;
 		delete this.sentences;
 		delete this.events;
@@ -103,9 +103,10 @@ class GameRoom
 	{
 		const object = this.info.toJSON ();
 
-		object.timeLeft  = this.timeLeft;
-		object.currRound = this.currRound;
-		object.screen    = this.screen !== null ? this.screen.name : null;
+		object.timeLeft   = this.timeLeft;
+		object.numRounds  = this.numRounds;
+		object.screen     = this.screen !== null ? this.screen.name : null;
+		object.numClients = this.clients.size;
 
 		return object;
 	}

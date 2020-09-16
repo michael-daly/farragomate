@@ -15,7 +15,7 @@ class GameRoomInfo
 		this.password   = info.password;
 		this.maxClients = info.maxClients;
 		this.timeLimit  = info.timeLimit;
-		this.numRounds  = info.numRounds;
+		this.maxRounds  = info.maxRounds;
 	}
 
 	/**
@@ -46,10 +46,11 @@ class GameRoomInfo
 	{
 		const object =
 		{
-			title:      this.title,
-			maxClients: this.maxClients,
-			timeLimit:  this.timeLimit,
-			numRounds:  this.numRounds,
+			title:       this.title,
+			maxClients:  this.maxClients,
+			timeLimit:   this.timeLimit,
+			maxRounds:   this.maxRounds,
+			hasPassword: this.password !== '',
 		};
 
 		return object;
