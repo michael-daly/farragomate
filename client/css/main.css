@@ -284,3 +284,79 @@ input[type=text].chalk, input[type=password].chalk
 {
 	width: 70%;
 }
+
+.popup-overlay
+{
+	position: fixed;
+
+	width:  100%;
+	height: 100%;
+
+	top:  0%;
+	left: 0%;
+
+	margin:  0%;
+	padding: 0%;
+
+	background: rgba(0, 0, 0, 0.25);
+}
+
+.popup-window
+{
+	top:  20%;
+	left: 0%;
+
+	position: relative;
+
+	margin-top:   1%;
+	margin-left:  35%;
+	margin-right: 35%;
+
+	background: url('/img/chalkboard.png');
+
+	background-position: 50% 50%;
+	background-color:    #284F37;  /* Fallback color */
+
+	box-sizing: border-box;
+
+	border: #AAFF66 0.1em dotted;
+
+	overflow: hidden;
+}
+
+.popup-title
+{
+	color:         #FFFF99;
+	border-bottom: #CCFF77 0.1em dotted;
+
+	width:  100%;
+	min-height: 1.6em;
+
+	padding-left: 2%;
+}
+
+.popup-body
+{
+	width: 100%;
+
+	margin-top:    1%;
+	margin-bottom: 3%;
+
+	padding:     5%;
+	padding-top: 0%;
+}
+
+.popup-buttons
+{
+	width:  100%;
+
+	padding-bottom: 5%;
+	padding-left:   2%;
+
+	position: relative;
+}
+
+.popup-buttons.center-content
+{
+	margin: 0vw;
+}
