@@ -32,7 +32,7 @@ class Topbar extends Component
 				</span>
 
 				<span style={{ width: '33%', display: 'inline-block' }}>
-					Round {this.props.currRound + 1} of {this.props.numRounds}
+					Round {this.props.numRounds + 1} of {this.props.maxRounds}
 				</span>
 			</div>
 		);

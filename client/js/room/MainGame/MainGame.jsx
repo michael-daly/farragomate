@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 
 import { connect } from 'react-redux';
 
-import Topbar           from '#/screens/Topbar.jsx';
+import Topbar           from '#/MainGame/Topbar.jsx';
 import SentenceCreation from '#/screens/SentenceCreation.jsx';
 import Voting           from '#/screens/Voting.jsx';
 import FinalScores      from '#/screens/FinalScores.jsx';
