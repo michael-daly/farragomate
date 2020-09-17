@@ -41,8 +41,9 @@ MainMenuHandlers.addHandler ('Request', 'RegisterInfo', ( client, packet ) =>
 		else
 		{
 			const displayName = sanitizeString (info.displayName);
+			const currName    = client.getDisplayName ();
 
-			if ( hasClientName (displayName) && displayName !== client.getDisplayName () )
+			if ( hasClientName (displayName) && displayName.toLowerCase () !== currName.toLowerCase () )
 			{
 				client.sendPacket ('Reject', packet, ['displayName', FIELD_ERR_UNIQUE]);
 			}
