@@ -44,9 +44,11 @@ class SentenceCreation extends Component
 							})
 						}
 
-						<div style={{ minHeight: '2.6vw' }}>{sentenceToStr (sentenceArray)}</div>
+						<div style={{ minHeight: '2.6vw', whiteSpace: 'pre' }}>
+							{sentenceToStr (sentenceArray)}
+						</div>
 
-						<div className='chalk sentence-tile-container'>
+						<div className='chalk sentence-tile-container' style={{ whiteSpace: 'pre' }}>
 						{
 							sentenceArray.length <= 0 ? '' :
 								<UIButton
