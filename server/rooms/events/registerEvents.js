@@ -48,9 +48,8 @@ GameRoomEvents.on ('createRoom', ( room, owner ) =>
 
 GameRoomEvents.on ('joinRoom', ( room, client ) =>
 {
-	sendDataToRoom (room, 'JoinRoom', client.toJSON ());
-
-	client.sendPacket ('Data', 'ClientList', getRoomClientList (room));
+	sendDataToRoom (room, 'JoinRoom', client.id);
+	sendDataToRoom (room, 'ClientList', getRoomClientList (room));
 
 	// This is to prevent unfinished wordbanks from being sent when the client creates the room.
 	if ( client.id !== room.ownerID )
