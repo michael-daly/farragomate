@@ -150,7 +150,7 @@ const getRoomList = () =>
 
 	for ( let [id, room] of map )
 	{
-		list[id] = room.toJSON ();
+		list[id] = { ...room.toJSON (), ownerName: getClient (room.ownerID).getDisplayName () };
 	}
 
 	return list;
