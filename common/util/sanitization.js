@@ -25,7 +25,12 @@ const map =
  */
 const sanitizeString = string =>
 {
-	return string.replace (/[&<>"'`/\\\\;:\(\){}=]/ig, match => (map[match]));
+	return string;  // Unneeded for now because React sanitizes by default.  I still want to keep the
+	                // functionality for now in case I need it, so I just commented out the old code.
+
+	// TODO: Remove sanitization functionality altogether.
+
+	// return string.replace (/[&<>"'`/\\\\;:\(\){}=]/ig, match => (map[match]));
 };
 
 /**
