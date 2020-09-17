@@ -2,7 +2,9 @@ const PacketManager = require ('~/packets/PacketManager.js');
 
 const { has } = require ('~/util/has.js');
 
-const { sendRequestPacket }               = require ('#/socket/actions.js');
+const { sendRequestPacket } = require ('#/socket/actions.js');
+const { setScreen }         = require ('#/App/actions.js');
+
 const { sentenceToStr, sentenceToStrArr } = require ('#/sentenceArray.js');
 
 
@@ -14,8 +16,8 @@ module.exports = store => next => action =>
 {
 	const state = store.getState ();
 
-	const { payload } = action;
-	const { room }    = state;
+	const { payload }        = action;
+	const { room, register } = state;
 
 	switch ( action.type )
 	{
@@ -23,13 +25,17 @@ module.exports = store => next => action =>
 		{
 			const { command, body } = payload;
 
-			if ( command === 'LeaveScreen' )
+			if ( command === 'JoinRoom' && body.id === register.id )
 			{
-				if ( body === 'SentenceCreation' )
+				store.dispatch (setScreen ('MainGame'));
+			}
+			else if ( command === 'LeaveScreen' )
+			{
+				if ( body === 'SentenceCreation' && room.sentences.array.length > 0 )
 				{
 					store.dispatch (sendRequestPacket ('SendSentence', room.sentences.array));
 				}
-				else if ( body === 'SentenceVoting' )
+				else if ( body === 'SentenceVoting' && room.sentences.vote !== '' )
 				{
 					store.dispatch (sendRequestPacket ('CastVote', room.sentences.vote));
 				}

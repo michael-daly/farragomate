@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Register   from '#/Register/Register.jsx';
 import MainMenu   from '#/MainMenu/MainMenu.jsx';
 import CreateRoom from '#/CreateRoom/CreateRoom.jsx';
+import JoinRoom   from '#/JoinRoom/JoinRoom.jsx';
 import MainGame   from '#/MainGame/MainGame.jsx';
 
 import { socketPort }      from '~/config.js';
@@ -48,6 +49,10 @@ class App extends Component
 		else if ( screen === 'CreateRoom' )
 		{
 			component = <CreateRoom />;
+		}
+		else if ( screen === 'JoinRoom' )
+		{
+			component = <JoinRoom />;
 		}
 		else if ( screen === 'MainGame' )
 		{

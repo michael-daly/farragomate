@@ -36,6 +36,7 @@ module.exports =
 		{
 			'#/App':        path.resolve (__dirname, './client/js/App/'),
 			'#/CreateRoom': path.resolve (__dirname, './client/js/room/CreateRoom/'),
+			'#/JoinRoom':   path.resolve (__dirname, './client/js/room/JoinRoom/'),
 			'#/MainGame':   path.resolve (__dirname, './client/js/room/MainGame/'),
 			'#/screens':    path.resolve (__dirname, './client/js/room/screens/'),
 			'#':            path.resolve (__dirname, './client/js/'),

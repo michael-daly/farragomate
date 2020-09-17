@@ -90,10 +90,16 @@ module.exports = store => next => action =>
 
 		case 'SEND_REQUEST_PACKET':
 		{
-			const { command, body } = action.payload;
+			const { command, body = '' } = action.payload;
 
 			socket.send (packetManager.createRequestPacket (command, body));
 
+			break;
+		}
+
+		case 'REQUEST_ROOM_LIST':
+		{
+			store.dispatch ({ type: 'SEND_REQUEST_PACKET', payload: { command: 'RoomList' } });
 			break;
 		}
 

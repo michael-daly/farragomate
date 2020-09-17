@@ -23,5 +23,27 @@ const castVote = id =>
 	return { type: 'CAST_VOTE', payload: id };
 };
 
+const requestRoomList = () =>
+{
+	return { type: 'REQUEST_ROOM_LIST' };
+};
 
-export { leaveRoom, addToSentence, removeFromSentence, clearSentence, castVote };
+const requestJoinRoom = ownerID =>
+{
+	return { type: 'SEND_REQUEST_PACKET', payload: { command: 'JoinRoom', body: ownerID } };
+};
+
+
+export
+{
+	leaveRoom,
+
+	addToSentence,
+	removeFromSentence,
+	clearSentence,
+
+	castVote,
+
+	requestRoomList,
+	requestJoinRoom,
+};
