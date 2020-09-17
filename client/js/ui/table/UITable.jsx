@@ -76,19 +76,14 @@ const UITable = props =>
 
 	return (
 		<div className='center-content'>
-		{
-			rowValues.length <= 0 ?
-				<div className='center-content'>{emptyMessage}</div> :
+			<h3 style={{ color: headerColor }}>{headerText}</h3>
 
-				<Fragment>
-					<h3 style={{ color: headerColor }}>{headerText}</h3>
-
-					<div className={`center-content table-container-${tableSize}`}>
-						{labels}
-						{table}
-					</div>
-				</Fragment>
-		}
+			<div className={`center-content table-container-${tableSize}`}>
+			{
+				rowValues.length > 0 ? [labels, table] :
+					<div className='center-content'>{emptyMessage}</div>
+			}
+			</div>
 		</div>
 	);
 };

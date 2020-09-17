@@ -216,7 +216,13 @@ input[type=text].chalk, input[type=password].chalk
 
 .table
 {
-	padding: 0vw;
+	padding:    0vw;
+	max-height: 25vw;
+
+	overflow-x: hidden;
+	overflow-y: auto;
+
+	white-space: pre;
 }
 
 .table-row
