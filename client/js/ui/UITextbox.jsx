@@ -7,12 +7,12 @@ const UITextbox = props =>
 	{
 		value,
 		maxLength,
-		onChange,
 
 		placeholder = '',
 		isPassword  = false,
 		highlight   = false,
 		disabled    = false,
+		onChange    = null,
 	}
 	= props;
 

@@ -11,8 +11,8 @@ const UIPopup = props =>
 		children = [],
 
 		numButtons  = 1,
-		button1Text = 'OK',
-		button2Text = 'Cancel',
+		button1Text = numButtons <= 1 ? 'OK' : 'Cancel',
+		button2Text = 'OK',
 
 		onClickButton1 = null,
 		onClickButton2 = null,
