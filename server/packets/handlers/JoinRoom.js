@@ -1,26 +1,49 @@
 const { MainMenuHandlers }         = require ('$/packets/handlerMaps.js');
 const { addClientToRoom, getRoom } = require ('$/rooms/GameRoomMap.js');
 
-const { ERROR_NOT_FOUND, ERROR_ROOM_FULL, ERROR_BANNED } = require ('~/errorCodes.js');
+const
+{
+	ERROR_NOT_FOUND,
+	ERROR_WRONG_PASSWORD,
+	ERROR_ROOM_FULL,
+	ERROR_BANNED,
+}
+= require ('~/errorCodes.js');
 
 
 MainMenuHandlers.addHandler ('Request', 'JoinRoom', ( client, packet ) =>
 {
-	const room = getRoom (packet.body);
+	const { body } = packet;
 
 	let error = null;
+	let room  = null;
 
-	if ( room === null )
+	if ( body === null || typeof body !== 'object' )
 	{
-		error = ERROR_NOT_FOUND;
+		error = ERROR_BAD_PACKET;
 	}
-	else if ( room.clients.isBannedID (client.id) )
+	else
 	{
-		error = ERROR_BANNED;
-	}
-	else if ( room.isFull )
-	{
-		error = ERROR_ROOM_FULL;
+		const { roomID = '', password = '' } = body;
+
+		room = getRoom (roomID);
+
+		if ( room === null )
+		{
+			error = ERROR_NOT_FOUND;
+		}
+		else if ( !room.isPassword (password) )
+		{
+			error = ERROR_WRONG_PASSWORD;
+		}
+		else if ( room.clients.isBannedID (client.id) )
+		{
+			error = ERROR_BANNED;
+		}
+		else if ( room.isFull )
+		{
+			error = ERROR_ROOM_FULL;
+		}
 	}
 
 	if ( error !== null )

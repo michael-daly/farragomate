@@ -103,6 +103,16 @@ module.exports = store => next => action =>
 			break;
 		}
 
+		case 'CANCEL_REQUEST':
+		{
+			if ( action.payload === 'REQUEST_JOIN_ROOM' )
+			{
+				store.dispatch ({ type: 'LEAVE_ROOM' });
+			}
+
+			break;
+		}
+
 		case 'LEAVE_ROOM':
 		{
 			store.dispatch ({ type: 'SEND_DATA_PACKET', payload: { command: 'LeaveRoom' } });

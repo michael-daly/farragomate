@@ -2,11 +2,15 @@ import React, { Component, Fragment } from 'react';
 
 import { connect } from 'react-redux';
 
-import UITable  from '#/ui/table/UITable.jsx';
-import UIButton from '#/ui/UIButton.jsx';
+import UIPopup       from '#/ui/popup/UIPopup.jsx';
+import UITable       from '#/ui/table/UITable.jsx';
+import UIButton      from '#/ui/UIButton.jsx';
+import PasswordPopup from '#/ui/popup/PasswordPopup.jsx';
 
-import { setScreen }    from '#/App/actions.js';
-import { getTimeSince } from '~/util/timestamps.js';
+import { setScreen }     from '#/App/actions.js';
+import { cancelRequest } from '#/socket/actions.js';
+import { clearErrorMsg } from '#/errors/actions.js';
+import { getTimeSince }  from '~/util/timestamps.js';
 
 import { requestRoomList, requestJoinRoom } from '#/room/actions.js';
 
@@ -32,7 +36,13 @@ class JoinRoom extends Component
 		this.buttonTimeout  = 0;
 		this.requestTimeout = 0;
 
-		this.state = { enableRefreshBtn: false, };
+		this.state =
+		{
+			enableRefreshBtn: false,
+			passwordPrompt:   false,
+			selectedRoom:     '',
+			roomPassword:     '',
+		};
 	}
 
 	componentDidMount ()
@@ -78,14 +88,43 @@ class JoinRoom extends Component
 
 	clickRoom ( roomID, rowData )
 	{
-		if ( rowData.hasPassword )
+		this.setState ({ selectedRoom: roomID }, () =>
 		{
-			// TODO: Handle passworded servers
-		}
-		else
-		{
-			this.props.requestJoinRoom (roomID);
-		}
+			if ( rowData.hasPassword )
+			{
+				this.showPrompt ();
+			}
+			else
+			{
+				this.joinRoom ();
+			}
+		});
+	}
+
+	showPrompt ()
+	{
+		this.setState ({ passwordPrompt: true, roomPassword: '' });
+	}
+
+	hidePrompt ()
+	{
+		this.setState ({ passwordPrompt: false, roomPassword: '', selectedRoom: '' });
+	}
+
+	joinRoom ()
+	{
+		this.props.requestJoinRoom (this.state.selectedRoom, this.state.roomPassword);
+		this.hidePrompt ();
+	}
+
+	cancelJoinRoom ()
+	{
+		this.props.cancelRequest ('REQUEST_JOIN_ROOM');
+	}
+
+	onChangePassword ( event )
+	{
+		this.setState ({ roomPassword: event.target.value });
 	}
 
 	render ()
@@ -97,7 +136,7 @@ class JoinRoom extends Component
 		const rowValues = [];
 		const highlight = [];
 
-		const onClick = ( rowIndex, event ) =>
+		const onClickRoom = ( rowIndex, event ) =>
 		{
 			const roomID = owners[rowIndex];
 
@@ -128,8 +167,44 @@ class JoinRoom extends Component
 			]);
 		}
 
+		let popup = '';
+
+		if ( props.errorMsg !== '' )
+		{
+			popup =
+			(
+				<UIPopup title='Error' onClickButton1={props.clearErrorMsg.bind (this)}>
+					{props.errorMsg}
+				</UIPopup>
+			);
+		}
+		else if ( props.isJoiningRoom )
+		{
+			popup =
+			(
+				<UIPopup
+					title='Joining Room'
+					button1Text='Cancel'
+					onClickButton1={this.cancelJoinRoom.bind (this)}
+				>
+					Attempting to join room...
+				</UIPopup>
+			);
+		}
+		else if ( state.passwordPrompt )
+		{
+			popup = <PasswordPopup
+				value={state.roomPassword}
+				onClickCancel={this.hidePrompt.bind (this)}
+				onClickJoin={this.joinRoom.bind (this)}
+				onChange={this.onChangePassword.bind (this)}
+			/>;
+		}
+
 		return (
 			<Fragment>
+				{popup}
+
 				<UITable
 					columnInfo={columnInfo}
 					rowValues={state.enableRefreshBtn ? rowValues : []}
@@ -137,7 +212,7 @@ class JoinRoom extends Component
 					tableSize='large'
 					headerText='Join a Room'
 					emptyMessage={state.enableRefreshBtn ? 'No rooms are available!' : 'Loading...'}
-					onClick={onClick.bind (this)}
+					onClick={onClickRoom.bind (this)}
 				/>
 
 				<div className='center-content' style={{ width: '54%' }}>
@@ -163,7 +238,7 @@ class JoinRoom extends Component
 
 const mapStateToProps = ({ room, errors }) =>
 {
-	return { ...room.list, errorMsg: errors.roomListError };
+	return { ...room.list, errorMsg: errors.joinRoomError };
 };
 
 const mapDispatchToProps = dispatch =>
@@ -177,6 +252,16 @@ const mapDispatchToProps = dispatch =>
 		requestJoinRoom ( ...args )
 		{
 			dispatch (requestJoinRoom (...args));
+		},
+
+		cancelRequest ( ...args )
+		{
+			dispatch (cancelRequest (...args));
+		},
+
+		clearErrorMsg ()
+		{
+			dispatch (clearErrorMsg ('joinRoomError'));
 		},
 
 		gotoMainMenu ()

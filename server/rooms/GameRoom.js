@@ -97,6 +97,17 @@ class GameRoom
 	}
 
 	/**
+	 * @param   {string} [password=""]
+	 * @returns {boolean} Whether or not the input password matches this room's.
+	 */
+	isPassword ( password = '' )
+	{
+		const roomPassword = this.info.getField ('password');
+
+		return roomPassword === '' || roomPassword === password;
+	}
+
+	/**
 	 * @returns {Object}
 	 */
 	toJSON ()
@@ -121,7 +132,7 @@ class GameRoom
 
 	get isFull ()
 	{
-		return this.clients.size >= this.info.maxClients;
+		return this.clients.size >= this.info.getField ('maxClients');
 	}
 
 	get timeLeft ()

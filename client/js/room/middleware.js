@@ -25,7 +25,7 @@ module.exports = store => next => action =>
 		{
 			const { command, body } = payload;
 
-			if ( command === 'JoinRoom' && body.id === register.id )
+			if ( command === 'JoinRoom' && body === register.id )
 			{
 				store.dispatch (setScreen ('MainGame'));
 			}
@@ -61,6 +61,12 @@ module.exports = store => next => action =>
 				payload.body = sentences;
 			}
 
+			break;
+		}
+
+		case 'REQUEST_JOIN_ROOM':
+		{
+			store.dispatch (sendRequestPacket ('JoinRoom', payload));
 			break;
 		}
 	}

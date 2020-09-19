@@ -316,7 +316,8 @@ input[type=text].chalk, input[type=password].chalk
 
 	margin-top:   1%;
 	margin-left:  35%;
-	margin-right: 35%;
+
+	max-width: 40%;
 
 	background: url('/img/chalkboard.png');
 

@@ -28,9 +28,9 @@ const requestRoomList = () =>
 	return { type: 'REQUEST_ROOM_LIST' };
 };
 
-const requestJoinRoom = ownerID =>
+const requestJoinRoom = ( roomID, password = '' ) =>
 {
-	return { type: 'SEND_REQUEST_PACKET', payload: { command: 'JoinRoom', body: ownerID } };
+	return { type: 'REQUEST_JOIN_ROOM', payload: { roomID, password } };
 };
 
 
