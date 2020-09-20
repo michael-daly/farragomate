@@ -36,9 +36,9 @@ class Voting extends Component
 		const { props } = this;
 
 		const { id, wordbanks, votingEnabled } = props;
+		const { sentences, vote, dataSent }    = props.sentences;
 
-		const { list }            = props.clients;
-		const { sentences, vote } = props.sentences;
+		const { list } = props.clients;
 
 		const rowValues = [];
 
@@ -94,7 +94,7 @@ class Voting extends Component
 				tableSize={votingEnabled ? 'medium' : 'large'}
 				headerText={votingEnabled ? 'Pick your favorite sentence!' : 'Voting Results'}
 				emptyMessage={votingEnabled ? 'No sentences to vote for!' : 'No results to show!'}
-				onClick={votingEnabled ? this.selectSentence.bind (this) : null}
+				onClick={votingEnabled && !dataSent ? this.selectSentence.bind (this) : null}
 			/>
 		);
 	}
@@ -103,12 +103,7 @@ class Voting extends Component
 
 const mapStateToProps = ({ register, room }) =>
 {
-	return {
-		id:        register.id,
-		clients:   room.clients,
-		wordbanks: room.wordbanks,
-		sentences: room.sentences,
-	};
+	return { id: register.id, ...room };
 };
 
 const mapDispatchToProps = dispatch =>

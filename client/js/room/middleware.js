@@ -5,10 +5,10 @@ const { has } = require ('~/util/has.js');
 const { setScreen }       = require ('#/App/actions.js');
 const { setLeaveRoomMsg } = require ('#/errors/actions.js');
 
-const { enterScreen, leaveScreen }          = require ('#/room/actions.js');
 const { sendRequestPacket, sendDataPacket } = require ('#/socket/actions.js');
+const { sentenceToStr, sentenceToStrArr }   = require ('#/sentenceArray.js');
 
-const { sentenceToStr, sentenceToStrArr } = require ('#/sentenceArray.js');
+const { enterScreen, leaveScreen, setDataSent } = require ('#/room/actions.js');
 
 
 let socket        = null;
@@ -73,10 +73,12 @@ module.exports = store => next => action =>
 
 					if ( body === 'SentenceCreation' && room.sentences.array.length > 0 )
 					{
+						store.dispatch (setDataSent (true));
 						store.dispatch (sendRequestPacket ('SendSentence', room.sentences.array));
 					}
 					else if ( body === 'SentenceVoting' && room.sentences.vote !== '' )
 					{
+						store.dispatch (setDataSent (true));
 						store.dispatch (sendRequestPacket ('CastVote', room.sentences.vote));
 					}
 

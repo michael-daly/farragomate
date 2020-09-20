@@ -49,7 +49,7 @@ module.exports = ( state = defaultState, action ) =>
 
 		case 'LEAVE_ROOM':
 		{
-			return { ...state, ...defaultState };
+			return { ...defaultState };
 		}
 	}
 

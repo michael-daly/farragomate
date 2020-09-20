@@ -127,8 +127,8 @@ class UIFields extends Component
 							value={state[fieldName] || ''}
 							isPassword={field.isPassword}
 							highlight={requiredFields.has (fieldName)}
-							disabled={disabled}
 							onChange={onTextboxChange}
+							disabled={disabled}
 						/>;
 					}
 					else

@@ -25,7 +25,8 @@ class SentenceCreation extends Component
 
 		const { wordbanks, sentences } = props;
 
-		const sentenceArray = sentenceToStrArr (wordbanks, sentences.array);
+		const sentenceArray  = sentenceToStrArr (wordbanks, sentences.array);
+		const disableButtons = sentences.dataSent;
 
 		return (
 			<div style={{ padding: '2vw' }}>
@@ -40,6 +41,7 @@ class SentenceCreation extends Component
 									words={words}
 									bankIndex={index}
 									onClickWord={props.addWord}
+									disabled={disableButtons}
 								/>;
 							})
 						}
@@ -55,6 +57,7 @@ class SentenceCreation extends Component
 									style={{ color: '#FF5154', paddingLeft: '0vw' }}
 									text='X'
 									onClick={props.clearWords}
+									disabled={disableButtons}
 								/>
 						}
 						{
@@ -66,6 +69,7 @@ class SentenceCreation extends Component
 									style={{ display: 'inline-block' }}
 									text={word}
 									onClick={() => props.removeWord (index * 2)}
+									disabled={disableButtons}
 								/>
 							))
 						}

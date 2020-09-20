@@ -3,7 +3,7 @@ import React from 'react';
 import UIButton from '#/ui/UIButton.jsx';
 
 
-const Wordbank = ({ words, bankIndex, onClickWord = () => {} }) =>
+const Wordbank = ({ words, bankIndex, disabled = false, onClickWord = () => {} }) =>
 (
 	<div
 		className='chalk-small'
@@ -18,6 +18,7 @@ const Wordbank = ({ words, bankIndex, onClickWord = () => {} }) =>
 					className='magnet-small'
 					text={word}
 					onClick={event => onClickWord (bankIndex, wordIndex, event)}
+					disabled={disabled}
 				/>;
 			})
 	}

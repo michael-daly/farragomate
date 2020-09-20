@@ -8,6 +8,7 @@ const defaultState = deepFreeze (
 	array:     [],
 	sentences: {},
 	vote:      '',
+	dataSent:  false,
 });
 
 
@@ -49,7 +50,7 @@ module.exports = ( state = defaultState, action ) =>
 		{
 			if ( command === 'ClientSentences' )
 			{
-				return { ...state, sentences: payload.body }
+				return { ...state, sentences: payload.body, dataSent: false };
 			}
 
 			break;
@@ -59,7 +60,7 @@ module.exports = ( state = defaultState, action ) =>
 		{
 			if ( payload === 'SentenceCreation' )
 			{
-				return { ...state, array: [], sentences: {}, vote: '' };
+				return { ...defaultState };
 			}
 
 			break;
@@ -68,6 +69,11 @@ module.exports = ( state = defaultState, action ) =>
 		case 'CLEAR_SENTENCE':
 		{
 			return { ...state, array: [] };
+		}
+
+		case 'SET_DATA_SENT':
+		{
+			return { ...state, dataSent: payload };
 		}
 	}
 

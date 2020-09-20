@@ -43,6 +43,11 @@ const leaveScreen = screen =>
 	return { type: 'LEAVE_SCREEN', payload: screen };
 };
 
+const setDataSent = ( wasSent = true ) =>
+{
+	return { type: 'SET_DATA_SENT', payload: wasSent };
+};
+
 
 export
 {
@@ -59,4 +64,6 @@ export
 
 	enterScreen,
 	leaveScreen,
+
+	setDataSent,
 };
