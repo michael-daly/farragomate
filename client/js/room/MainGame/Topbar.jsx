@@ -16,6 +16,8 @@ class Topbar extends Component
 
 	render ()
 	{
+		const { props } = this;
+
 		return (
 			<div className='topbar'>
 				<span>
@@ -23,16 +25,16 @@ class Topbar extends Component
 						style={{ borderWidth: '0.08em', color: '#FFBB88' }}
 						className='chalk-small'
 						text='<< Leave'
-						onClick={this.props.leaveRoom}
+						onClick={props.onClickLeave}
 					/>
 				</span>
 
 				<span style={{ paddingLeft: '3%', width: '33%', display: 'inline-block' }}>
-					Time Left: {this.props.timeLeft}
+					Time Left: {props.timeLeft}
 				</span>
 
 				<span style={{ width: '33%', display: 'inline-block' }}>
-					Round {this.props.numRounds + 1} of {this.props.maxRounds}
+					Round {props.numRounds + 1} of {props.maxRounds}
 				</span>
 			</div>
 		);
@@ -47,7 +49,7 @@ const mapStateToProps = ({ room }) =>
 
 const mapDispatchToProps = dispatch =>
 {
-	return { leaveRoom () { dispatch (leaveRoom ()); } };
+	return {};
 };
 
 

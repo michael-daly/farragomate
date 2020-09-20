@@ -7,12 +7,28 @@ import SentenceCreation from '#/screens/SentenceCreation.jsx';
 import Voting           from '#/screens/Voting.jsx';
 import FinalScores      from '#/screens/FinalScores.jsx';
 
+import UIPopup from '#/ui/popup/UIPopup.jsx';
+
+import { leaveRoom } from '#/room/actions.js';
+
 
 class MainGame extends Component
 {
 	constructor ( props )
 	{
 		super (props);
+
+		this.state = { confirmPopup: false };
+	}
+
+	showConfirmation ()
+	{
+		this.setState ({ confirmPopup: true });
+	}
+
+	hideConfirmation ()
+	{
+		this.setState ({ confirmPopup: false });
 	}
 
 	render ()
@@ -42,7 +58,33 @@ class MainGame extends Component
 			component = <div className='center-content'>Invalid screen: `{screen}`</div>;
 		}
 
-		return <Fragment><Topbar />{component}</Fragment>;
+		let popup = '';
+
+		if ( this.state.confirmPopup )
+		{
+			popup =
+			(
+				<UIPopup
+					title='Leave the room?'
+					numButtons={2}
+					button1Text='No'
+					button2Text='Yes'
+					onClickButton1={this.hideConfirmation.bind (this)}
+					onClickButton2={this.props.leaveRoom.bind (this)}
+				>
+					Do you want to leave this room?
+				</UIPopup>
+			);
+		}
+
+		return (
+			<Fragment>
+				<Topbar onClickLeave={this.showConfirmation.bind (this)} />
+
+				{popup}
+				{component}
+			</Fragment>
+		);
 	}
 }
 
@@ -54,7 +96,12 @@ const mapStateToProps = ({ room }) =>
 
 const mapDispatchToProps = dispatch =>
 {
-	return {};
+	return {
+		leaveRoom ()
+		{
+			dispatch (leaveRoom ());
+		},
+	};
 };
 
 
