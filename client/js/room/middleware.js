@@ -2,11 +2,11 @@ const PacketManager = require ('~/packets/PacketManager.js');
 
 const { has } = require ('~/util/has.js');
 
-const { setScreen }         = require ('#/App/actions.js');
-const { sendRequestPacket } = require ('#/socket/actions.js');
-const { setLeaveRoomMsg }   = require ('#/errors/actions.js');
+const { setScreen }       = require ('#/App/actions.js');
+const { setLeaveRoomMsg } = require ('#/errors/actions.js');
 
-const { sentenceToStr, sentenceToStrArr } = require ('#/sentenceArray.js');
+const { sendRequestPacket, sendDataPacket } = require ('#/socket/actions.js');
+const { sentenceToStr, sentenceToStrArr }   = require ('#/sentenceArray.js');
 
 
 let socket        = null;
@@ -73,9 +73,23 @@ module.exports = store => next => action =>
 			break;
 		}
 
+		case 'REQUEST_ROOM_LIST':
+		{
+			store.dispatch (sendRequestPacket ('RoomList'));
+			break;
+		}
+
 		case 'REQUEST_JOIN_ROOM':
 		{
 			store.dispatch (sendRequestPacket ('JoinRoom', payload));
+			break;
+		}
+
+		case 'LEAVE_ROOM':
+		{
+			store.dispatch (setScreen ('MainMenu'));
+			store.dispatch (sendDataPacket ('LeaveRoom'));
+
 			break;
 		}
 	}

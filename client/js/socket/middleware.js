@@ -1,6 +1,7 @@
 const PacketManager = require ('~/packets/PacketManager.js');
 
-const { has } = require ('~/util/has.js');
+const { has }       = require ('~/util/has.js');
+const { leaveRoom } = require ('#/room/actions.js');
 
 
 let socket        = null;
@@ -97,25 +98,13 @@ module.exports = store => next => action =>
 			break;
 		}
 
-		case 'REQUEST_ROOM_LIST':
-		{
-			store.dispatch ({ type: 'SEND_REQUEST_PACKET', payload: { command: 'RoomList' } });
-			break;
-		}
-
 		case 'CANCEL_REQUEST':
 		{
 			if ( action.payload === 'REQUEST_JOIN_ROOM' )
 			{
-				store.dispatch ({ type: 'LEAVE_ROOM' });
+				store.dispatch (leaveRoom ());
 			}
 
-			break;
-		}
-
-		case 'LEAVE_ROOM':
-		{
-			store.dispatch ({ type: 'SEND_DATA_PACKET', payload: { command: 'LeaveRoom' } });
 			break;
 		}
 	}
