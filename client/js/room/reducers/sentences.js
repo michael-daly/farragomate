@@ -57,9 +57,9 @@ module.exports = ( state = defaultState, action ) =>
 
 		case 'ENTER_SCREEN':
 		{
-			if ( command === 'SentenceCreation' )
+			if ( payload === 'SentenceCreation' )
 			{
-				return { ...state, array: [], vote: '' };
+				return { ...state, array: [], sentences: {}, vote: '' };
 			}
 
 			break;
