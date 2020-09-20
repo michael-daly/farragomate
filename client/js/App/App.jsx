@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import Register   from '#/Register/Register.jsx';
-import MainMenu   from '#/MainMenu/MainMenu.jsx';
-import CreateRoom from '#/CreateRoom/CreateRoom.jsx';
-import JoinRoom   from '#/JoinRoom/JoinRoom.jsx';
-import MainGame   from '#/MainGame/MainGame.jsx';
+import ConnectionError from '#/errors/ConnectionError.jsx';
+import Register        from '#/Register/Register.jsx';
+import MainMenu        from '#/MainMenu/MainMenu.jsx';
+import CreateRoom      from '#/CreateRoom/CreateRoom.jsx';
+import JoinRoom        from '#/JoinRoom/JoinRoom.jsx';
+import MainGame        from '#/MainGame/MainGame.jsx';
 
 import { socketPort }      from '~/config.js';
 import { useSecureSocket } from '#/config.js';
@@ -38,29 +39,50 @@ class App extends Component
 
 		let component = '';
 
-		if ( screen === 'Register' )
+		if ( this.props.socketError !== '' )
 		{
-			component = <Register />;
-		}
-		else if ( screen === 'MainMenu' )
-		{
-			component = <MainMenu />;
-		}
-		else if ( screen === 'CreateRoom' )
-		{
-			component = <CreateRoom />;
-		}
-		else if ( screen === 'JoinRoom' )
-		{
-			component = <JoinRoom />;
-		}
-		else if ( screen === 'MainGame' )
-		{
-			component = <MainGame />;
+			component = <ConnectionError />;
 		}
 		else
 		{
-			component = <div className='center-content'>Invalid screen: `{screen}`</div>;
+			switch ( screen )
+			{
+				case 'Register':
+				{
+					component = <Register />;
+					break;
+				}
+
+				case 'MainMenu':
+				{
+					component = <MainMenu />;
+					break;
+				}
+
+				case 'CreateRoom':
+				{
+					component = <CreateRoom />;
+					break;
+				}
+
+				case 'JoinRoom':
+				{
+					component = <JoinRoom />;
+					break;
+				}
+
+				case 'MainGame':
+				{
+					component = <MainGame />;
+					break;
+				}
+
+				default:
+				{
+					component = <div className='center-content'>Invalid screen: `{screen}`</div>;
+					break;
+				}
+			}
 		}
 
 		return <div className='chalkboard'>{component}</div>;
@@ -68,9 +90,9 @@ class App extends Component
 }
 
 
-const mapStateToProps = ({ app }) =>
+const mapStateToProps = ({ app, errors }) =>
 {
-	return { ...app };
+	return { ...app, socketError: errors.socketError };
 };
 
 const mapDispatchToProps = dispatch =>
