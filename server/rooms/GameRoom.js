@@ -114,6 +114,7 @@ class GameRoom
 	{
 		const object = this.info.toJSON ();
 
+		object.id         = this.id;
 		object.timeLeft   = this.timeLeft;
 		object.numRounds  = this.numRounds;
 		object.screen     = this.screen !== null ? this.screen.name : null;
