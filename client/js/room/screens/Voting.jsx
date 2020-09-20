@@ -37,8 +37,8 @@ class Voting extends Component
 
 		const { id, wordbanks, votingEnabled } = props;
 
-		const { sentences, vote } = props.sentences;
 		const { list }            = props.clients;
+		const { sentences, vote } = props.sentences;
 
 		const rowValues = [];
 
@@ -47,12 +47,6 @@ class Voting extends Component
 
 		for ( let authorID in sentences )
 		{
-			if ( votingEnabled && authorID === id )
-			{
-				currIndex++;
-				continue;
-			}
-
 			const sentence = sentences[authorID];
 			const rowArr   = [];
 

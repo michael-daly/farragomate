@@ -5,8 +5,10 @@ const { has } = require ('~/util/has.js');
 const { setScreen }       = require ('#/App/actions.js');
 const { setLeaveRoomMsg } = require ('#/errors/actions.js');
 
+const { enterScreen, leaveScreen }          = require ('#/room/actions.js');
 const { sendRequestPacket, sendDataPacket } = require ('#/socket/actions.js');
-const { sentenceToStr, sentenceToStrArr }   = require ('#/sentenceArray.js');
+
+const { sentenceToStr, sentenceToStrArr } = require ('#/sentenceArray.js');
 
 
 let socket        = null;
@@ -26,48 +28,88 @@ module.exports = store => next => action =>
 		{
 			const { command, body } = payload;
 
-			if ( command === 'JoinRoom' && body === register.id )
+			switch ( command )
 			{
-				store.dispatch (setScreen ('MainGame'));
-			}
-			else if ( command === 'KickClient' && body === register.id )
-			{
-				store.dispatch (setLeaveRoomMsg ('You were kicked from the room.'));
-			}
-			else if ( command === 'DeleteRoom' && room.info.id !== '' )
-			{
-				store.dispatch (setLeaveRoomMsg ('The room was closed.'));
-			}
-			else if ( command === 'LeaveScreen' )
-			{
-				if ( body === 'SentenceCreation' && room.sentences.array.length > 0 )
+				case 'JoinRoom':
 				{
-					store.dispatch (sendRequestPacket ('SendSentence', room.sentences.array));
-				}
-				else if ( body === 'SentenceVoting' && room.sentences.vote !== '' )
-				{
-					store.dispatch (sendRequestPacket ('CastVote', room.sentences.vote));
-				}
-			}
-			else if ( command === 'ClientSentences' )
-			{
-				const { wordbanks } = state.room;
-				const { body }      = payload;
-
-				const sentences = {};
-
-				for ( let authorID in body )
-				{
-					const sentence = body[authorID];
-
-					sentences[authorID] =
+					if ( body === register.id )
 					{
-						...sentence,
-						str: sentenceToStr (sentenceToStrArr (wordbanks, sentence.arr)),
+						store.dispatch (setScreen ('MainGame'));
 					}
+
+					break;
 				}
 
-				payload.body = sentences;
+				case 'KickClient':
+				{
+					if ( body === register.id )
+					{
+						store.dispatch (setLeaveRoomMsg ('You were kicked from the room.'));
+					}
+
+					break;
+				}
+
+
+				case 'DeleteRoom':
+				{
+					if ( room.info.id !== '' )
+					{
+						store.dispatch (setLeaveRoomMsg ('The room was closed.'));
+					}
+
+					break;
+				}
+
+				case 'EnterScreen':
+				{
+					store.dispatch (enterScreen (payload.body));
+					break;
+				}
+
+				case 'LeaveScreen':
+				{
+					store.dispatch (leaveScreen (payload.body));
+
+					if ( body === 'SentenceCreation' && room.sentences.array.length > 0 )
+					{
+						store.dispatch (sendRequestPacket ('SendSentence', room.sentences.array));
+					}
+					else if ( body === 'SentenceVoting' && room.sentences.vote !== '' )
+					{
+						store.dispatch (sendRequestPacket ('CastVote', room.sentences.vote));
+					}
+
+					break;
+				}
+
+				case 'ClientSentences':
+				{
+					const { wordbanks } = state.room;
+					const { body }      = payload;
+
+					const sentences = {};
+
+					for ( let authorID in body )
+					{
+						if ( authorID === register.id && room.info.screen === 'SentenceVoting' )
+						{
+							continue;
+						}
+
+						const sentence = body[authorID];
+
+						sentences[authorID] =
+						{
+							...sentence,
+							str: sentenceToStr (sentenceToStrArr (wordbanks, sentence.arr)),
+						}
+					}
+
+					payload.body = sentences;
+
+					break;
+				}
 			}
 
 			break;

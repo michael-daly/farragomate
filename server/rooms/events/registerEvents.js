@@ -24,23 +24,30 @@ GameRoomEvents.on ('createRoom', ( room, owner ) =>
 	{
 		if ( !wasForced )
 		{
-			sendDataToRoom (room, 'LeaveScreen', room.screen.name);
 			room.leaveScreen ();
 		}
 	});
 
 	room.events.on ('enterScreen', screen =>
 	{
-		room.timer.start (screen.getStartTime (room));
-		sendDataToRoom (room, 'RoomInfo', room.toJSON ());
+		sendDataToRoom (room, 'EnterScreen', room.screen.name);
+
+		screen.onEnterScreen (room).then (() =>
+		{
+			room.timer.start (screen.getStartTime (room));
+			sendDataToRoom (room, 'RoomInfo', room.toJSON ());
+		});
 	});
 
 	room.events.on ('leaveScreen', screen =>
 	{
-		room.screen = getGameScreen (screen.getNextScreen (room));
+		sendDataToRoom (room, 'LeaveScreen', room.screen.name);
 
-		sendDataToRoom (room, 'EnterScreen', room.screen.name);
-		room.enterScreen ();
+		screen.onLeaveScreen (room).then (() =>
+		{
+			room.screen = getGameScreen (screen.getNextScreen (room));
+			room.enterScreen ();
+		});
 	});
 
 	room.start (SentenceCreation);

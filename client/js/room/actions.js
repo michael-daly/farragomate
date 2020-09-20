@@ -33,6 +33,16 @@ const requestJoinRoom = ( roomID, password = '' ) =>
 	return { type: 'REQUEST_JOIN_ROOM', payload: { roomID, password } };
 };
 
+const enterScreen = screen =>
+{
+	return { type: 'ENTER_SCREEN', payload: screen };
+};
+
+const leaveScreen = screen =>
+{
+	return { type: 'LEAVE_SCREEN', payload: screen };
+};
+
 
 export
 {
@@ -46,4 +56,7 @@ export
 
 	requestRoomList,
 	requestJoinRoom,
+
+	enterScreen,
+	leaveScreen,
 };

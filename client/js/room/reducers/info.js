@@ -42,6 +42,11 @@ module.exports = ( state = defaultState, action ) =>
 			break;
 		}
 
+		case 'ENTER_SCREEN':
+		{
+			return { ...state, screen: payload };
+		}
+
 		case 'LEAVE_ROOM':
 		{
 			return { ...state, ...defaultState };

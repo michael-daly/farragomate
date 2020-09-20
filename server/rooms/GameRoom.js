@@ -69,22 +69,12 @@ class GameRoom
 
 	enterScreen ()
 	{
-		const { events, screen } = this;
-
-		screen.onEnterScreen (this).then (() =>
-		{
-			events.emit ('enterScreen', screen);
-		});
+		this.events.emit ('enterScreen', this.screen);
 	}
 
 	leaveScreen ()
 	{
-		const { events, screen } = this;
-
-		screen.onLeaveScreen (this).then (() =>
-		{
-			events.emit ('leaveScreen', screen);
-		});
+		this.events.emit ('leaveScreen', this.screen);
 	}
 
 	/**

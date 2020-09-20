@@ -13,7 +13,9 @@ const defaultState = deepFreeze (
 
 module.exports = ( state = defaultState, action ) =>
 {
-	const { type, payload } = action;
+	const { type, payload = {} } = action;
+
+	const { command } = payload;
 
 	switch ( type )
 	{
@@ -45,12 +47,17 @@ module.exports = ( state = defaultState, action ) =>
 
 		case 'RECV_DATA_PACKET':
 		{
-			if ( payload.command === 'ClientSentences' )
+			if ( command === 'ClientSentences' )
 			{
 				return { ...state, sentences: payload.body }
 			}
 
-			if ( payload.command === 'Wordbanks' )
+			break;
+		}
+
+		case 'ENTER_SCREEN':
+		{
+			if ( command === 'SentenceCreation' )
 			{
 				return { ...state, array: [], vote: '' };
 			}
