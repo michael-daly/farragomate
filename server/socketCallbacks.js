@@ -10,7 +10,9 @@ const { createClientInfo }   = require ('$/clients/info/GameClientInfo.js');
 const { MainMenuHandlers, GameRoomHandlers } = require ('$/packets/handlerMaps.js');
 const { addNewClient, deleteClient }         = require ('$/clients/GameClientMap.js');
 
-const { ERROR_NAME_NOT_SET } = require ('~/errorCodes.js');
+const { SK_ERR_TRY_LATER } = require ('~/socketErrors.js');
+
+const { ERROR_CLIENT_LIMIT, ERROR_NAME_NOT_SET } = require ('~/errorCodes.js');
 
 
 /**
@@ -18,9 +20,15 @@ const { ERROR_NAME_NOT_SET } = require ('~/errorCodes.js');
  */
 const onNewConnection = function ( socket, request )
 {
-	addNewClient (socket, createClientInfo ());
+	const clientOrError = addNewClient (socket, createClientInfo ());
 
-	console.log (`New connection: ${socket.gameClient.id}`);
+	if ( clientOrError === ERROR_CLIENT_LIMIT )
+	{
+		socket.close (SK_ERR_TRY_LATER);
+		return;
+	}
+
+	console.log (`New connection: ${clientOrError.id}`);
 
 	socket.on ('message', onSocketMessage);
 	socket.on ('close', onSocketClose);

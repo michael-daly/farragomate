@@ -18,6 +18,7 @@ module.exports =
 		'FIELD_ERR_MAX',
 		'FIELD_ERR_UNIQUE',
 
+		'ERROR_CLIENT_LIMIT',
 		'ERROR_NAME_NOT_SET',
 		'ERROR_IN_ROOM',
 		'ERROR_NOT_IN_ROOM',

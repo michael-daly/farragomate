@@ -16,7 +16,7 @@ class ConnectionError extends Component
 			<div className='center-content'>
 				<h1>Connection Lost</h1>
 
-				<div className='center-content' style={{ width: '54%' }}>
+				<div className='center-content' style={{ width: '54%', whiteSpace: 'pre' }}>
 					{this.props.errorMsg}
 				</div>
 			</div>
