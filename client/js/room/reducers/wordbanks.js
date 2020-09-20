@@ -18,6 +18,16 @@ module.exports = ( state = defaultState, action ) =>
 
 			break;
 		}
+
+		case 'ENTER_SCREEN':
+		{
+			if ( payload === 'SentenceCreation' )
+			{
+				return [];
+			}
+
+			break;
+		}
 	}
 
 	return state;
