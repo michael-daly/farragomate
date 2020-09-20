@@ -9,7 +9,7 @@ const { ERROR_CLIENT_LIMIT } = require ('~/errorCodes.js');
 
 const GameClientMap = new GameObjectMap ();
 
-GameClientMap.maxClients = 20;
+GameClientMap.maxClients = 320;
 
 /**
  * @param {WebSocket}      socket
