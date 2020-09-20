@@ -1,3 +1,6 @@
+const { setScreen } = require ('#/App/actions.js');
+
+
 module.exports = store => next => action =>
 {
 	const { type, payload } = action;
@@ -12,7 +15,7 @@ module.exports = store => next => action =>
 			{
 				if ( payload.command === 'RegisterInfo' )
 				{
-					store.dispatch ({ type: 'SET_SCREEN', payload: 'MainMenu' });
+					store.dispatch (setScreen ('MainMenu'));
 				}
 
 				break;
@@ -22,7 +25,7 @@ module.exports = store => next => action =>
 			{
 				if ( payload.command === 'CreateRoom' )
 				{
-					store.dispatch ({ type: 'SET_SCREEN', payload: 'MainGame' });
+					store.dispatch (setScreen ('MainGame'));
 				}
 
 				break;
@@ -36,7 +39,7 @@ module.exports = store => next => action =>
 			case 'DeleteRoom':
 			case 'KickClient':
 			{
-				store.dispatch ({ type: 'SET_SCREEN', payload: 'MainMenu' });
+				store.dispatch (setScreen ('MainMenu'));
 				break;
 			}
 		}
