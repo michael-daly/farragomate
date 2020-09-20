@@ -1,4 +1,5 @@
-const GameScreen = require ('$/screens/GameScreen.js');
+const GameScreen    = require ('$/screens/GameScreen.js');
+const VotingResults = require ('$/screens/VotingResults.js');
 
 const { sleep }          = require ('~/util/promises.js');
 const { sendDataToRoom } = require ('$/rooms/GameRoomMap.js');
@@ -18,9 +19,24 @@ SentenceVoting.onLeaveScreen = async function ( room )
 	await sleep (2000);
 };
 
-SentenceVoting.getNextScreen = function ()
+SentenceVoting.getNextScreen = function ( room )
 {
+	if ( Object.keys (room.sentences.getSentences ()).length <= 0 )
+	{
+		return VotingResults.getNextScreen (room);
+	}
+
 	return 'VotingResults';
+};
+
+SentenceVoting.getStartTime = function ( room )
+{
+	if ( Object.keys (room.sentences.getSentences ()).length <= 0 )
+	{
+		return 5;
+	}
+
+	return this.constructor.prototype.getStartTime.apply (this);
 };
 
 

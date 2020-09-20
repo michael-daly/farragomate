@@ -25,8 +25,6 @@ VotingResults.onLeaveScreen = async function ( room )
 
 	clients.clearVotedIDs ();
 	sentences.clearSentences ();
-
-	sendDataToRoom (room, 'ClientList', getRoomClientList (room));
 };
 
 VotingResults.getNextScreen = function ( room )
@@ -37,6 +35,16 @@ VotingResults.getNextScreen = function ( room )
 	}
 
 	return 'FinalScores';
+};
+
+VotingResults.getStartTime = function ( room )
+{
+	if ( Object.keys (room.sentences.getSentences ()).length <= 0 )
+	{
+		return 1;
+	}
+
+	return this.constructor.prototype.getStartTime.apply (this);
 };
 
 
