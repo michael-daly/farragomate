@@ -3,9 +3,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import TitleLogo from '#/ui/TitleLogo.jsx';
+import UIPopup   from '#/ui/popup/UIPopup.jsx';
 import UIButton  from '#/ui/UIButton.jsx';
 
-import { setScreen } from '#/App/actions.js';
+import { setScreen }     from '#/App/actions.js';
+import { clearErrorMsg } from '#/errors/actions.js';
 
 
 class MainMenu extends Component
@@ -32,6 +34,20 @@ class MainMenu extends Component
 
 	render ()
 	{
+		const { props } = this;
+
+		let popup = '';
+
+		if ( props.leaveRoomMsg !== '' )
+		{
+			popup =
+			(
+				<UIPopup title='Disconnected' onClickButton1={props.clearMessage.bind (this)}>
+					{props.leaveRoomMsg}
+				</UIPopup>
+			);
+		}
+
 		const createRoom = this.createRoom.bind (this);
 		const joinRoom   = this.joinRoom.bind (this);
 		const changeName = this.changeName.bind (this);
@@ -39,6 +55,8 @@ class MainMenu extends Component
 		return (
 			<div className='center-content'>
 				<TitleLogo />
+
+				{popup}
 
 				<div className='button-menu center-content'>
 					<UIButton className='magnet' inline={false} text='Create Room' onClick={createRoom} />
@@ -54,9 +72,9 @@ class MainMenu extends Component
 }
 
 
-const mapStateToProps = () =>
+const mapStateToProps = ({ errors }) =>
 {
-	return {};
+	return { leaveRoomMsg: errors.leaveRoomMsg };
 };
 
 const mapDispatchToProps = dispatch =>
@@ -66,6 +84,11 @@ const mapDispatchToProps = dispatch =>
 		setScreen ( screen )
 		{
 			dispatch (setScreen (screen));
+		},
+
+		clearMessage ()
+		{
+			dispatch (clearErrorMsg ('leaveRoomMsg'));
 		},
 	};
 

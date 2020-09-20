@@ -2,8 +2,9 @@ const PacketManager = require ('~/packets/PacketManager.js');
 
 const { has } = require ('~/util/has.js');
 
-const { sendRequestPacket } = require ('#/socket/actions.js');
 const { setScreen }         = require ('#/App/actions.js');
+const { sendRequestPacket } = require ('#/socket/actions.js');
+const { setLeaveRoomMsg }   = require ('#/errors/actions.js');
 
 const { sentenceToStr, sentenceToStrArr } = require ('#/sentenceArray.js');
 
@@ -28,6 +29,14 @@ module.exports = store => next => action =>
 			if ( command === 'JoinRoom' && body === register.id )
 			{
 				store.dispatch (setScreen ('MainGame'));
+			}
+			else if ( command === 'KickClient' && body === register.id )
+			{
+				store.dispatch (setLeaveRoomMsg ('You were kicked from the room.'));
+			}
+			else if ( command === 'DeleteRoom' && room.info.id !== '' )
+			{
+				store.dispatch (setLeaveRoomMsg ('The room was closed.'));
 			}
 			else if ( command === 'LeaveScreen' )
 			{

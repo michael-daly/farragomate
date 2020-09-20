@@ -12,6 +12,7 @@ const defaultState = deepFreeze (
 	registerError:   '',
 	createRoomError: '',
 	joinRoomError:   '',
+	leaveRoomMsg:    '',
 });
 
 
@@ -22,6 +23,10 @@ module.exports = ( state = defaultState, action ) =>
 	if ( type === 'CLEAR_ERROR_MSG' )
 	{
 		return { ...state, [payload]: '' };
+	}
+	else if ( type === 'SET_LEAVE_ROOM_MSG' )
+	{
+		return { ...state, leaveRoomMsg: payload };
 	}
 	else if ( type === 'RECV_ACCEPT_PACKET' )
 	{

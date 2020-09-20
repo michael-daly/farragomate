@@ -29,6 +29,18 @@ module.exports = store => next => action =>
 			}
 		}
 	}
+	else if ( type === 'RECV_DATA_PACKET' )
+	{
+		switch ( payload.command )
+		{
+			case 'DeleteRoom':
+			case 'KickClient':
+			{
+				store.dispatch ({ type: 'SET_SCREEN', payload: 'MainMenu' });
+				break;
+			}
+		}
+	}
 
 	return next (action);
 };
