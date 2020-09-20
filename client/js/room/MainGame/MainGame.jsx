@@ -37,25 +37,38 @@ class MainGame extends Component
 
 		let component = '';
 
-		if ( screen === 'SentenceCreation' || screen === null )
+		switch ( screen )
 		{
-			component = <SentenceCreation />;
-		}
-		else if ( screen === 'SentenceVoting' )
-		{
-			component = <Voting votingEnabled={true} />;
-		}
-		else if ( screen === 'VotingResults' )
-		{
-			component = <Voting votingEnabled={false} />;
-		}
-		else if ( screen === 'FinalScores' )
-		{
-			component = <FinalScores />;
-		}
-		else
-		{
-			component = <div className='center-content'>Invalid screen: `{screen}`</div>;
+			case 'SentenceCreation':
+			case null:
+			{
+				component = <SentenceCreation />;
+				break;
+			}
+
+			case 'SentenceVoting':
+			{
+				component = <Voting votingEnabled={true} />;
+				break;
+			}
+
+			case 'VotingResults':
+			{
+				component = <Voting votingEnabled={false} />;
+				break;
+			}
+
+			case 'FinalScores':
+			{
+				component = <FinalScores />;
+				break;
+			}
+
+			default:
+			{
+				component = <div className='center-content'>Invalid screen: `{screen}`</div>;
+				break;
+			}
 		}
 
 		let popup = '';
