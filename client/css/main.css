@@ -111,7 +111,7 @@ html, body, .chalkboard
 	font-size: 0.9vw;
 }
 
-.chalk, .chalk-small
+.chalk, .chalk-small, .client-list
 {
 	margin: 0.15em;
 
@@ -132,12 +132,12 @@ html, body, .chalkboard
 	background-color: rgba(128, 128, 128, 0.1);
 }
 
-.chalk.highlighted
+.chalk.highlighted, .chalk-small.highlighted
 {
 	border-color: #FF5154 !important;
 }
 
-.chalk-small
+.chalk-small, .client-list
 {
 	border:    0.05em dashed;
 	font-size: 1.3vw;
@@ -254,7 +254,7 @@ input[type=text].chalk, input[type=password].chalk
 
 .no-border
 {
-	border: none;
+	border: none !important;
 }
 
 .table-row.highlighted
@@ -365,4 +365,23 @@ input[type=text].chalk, input[type=password].chalk
 .popup-buttons.center-content
 {
 	margin: 0vw;
+}
+
+.client-list
+{
+	margin: 2vw;
+
+	padding:        0.25vw;
+	padding-top:    0.5vw;
+	padding-bottom: 0.5vw;
+
+	overflow-wrap: normal;
+}
+
+.client-list-name
+{
+	padding-left:  2%;
+	padding-right: 2%;
+
+	border-right: dashed 0.05em;
 }

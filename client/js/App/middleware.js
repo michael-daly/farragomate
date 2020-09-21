@@ -36,8 +36,13 @@ module.exports = store => next => action =>
 	{
 		switch ( payload.command )
 		{
-			case 'DeleteRoom':
 			case 'KickClient':
+				if ( payload.body !== state.register.id )
+				{
+					break;
+				}
+
+			case 'DeleteRoom':
 			{
 				store.dispatch (setScreen ('MainMenu'));
 				break;

@@ -1,3 +1,8 @@
+const kickClient = id =>
+{
+	return { type: 'KICK_CLIENT', payload: id };
+};
+
 const leaveRoom = () =>
 {
 	return { type: 'LEAVE_ROOM' };
@@ -51,6 +56,7 @@ const setDataSent = ( wasSent = true ) =>
 
 export
 {
+	kickClient,
 	leaveRoom,
 
 	addToSentence,

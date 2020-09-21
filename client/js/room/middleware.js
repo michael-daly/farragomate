@@ -129,6 +129,12 @@ module.exports = store => next => action =>
 			break;
 		}
 
+		case 'KICK_CLIENT':
+		{
+			store.dispatch (sendRequestPacket ('KickClient', payload));
+			break;
+		}
+
 		case 'LEAVE_ROOM':
 		{
 			store.dispatch (setScreen ('MainMenu'));

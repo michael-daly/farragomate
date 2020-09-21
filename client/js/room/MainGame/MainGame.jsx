@@ -3,13 +3,14 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import Topbar           from '#/MainGame/Topbar.jsx';
+import ClientList       from '#/MainGame/ClientList.jsx';
 import SentenceCreation from '#/screens/SentenceCreation.jsx';
 import Voting           from '#/screens/Voting.jsx';
 import FinalScores      from '#/screens/FinalScores.jsx';
 
 import UIPopup from '#/ui/popup/UIPopup.jsx';
 
-import { leaveRoom } from '#/room/actions.js';
+import { kickClient, leaveRoom } from '#/room/actions.js';
 
 
 class MainGame extends Component
@@ -33,7 +34,9 @@ class MainGame extends Component
 
 	render ()
 	{
-		const { screen } = this.props;
+		const { id, info, clients } = this.props;
+
+		const { screen } = info;
 
 		let component = '';
 
@@ -94,6 +97,13 @@ class MainGame extends Component
 			<Fragment>
 				<Topbar onClickLeave={this.showConfirmation.bind (this)} />
 
+				<ClientList
+					clients={clients}
+					ownerID={info.ownerID}
+					showX={id === info.ownerID}
+					onClickX={this.props.kickClient.bind (this)}
+				/>
+
 				{popup}
 				{component}
 			</Fragment>
@@ -102,14 +112,19 @@ class MainGame extends Component
 }
 
 
-const mapStateToProps = ({ room }) =>
+const mapStateToProps = ({ register, room }) =>
 {
-	return { screen: room.info.screen };
+	return { id: register.id, info: { ...room.info }, clients: room.clients.list };
 };
 
 const mapDispatchToProps = dispatch =>
 {
 	return {
+		kickClient ( ...args )
+		{
+			dispatch (kickClient (...args));
+		},
+
 		leaveRoom ()
 		{
 			dispatch (leaveRoom ());
