@@ -20,6 +20,11 @@ SentenceCreation.onEnterScreen = async function ( room )
 			room.numRounds = 0;
 		}
 
+		room.clients.forEach (clientID =>
+		{
+			room.clients.setCanVote (clientID, true);
+		});
+
 		sendInfoToRoom (room);
 		sendDataToRoom (room, 'Wordbanks', room.sentences.getWordbanks ());
 		sendDataToRoom (room, 'ClientList', getRoomClientList (room));

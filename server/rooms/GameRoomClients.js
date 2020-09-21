@@ -29,7 +29,13 @@ class GameRoomClients
 	 */
 	addClientID ( clientID )
 	{
-		this.clientData.set (clientID, { id: clientID, hasVoted: false, score: 0 });
+		this.clientData.set (clientID,
+		{
+			id:       clientID,
+			hasVoted: false,
+			canVote:  false,
+			score:    0,
+		});
 	}
 
 	/**
@@ -99,6 +105,24 @@ class GameRoomClients
 	hasVotedID ( clientID )
 	{
 		return this.clientData.get (clientID).hasVoted;
+	}
+
+	/**
+	 * @param   {string} clientID
+	 * @returns {boolean}
+	 */
+	canVote ( clientID )
+	{
+		return this.clientData.get (clientID).canVote;
+	}
+
+	/**
+	 * @param {string}  clientID
+	 * @param {boolean} canVote
+	 */
+	setCanVote ( clientID, canVote )
+	{
+		this.clientData.get (clientID).canVote = canVote;
 	}
 
 	/**
