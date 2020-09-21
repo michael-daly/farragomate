@@ -19,24 +19,47 @@ class MainGame extends Component
 	{
 		super (props);
 
-		this.state = { confirmPopup: false };
+		this.state = { confirmPopup: '', selectedClient: '' };
 	}
 
-	showConfirmation ()
+	confirmLeave ()
 	{
-		this.setState ({ confirmPopup: true });
+		this.showConfirmation ('leave');
+	}
+
+	confirmKick ()
+	{
+		this.showConfirmation ('kick');
+	}
+
+	showConfirmation ( type )
+	{
+		this.setState ({ confirmPopup: type });
 	}
 
 	hideConfirmation ()
 	{
-		this.setState ({ confirmPopup: false });
+		this.setState ({ confirmPopup: '', selectedClient: '' });
+	}
+
+	clickX ( id )
+	{
+		this.setState ({ selectedClient: id });
+		this.confirmKick ();
+	}
+
+	clickKickClient ()
+	{
+		this.props.kickClient (this.state.selectedClient);
+		this.hideConfirmation ();
 	}
 
 	render ()
 	{
 		const { id, info, clients } = this.props;
 
-		const { screen } = info;
+		const { screen }       = info;
+		const { confirmPopup } = this.state;
 
 		let component = '';
 
@@ -76,32 +99,55 @@ class MainGame extends Component
 
 		let popup = '';
 
-		if ( this.state.confirmPopup )
+		if ( confirmPopup !== '' )
 		{
+			let title = '';
+			let body  = '';
+
+			let onClickButton1 = null;
+			let onClickButton2 = null;
+
+			if ( confirmPopup === 'leave' )
+			{
+				title = 'Confirmation';
+				body  = 'Leave this room?';
+
+				onClickButton1 = this.hideConfirmation.bind (this);
+				onClickButton2 = this.props.leaveRoom.bind (this);
+			}
+			else if ( confirmPopup === 'kick' )
+			{
+				title = 'Confirmation';
+				body  = 'Kick player from this room?';
+
+				onClickButton1 = this.hideConfirmation.bind (this);
+				onClickButton2 = this.clickKickClient.bind (this);
+			}
+
 			popup =
 			(
 				<UIPopup
-					title='Leave the room?'
+					title={title}
 					numButtons={2}
 					button1Text='No'
 					button2Text='Yes'
-					onClickButton1={this.hideConfirmation.bind (this)}
-					onClickButton2={this.props.leaveRoom.bind (this)}
+					onClickButton1={onClickButton1}
+					onClickButton2={onClickButton2}
 				>
-					Do you want to leave this room?
+					{body}
 				</UIPopup>
 			);
 		}
 
 		return (
 			<Fragment>
-				<Topbar onClickLeave={this.showConfirmation.bind (this)} />
+				<Topbar onClickLeave={this.confirmLeave.bind (this)} />
 
 				<ClientList
 					clients={clients}
 					ownerID={info.ownerID}
 					showX={id === info.ownerID}
-					onClickX={this.props.kickClient.bind (this)}
+					onClickX={this.clickX.bind (this)}
 				/>
 
 				{popup}
