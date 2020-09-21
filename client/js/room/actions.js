@@ -3,6 +3,11 @@ const kickClient = id =>
 	return { type: 'KICK_CLIENT', payload: id };
 };
 
+const clientLeave = id =>
+{
+	return { type: 'CLIENT_LEAVE', payload: id };
+};
+
 const leaveRoom = () =>
 {
 	return { type: 'LEAVE_ROOM' };
@@ -53,10 +58,16 @@ const setDataSent = ( wasSent = true ) =>
 	return { type: 'SET_DATA_SENT', payload: wasSent };
 };
 
+const cacheClientNames = names =>
+{
+	return { type: 'CACHE_CLIENT_NAMES', payload: names };
+};
+
 
 export
 {
 	kickClient,
+	clientLeave,
 	leaveRoom,
 
 	addToSentence,
@@ -72,4 +83,6 @@ export
 	leaveScreen,
 
 	setDataSent,
+
+	cacheClientNames,
 };

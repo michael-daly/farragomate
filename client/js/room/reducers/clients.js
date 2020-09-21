@@ -24,6 +24,15 @@ module.exports = ( state = defaultState, action ) =>
 
 			break;
 		}
+
+		case 'CLIENT_LEAVE':
+		{
+			const list = { ...state.list };
+
+			delete list[payload];
+
+			return { ...state, list };
+		}
 	}
 
 	return state;

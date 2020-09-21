@@ -9,6 +9,11 @@ const defaultState = deepFreeze (
 	sentences: {},
 	vote:      '',
 	dataSent:  false,
+
+	// This is for when a client leaves the server during the sentence voting phase.
+	// We don't want their sentence to not show up in the voting results, so we save it here
+	// for later.
+	cachedNames: {},
 });
 
 
@@ -74,6 +79,11 @@ module.exports = ( state = defaultState, action ) =>
 		case 'SET_DATA_SENT':
 		{
 			return { ...state, dataSent: payload };
+		}
+
+		case 'CACHE_CLIENT_NAMES':
+		{
+			return { ...state, cachedNames: { ...payload } };
 		}
 	}
 

@@ -8,7 +8,18 @@ const { setLeaveRoomMsg } = require ('#/errors/actions.js');
 const { sendRequestPacket, sendDataPacket } = require ('#/socket/actions.js');
 const { sentenceToStr, sentenceToStrArr }   = require ('#/sentenceArray.js');
 
-const { enterScreen, leaveScreen, setDataSent } = require ('#/room/actions.js');
+const
+{
+	clientLeave,
+
+	enterScreen,
+	leaveScreen,
+
+	setDataSent,
+
+	cacheClientNames,
+}
+= require ('#/room/actions.js');
 
 
 let socket        = null;
@@ -40,6 +51,12 @@ module.exports = store => next => action =>
 					break;
 				}
 
+				case 'LeaveRoom':
+				{
+					store.dispatch (clientLeave (body));
+					break;
+				}
+
 				case 'KickClient':
 				{
 					if ( body === register.id )
@@ -49,7 +66,6 @@ module.exports = store => next => action =>
 
 					break;
 				}
-
 
 				case 'DeleteRoom':
 				{
@@ -64,6 +80,12 @@ module.exports = store => next => action =>
 				case 'EnterScreen':
 				{
 					store.dispatch (enterScreen (payload.body));
+
+					if ( body === 'SentenceVoting' )
+					{
+						store.dispatch (cacheClientNames (room.clients.list));
+					}
+
 					break;
 				}
 
