@@ -28,6 +28,11 @@ module.exports = ( state = defaultState, action ) =>
 
 			break;
 		}
+
+		case 'LEAVE_ROOM':
+		{
+			return [ ...defaultState ];
+		}
 	}
 
 	return state;

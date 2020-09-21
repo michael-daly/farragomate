@@ -3,6 +3,7 @@ const PacketManager = require ('~/packets/PacketManager.js');
 const { has } = require ('~/util/has.js');
 
 const { setScreen }       = require ('#/App/actions.js');
+const { leaveRoom }       = require ('#/room/actions.js');
 const { setLeaveRoomMsg } = require ('#/errors/actions.js');
 
 const { sendRequestPacket, sendDataPacket } = require ('#/socket/actions.js');
@@ -61,6 +62,7 @@ module.exports = store => next => action =>
 				{
 					if ( body === register.id )
 					{
+						store.dispatch (leaveRoom ());
 						store.dispatch (setLeaveRoomMsg ('You were kicked from the room.'));
 					}
 
@@ -71,6 +73,7 @@ module.exports = store => next => action =>
 				{
 					if ( room.info.id !== '' )
 					{
+						store.dispatch (leaveRoom ());
 						store.dispatch (setLeaveRoomMsg ('The room was closed.'));
 					}
 

@@ -33,9 +33,12 @@ class Voting extends Component
 
 	render ()
 	{
-		const { id, wordbanks, votingEnabled } = this.props;
+		const { props } = this;
+		const { list }  = props.clients;
 
-		const { sentences, vote, dataSent, cachedNames } = this.props.sentences;
+		const { id, wordbanks, votingEnabled } = props;
+
+		const { sentences, vote, dataSent, cachedNames } = props.sentences;
 
 		const rowValues = [];
 
@@ -47,9 +50,11 @@ class Voting extends Component
 			const sentence = sentences[authorID];
 			const rowArr   = [];
 
+			const clientInfo = cachedNames[authorID] || list[authorID];
+
 			if ( !votingEnabled )
 			{
-				rowArr.push (sentence.votes, cachedNames[authorID].displayName);
+				rowArr.push (sentence.votes, clientInfo.displayName);
 			}
 
 			if ( authorID === vote )

@@ -71,6 +71,11 @@ module.exports = ( state = defaultState, action ) =>
 			break;
 		}
 
+		case 'LEAVE_ROOM':
+		{
+			return { ...defaultState };
+		}
+
 		case 'CLEAR_SENTENCE':
 		{
 			return { ...state, array: [] };

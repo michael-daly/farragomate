@@ -33,6 +33,11 @@ module.exports = ( state = defaultState, action ) =>
 
 			return { ...state, list };
 		}
+
+		case 'LEAVE_ROOM':
+		{
+			return { ...defaultState };
+		}
 	}
 
 	return state;
