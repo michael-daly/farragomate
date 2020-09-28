@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import Topbar           from '#/MainGame/Topbar.jsx';
 import ClientList       from '#/MainGame/ClientList.jsx';
-import SentenceCreation from '#/screens/SentenceCreation.jsx';
+import SentenceCreation from '#/SentenceCreation/SentenceCreation.jsx';
 import Voting           from '#/screens/Voting.jsx';
 import FinalScores      from '#/screens/FinalScores.jsx';
 

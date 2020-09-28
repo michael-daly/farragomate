@@ -46,6 +46,23 @@ module.exports = ( state = defaultState, action ) =>
 			return { ...state, array };
 		}
 
+		case 'MOVE_SENTENCE_WORD':
+		{
+			let { oldIndex, newIndex } = payload;
+
+			const array   = state.array.slice ();
+			const spliced = array.splice (oldIndex * 2, 2);
+
+			if ( spliced.length <= 0 )
+			{
+				break;
+			}
+
+			array.splice (newIndex * 2, 0, ...spliced);
+
+			return { ...state, array };
+		}
+
 		case 'CAST_VOTE':
 		{
 			return { ...state, vote: action.payload };

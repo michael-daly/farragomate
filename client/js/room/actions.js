@@ -23,6 +23,11 @@ const removeFromSentence = index =>
 	return { type: 'REMOVE_FROM_SENTENCE', payload: index };
 };
 
+const moveSentenceWord = ( oldIndex, newIndex ) =>
+{
+	return { type: 'MOVE_SENTENCE_WORD', payload: { oldIndex, newIndex } };
+};
+
 const clearSentence = () =>
 {
 	return { type: 'CLEAR_SENTENCE' };
@@ -72,6 +77,7 @@ export
 
 	addToSentence,
 	removeFromSentence,
+	moveSentenceWord,
 	clearSentence,
 
 	castVote,
