@@ -26,7 +26,7 @@ const ClientList = ({ clients, ownerID, showX = false, onClickX = () => {} }) =>
 					/> : '';
 
 				return (
-					<span key={`client-list-${index}-${id}-${displayName}`} className={className}>
+					<span key={`client-list-${id}-${displayName}`} className={className}>
 						{kickButton}
 						{displayName}
 					</span>

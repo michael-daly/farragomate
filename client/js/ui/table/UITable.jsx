@@ -60,7 +60,7 @@ const UITable = props =>
 
 				return (
 					<UITableRow
-						key={`table-row-${rowIndex}-${isSelected}-${row.join ('-')}`}
+						key={`table-row-${rowIndex}-${isSelected}}`}
 						rowIndex={rowIndex}
 						values={row}
 						columnInfo={columnInfo}
