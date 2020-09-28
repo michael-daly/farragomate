@@ -9,6 +9,7 @@ import fieldData from '~/rooms/fieldData.js';
 
 import { setScreen }         from '#/App/actions.js';
 import { sendRequestPacket } from '#/socket/actions.js';
+import { clearErrorMsg }     from '#/errors/actions.js';
 
 
 class CreateRoom extends Component
@@ -45,6 +46,12 @@ class CreateRoom extends Component
 		this.props.sendRoomInfo (this.state.fields);
 	}
 
+	onClickBack ()
+	{
+		this.props.clearErrorMsg ();
+		this.props.gotoMainMenu ();
+	}
+
 	render ()
 	{
 		const { props }        = this;
@@ -68,7 +75,7 @@ class CreateRoom extends Component
 				</div>
 
 				<div className='center-content' style={{ width: '54%' }}>
-					<span className='left' onClick={props.gotoMainMenu}>
+					<span className='left' onClick={this.onClickBack.bind (this)}>
 						<UIButton className='magnet' text='<< Back' />
 					</span>
 
@@ -78,7 +85,7 @@ class CreateRoom extends Component
 							text='Create Room >>'
 							inline={true}
 							onClick={this.onClickCreate.bind (this)}
-							disabled={!this.state.enableCreateBtn && errorMessage === ''}
+							disabled={!this.state.enableCreateBtn || errorMessage !== ''}
 						/>
 					</span>
 				</div>
@@ -90,7 +97,10 @@ class CreateRoom extends Component
 
 const mapStateToProps = ({ room, errors }) =>
 {
-	return { info: { ...room.info }, errorMessage: errors.createRoomError };
+	return {
+		info: { ...room.info },
+		errorMessage: errors.createRoomError,
+	};
 };
 
 const mapDispatchToProps = dispatch =>
@@ -105,6 +115,11 @@ const mapDispatchToProps = dispatch =>
 		sendRoomInfo ( info )
 		{
 			dispatch (sendRequestPacket ('CreateRoom', info));
+		},
+
+		clearErrorMsg ()
+		{
+			dispatch (clearErrorMsg ('createRoomError'));
 		},
 	};
 

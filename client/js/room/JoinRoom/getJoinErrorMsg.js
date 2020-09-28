@@ -44,7 +44,7 @@ const getJoinErrorMsg = error =>
 
 		default:
 		{
-			return `Internal application error: Unknown joinRoom error ${error}`;
+			return `Internal application error: Unknown room joining error ${error}`;
 		}
 	}
 };

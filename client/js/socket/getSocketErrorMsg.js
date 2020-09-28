@@ -39,7 +39,8 @@ const getSocketErrorMsg = error =>
 
 		case SK_ERR_TRY_LATER:
 		{
-			return 'Master server has too many connections! Please try again in a few minutes.';
+			return 'Master server has too many connections at the moment!' +
+			       'Please try again in a few minutes.';
 		}
 
 		default:
