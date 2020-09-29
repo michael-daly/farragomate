@@ -10,7 +10,7 @@
 //       Also, be sure to add the words added in this pull request:
 //           https://github.com/web-mech/badwords/pull/70
 //
-//       Also, be sure to add "BBC" to the list of bad words (sigh)
+//       Also, be sure to add things like "BBC" to the list of bad words (sigh)
 
 const replacements =
 [
