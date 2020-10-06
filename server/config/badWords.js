@@ -27,20 +27,22 @@ module.exports =
 		/\bs+((\s|\W)*p)+((\s|\W)*(i|l|1|!))+((\s|\W)*(c|k))+((\s|\W)*(k))+\w*/gi,
 		/\bw+((\s|\W)*(e|3))+((\s|\W)*t)+((\s|\W)*b)+((\s|\W)*(a|4|@))+((\s|\W)*(c|k))+\w*/gi,
 
-		// Censor permutations of "n[h]i[h]g" provided that there's not an h or an e after it.
-		/\bn+(\s|\W)*h*(\s|\W)*(i|l|1)+(\s|\W)*h*(\s|\W)*g+(\s|\W)*([^he]|\b)/gi,
+		// (Part 1) Censor permutations of "n[h]i[h]g" provided that there's not an h or an e after it.
+		/\bn+((\s|\W)*(h|[aeiouyw]|\d)*)*((\s|\W)*(i|l|1))+((\s|\W)*(h|[aeiouyw]|\d)*)*((\s|\W)*g)+(\s|\W)*([^he]|\b)/gi,
 
-		// Clean up for the above one regarding words with g after "nigh-" prefix.
+		// (Part 2) Censor words with "nigh-" prefix that have a g after it.
 		/\bn+(\s|\W)*h*(\s|\W)*(i|l|1)+(\s|\W)*h*(\s|\W)*g+(\s|\W)*[he]*g/gi,
 
-		// Last one to censor the rest except Nigeria and Nigel.
+		// (Part 3) Censor the rest except Nigeria and Nigel.
 		/\bn+h*(i|l|1)+h*g+(e+([^l]*r+|\b))\b/gi,
 
 		// Censor permutations of a certain slur unless the word is Pakistan.
-		/\bp+(\s|\W)*h*(\s|\W)*(a|4|@)+(\s|\W)*h*(\s|\W)*k+(\s|\W)*(i|l|1)+s*[^t]*[^a]*[^n]*\b/gi,
+		/\bp+((\s|\W)*(a|4|@))+((\s|\W)*h*)*((\s|\W)*k)+((\s|\W)*(i|l|1))+s*[^t]*[^a]*[^n]*\b/gi,
 
-		// Censor permutations of "KKK".
+		// Censor permutations of "KKK" and related terms.
 		/\bk(\s|\W)*k(\s|\W)*k\b/gi,
+		/((\s|\W)*(k|c))+((\s|\W)*u)+((\s|\W)*(k|c))+((\s|\W)*(l|i|1|!))+((\s|\W)*u)+((\s|\W)*x)+\w*/gi,
+		/((\s|\W)*k)+((\s|\W)*(l|1|!))+((\s|\W)*(a|4|@))+((\s|\W)*n)+\w*/gi,
 
 
 		// Censor permutations of "ass[w*]"
@@ -52,8 +54,8 @@ module.exports =
 		// Censor permutations of "b****rd".
 		/\bb+((\s|\W)*(a|4|@))+((\s|\W)*(s|z|5))+((\s|\W)*t)+((\s|\W)*(a|4|@|e|3))+((\s|\W)*r)+((\s|\W)*d)+/gi,
 
-		// Censor permutations of "bi[a|o]tch".
-		/\bb+(\s|\W)*(i|l|1)+(\s|\W)*(a|4|@|o|0)*(\s|\W)*t+(\s|\W)*c+(\s|\W)*h+/,
+		// Censor permutations of "bi[a|o|y]tch".
+		/\bb+((\s|\W)*(i|l|y|1))+((\s|\W)*(a|4|@|o|0|y))*(\s|\W)*t+(\s|\W)*c+(\s|\W)*h+/gi,
 
 		// Censor permutations of "pr**k".
 		/((\s|\W)*p)+((\s|\W)*r)+((\s|\W)*(i|l|1|!))+((\s|\W)*(c|k))+((\s|\W)*(c|k))+/gi,
