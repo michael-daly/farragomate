@@ -18,11 +18,6 @@ module.exports =
 	// Regex rules for all situations
 	all:
 	[
-		// Censor permutations of "c*m" that is not part of a word, unless the next character
-		// is an s, z, e, or is an -ed suffix.
-		/\bc+\s*u+\s*m+([sz\W\d]+|\b|(ed)|e)/gi,
-
-
 		/* Censor permutations of racist slurs. */
 
 		/n+((\s|\W)*(e|3))+((\s|\W)*g)+((\s|\W)*r)+((\s|\W)*(o|0))+\w*/gi,
@@ -88,6 +83,7 @@ module.exports =
 		/s+((\s|\W)*(c|k))+((\s|\W)*r)+((\s|\W)*(o|0))+((\s|\W)*t)+\w*/gi,
 		/((\b(a|4|@))|(@))+(\s|\W)*n+(\s|\W)*u+(\s|\W)*s+/gi,
 		/((\s|\W)*r)+((\s|\W)*(e|3))+((\s|\W)*(c|k|ck|kc))+((\s|\W)*t)+((\s|\W)*u)+((\s|\W)*m)+\w*/gi,
+		/\bc+((\s|\W)*u)+((\s|\W)*m)+([sz\W\d]+|\b|(ed)|e)/gi,
 		/j+((\s|\W)*(i|l|1))+((\s|\W)*(s|z))+((\s|\W)*(s|z))+/gi,
 		/j+((\s|\W)*(i|l|1))+((\s|\W)*(s|z))+(\s|\W)*m+/gi,
 		/\bb+((\s|\W)*(l|i|1))+((\s|\W)*(o|0))+((\s|\W)*w)+((\s|\W)*j)+((\s|\W)*(o|0))+(\s|\W)*b+/,
