@@ -121,12 +121,12 @@ module.exports =
 	[
 		// Less strict "a**h***" censor rules for words and sentences.
 		/(a|4|\@)+s+h+(o|0)+((l|i|1)+(e|3)+|(e|3)+(l|i|1)+)\b/gi,
-	]
+	],
 
 	// Regex rules for display names and server titles.
 	names:
 	[
 		// Stricter "a**h***" censor rules for display names and server title.
 		/(a|4|\@)+(\s|\W)*(s+(\s|\W)*)+h+(\s|\W)*(o|0)+(\s|\W)*((l|i|1)+(\s|\W)*(e|3)+|(e|3)+(\s|\W)*(l|i|1)+)(\s|\W)*\b/gi,
-	]
+	],
 };
