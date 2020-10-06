@@ -1,6 +1,11 @@
 /**
  * Regex hieroglyphics.
  *
+ * These generally account for spaces, repeat characters, characters that look similar (i, l, 1, !, etc.),
+ * and so on. Many have special rules and exceptions but this is generally how they work.
+ *
+ * If you want to see what they do, put them in RegExr -- I could not have made these without it.
+ *
  * I have no doubt people will be able to bypass this. People are very creative at getting around
  * word filters. This is just to provide some deterrence and prevent certain words from appearing
  * in the wordbanks.
