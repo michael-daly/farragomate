@@ -41,12 +41,6 @@ module.exports = store => next => action =>
 				{
 					break;
 				}
-
-			case 'DeleteRoom':
-			{
-				store.dispatch (setScreen ('MainMenu'));
-				break;
-			}
 		}
 	}
 

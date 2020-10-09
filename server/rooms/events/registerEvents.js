@@ -72,7 +72,7 @@ GameRoomEvents.on ('leaveRoom', ( room, client ) =>
 	sendDataToRoom (room, 'LeaveRoom', client.id);
 });
 
-GameRoomEvents.on ('deleteRoom', room =>
+GameRoomEvents.on ('deleteRoom', ( room, reason ) =>
 {
-	sendDataToRoom (room, 'DeleteRoom');
+	sendDataToRoom (room, 'DeleteRoom', reason);
 });

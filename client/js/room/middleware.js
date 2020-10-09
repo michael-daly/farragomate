@@ -73,8 +73,10 @@ module.exports = store => next => action =>
 				{
 					if ( room.info.id !== '' )
 					{
+						const roomMessage = 'The room was closed' + (body ? `: ${body}` : '.');
+
 						store.dispatch (leaveRoom ());
-						store.dispatch (setLeaveRoomMsg ('The room was closed.'));
+						store.dispatch (setLeaveRoomMsg (roomMessage));
 					}
 
 					break;

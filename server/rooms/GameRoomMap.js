@@ -37,12 +37,13 @@ const addNewRoom = ( owner, info ) =>
 
 /**
  * @param {string} roomID
+ * @param {string} [reason]
  */
-const deleteRoom = roomID =>
+const deleteRoom = ( roomID, reason ) =>
 {
 	const room = getRoom (roomID);
 
-	GameRoomEvents.emit ('deleteRoom', room);
+	GameRoomEvents.emit ('deleteRoom', room, reason);
 
 	room.clients.forEach (clientID =>
 	{
@@ -76,12 +77,13 @@ const addClientToRoom = ( room, client ) =>
 /**
  * @param {GameRoom}   room
  * @param {GameClient} client
+ * @param {string}     [reason]
  */
-const removeClientFromRoom = ( room, client ) =>
+const removeClientFromRoom = ( room, client, reason ) =>
 {
 	if ( room.ownerID === client.id )
 	{
-		deleteRoom (room.id);
+		deleteRoom (room.id, reason);
 	}
 	else
 	{

@@ -2,14 +2,25 @@ const GameScreen = require ('$/screens/GameScreen.js');
 
 const { sleep } = require ('~/util/promises.js');
 
-const { sendInfoToRoom, sendDataToRoom, getRoomClientList } = require ('$/rooms/GameRoomMap.js');
+const
+{
+	sendInfoToRoom,
+	sendDataToRoom,
+	getRoomClientList,
+	deleteRoom,
+}
+= require ('$/rooms/GameRoomMap.js');
 
 
 const SentenceCreation = new GameScreen ('SentenceCreation');
 
 SentenceCreation.onEnterScreen = async function ( room )
 {
-	await room.sentences.fetchWords ();
+	await room.sentences.fetchWords ().catch ( error =>
+	{
+		console.log (`[${room.id}] Wordnik API error: ${error.message}`);
+		deleteRoom (room.id, 'API error');
+	});
 
 	if ( !room.isDeleted )
 	{
