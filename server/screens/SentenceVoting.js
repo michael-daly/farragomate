@@ -5,7 +5,6 @@ const { sleep }          = require ('~/util/promises.js');
 const { sendDataToRoom } = require ('$/rooms/GameRoomMap.js');
 
 
-// TODO: Make voting change depending on how many sentences there are to read, including none.
 const SentenceVoting = new GameScreen ('SentenceVoting', 30);
 
 SentenceVoting.onEnterScreen = async function ( room )
@@ -31,12 +30,7 @@ SentenceVoting.getNextScreen = function ( room )
 
 SentenceVoting.getStartTime = function ( room )
 {
-	if ( Object.keys (room.sentences.getSentences ()).length <= 0 )
-	{
-		return 5;
-	}
-
-	return this.constructor.prototype.getStartTime.apply (this);
+	return 5 + (Object.keys (room.sentences.getSentences ()).length * 2);
 };
 
 
