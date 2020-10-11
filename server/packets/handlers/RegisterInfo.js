@@ -1,5 +1,5 @@
 const fieldData      = require ('~/clients/fieldData.js');
-const filterRules    = require ('$/config/filterRules.js');
+const filterRules    = require ('~/config/filterRules.js');
 const validateFields = require ('$/fields/validateFields.js');
 
 const { MainMenuHandlers } = require ('$/packets/handlerMaps.js');

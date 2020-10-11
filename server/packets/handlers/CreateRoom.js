@@ -1,5 +1,5 @@
 const fieldData      = require ('~/rooms/fieldData.js');
-const filterRules    = require ('$/config/filterRules.js');
+const filterRules    = require ('~/config/filterRules.js');
 const validateFields = require ('$/fields/validateFields.js');
 
 const { GameRoom } = require ('$/rooms/GameRoom.js');

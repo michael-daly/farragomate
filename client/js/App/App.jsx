@@ -9,7 +9,7 @@ import CreateRoom      from '#/CreateRoom/CreateRoom.jsx';
 import JoinRoom        from '#/JoinRoom/JoinRoom.jsx';
 import MainGame        from '#/MainGame/MainGame.jsx';
 
-import { socketPort }      from '~/config.js';
+import { socketPort }      from '~/config/sockets.js';
 import { useSecureSocket } from '#/config.js';
 import { socketConnect }   from '#/socket/actions.js';
 

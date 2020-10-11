@@ -2,7 +2,7 @@ const got = require ('got');
 
 const objectToURL  = require ('~/util/objectToURL.js');
 const apiRequest   = require ('$/config/apiRequest.js');
-const filterRules  = require ('$/config/filterRules.js');
+const filterRules  = require ('~/config/filterRules.js');
 
 const { hasBadWord }   = require ('~/badWordFilter.js');
 const { isValidIndex } = require ('~/util/arrays.js');

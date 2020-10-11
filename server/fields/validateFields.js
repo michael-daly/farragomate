@@ -61,9 +61,9 @@ const validate = ( inputFields, fieldName, data ) =>
 };
 
 /**
- * @param {*}        field
- * @param {Object}   data
- * @param {RegExp[]} filterRules
+ * @param {*}      field
+ * @param {Object} data
+ * @param {Object} filterRules
  *
  * @returns {Integer} ERROR_NONE if no error.
  *
@@ -81,9 +81,9 @@ const validateBadWords = ( field, data, filterRules = null ) =>
 };
 
 /**
- * @param {Object}   inputFields
- * @param {Object}   fieldData
- * @param {RegExp[]} [filterRules=null]
+ * @param {Object} inputFields
+ * @param {Object} fieldData
+ * @param {Object} [filterRules=null]
  *
  * @returns {Integer|Array} [fieldName, errorCode] or ERROR_NONE if no error.
  */

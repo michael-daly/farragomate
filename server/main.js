@@ -8,7 +8,7 @@ const app     = express ();
 const WebSocketServer = require ('ws').Server;
 const onNewConnection = require ('$/socketCallbacks.js');
 
-const { socketPort } = require ('~/config.js');
+const { socketPort } = require ('~/config/sockets.js');
 
 const PORT = 3000;
 

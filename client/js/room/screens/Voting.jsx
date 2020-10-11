@@ -2,9 +2,11 @@ import React, { Component, Fragment } from 'react';
 
 import { connect } from 'react-redux';
 
-import UITable from '#/ui/table/UITable.jsx';
+import UITable     from '#/ui/table/UITable.jsx';
+import filterRules from '~/config/filterRules.js';
 
-import { castVote } from '#/room/actions.js';
+import { castVote }       from '#/room/actions.js';
+import { censorBadWords } from '~/badWordFilter.js';
 
 
 const votingColumns  =
@@ -62,7 +64,9 @@ class Voting extends Component
 				selected = currIndex;
 			}
 
-			rowArr.push (sentence.str);
+			const sentenceStr = censorBadWords (sentence.str, filterRules.all);
+
+			rowArr.push (censorBadWords (sentenceStr, filterRules.fields));
 			rowValues.push (rowArr);
 
 			currIndex++;
