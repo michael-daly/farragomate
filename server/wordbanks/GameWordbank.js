@@ -3,9 +3,8 @@ const got = require ('got');
 const objectToURL  = require ('~/util/objectToURL.js');
 const apiRequest   = require ('$/config/apiRequest.js');
 const filterRules  = require ('$/config/badWords.js');
-const replacements = require ('$/config/replacements.js');
 
-const { isValidIndex, shuffleArray } = require ('~/util/arrays.js');
+const { isValidIndex } = require ('~/util/arrays.js');
 
 const API_KEY = require ('$/config/apiKey.js');
 
@@ -76,7 +75,10 @@ class GameWordbank
 		return false;
 	}
 
-	async fetchWords ()
+	/**
+	 * @param {string[]} substitutes
+	 */
+	async fetchWords ( substitutes )
 	{
 		if ( this.isDeleted || this.requestURL === null )
 		{
@@ -91,8 +93,7 @@ class GameWordbank
 			return;
 		}
 
-		const words       = [];
-		const substitutes = shuffleArray (replacements.slice ());
+		const words = [];
 
 		const { length } = body;
 

@@ -110,7 +110,10 @@ class GameRoomSentences
 		return arr;
 	}
 
-	async fetchWords ()
+	/**
+	 * @param {string[]} substitutes
+	 */
+	async fetchWords ( substitutes )
 	{
 		const { wordbanks } = this;
 		const { length }    = wordbanks;
@@ -119,7 +122,7 @@ class GameRoomSentences
 
 		for ( let i = 0; i < length; i++ )
 		{
-			promises.push (wordbanks[i].fetchWords ());
+			promises.push (wordbanks[i].fetchWords (substitutes));
 		}
 
 		return Promise.all (promises);

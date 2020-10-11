@@ -1,6 +1,8 @@
-const GameScreen = require ('$/screens/GameScreen.js');
+const GameScreen   = require ('$/screens/GameScreen.js');
+const replacements = require ('$/config/replacements.js');
 
-const { sleep } = require ('~/util/promises.js');
+const { shuffleArray } = require ('~/util/arrays.js');
+const { sleep }        = require ('~/util/promises.js');
 
 const
 {
@@ -16,7 +18,9 @@ const SentenceCreation = new GameScreen ('SentenceCreation');
 
 SentenceCreation.onEnterScreen = async function ( room )
 {
-	await room.sentences.fetchWords ().catch ( error =>
+	const substitutes = shuffleArray (replacements.slice ());
+
+	await room.sentences.fetchWords (substitutes).catch ( error =>
 	{
 		console.log (`[${room.id}] Wordnik API error: ${error.message}`);
 		deleteRoom (room.id, 'API error');
