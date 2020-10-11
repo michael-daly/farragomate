@@ -1,9 +1,11 @@
 const got = require ('got');
 
-const objectToURL = require ('~/util/objectToURL.js');
-const apiRequest  = require ('$/config/apiRequest.js');
+const objectToURL  = require ('~/util/objectToURL.js');
+const apiRequest   = require ('$/config/apiRequest.js');
+const filterRules  = require ('$/config/badWords.js');
+const replacements = require ('$/config/replacements.js');
 
-const { isValidIndex } = require ('~/util/arrays.js');
+const { isValidIndex, shuffleArray } = require ('~/util/arrays.js');
 
 const API_KEY = require ('$/config/apiKey.js');
 
@@ -55,6 +57,25 @@ class GameWordbank
 		return isValidIndex (this.words, index);
 	}
 
+	/**
+	 * @param   {string}   word
+	 * @returns {boolean}
+	 */
+	isBadWord ( word )
+	{
+		const { length } = filterRules;
+
+		for ( let i = 0; i < length; i++ )
+		{
+			if ( word.match (filterRules[i]).length > 0 )
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	async fetchWords ()
 	{
 		if ( this.isDeleted || this.requestURL === null )
@@ -70,13 +91,23 @@ class GameWordbank
 			return;
 		}
 
-		const words = [];
+		const words       = [];
+		const substitutes = shuffleArray (replacements.slice ());
 
 		const { length } = body;
 
 		for ( let i = 0; i < length; i++ )
 		{
-			words.push (body[i].word);
+			const { word } = body[i];
+
+			if ( this.isBadWord (word, filterRules) )
+			{
+				words.push (substitutes.pop ());
+			}
+			else
+			{
+				words.push (word);
+			}
 		}
 
 		this.words = words;

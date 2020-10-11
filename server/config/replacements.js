@@ -1,7 +1,8 @@
-// Replacements for bad words.
+/**
+ * Replacements for bad words.
+ */
 
-
-const replacements =
+module.exports = Object.freeze (
 [
 	'thunder', 'bubble', 'sip', 'determined', 'married', 'scratch', 'annoying',
 	'curl', 'spotty', 'vessel', 'owe', 'imported', 'blush', 'available', 'absent',
@@ -16,7 +17,4 @@ const replacements =
 	'😂', '🤔', '😩👌', '♥', '💔', '👍', '👎', '🅱', '🆗', '🆒',
 	':)', ';)', ':^)', ':(', ':\'(', ':^(', ':/', ':\\', ':D', 'D:', ':I', ':|', 'O_O',
 	'Oops', 'D\'oh', 'Wow', 'Gosh', 'Gee', 'Geez', 'Zombo.com', 'Hank Hill', 'John Madden',
-];
-
-
-module.exports = replacements;
+]);
