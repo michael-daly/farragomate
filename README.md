@@ -25,18 +25,3 @@ Before installing, you'll need to get a Wordnik API key. This is the API the ser
 2. Once the time is up, you will be shown other players' sentences and be asked to pick your favorite one. (Note that your own sentence isn't shown because you cannot vote for it.)
 3. Once the time is up, the voting results will be shown.
 4. This cycle will repeat until the end of the game where the final scores will be displayed.
-
-
-### To Do
-
-* [X]  Add filter for player names, Wordnik words, and player-made sentences.
-* [ ]  Add a more robust client-sided filter that adds the correct number of asterisks for each character that gets censored instead of just three every time.
-* [ ]  Shuffle player sentences when voting so they're not in the same order every time.
-* [ ]  Add handling for API errors.
-* [ ]  Add ability to put player names in sentences.
-* [ ]  Change time limit for voting depending on how many sentences there are.
-* [ ]  Add ability for players to "lock in" their sentences and skip to the voting phase so they don't have to wait for the timer to count down all the way.
-* [ ]  Similarly, add ability for players to "lock in" their votes and skip to the voting results.
-* [ ]  An ability to skip the voting results and final scores screens might be a good thing to add as well.
-* [ ]  Highlight winner(s) on final scores screen.
-* [ ]  Add "x/20" element to show players how many sentence tiles they have.
