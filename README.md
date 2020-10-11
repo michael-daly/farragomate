@@ -31,6 +31,7 @@ Before installing, you'll need to get a Wordnik API key. This is the API the ser
 
 * [X]  Add filter for player names, Wordnik words, and player-made sentences.
 * [ ]  Add a more robust client-sided filter that adds the correct number of asterisks for each character that gets censored instead of just three every time.
+* [ ]  Shuffle player sentences when voting so they're not in the same order every time.
 * [ ]  Add handling for API errors.
 * [ ]  Add ability to put player names in sentences.
 * [ ]  Change time limit for voting depending on how many sentences there are.
