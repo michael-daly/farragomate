@@ -4,9 +4,6 @@ A remake of the classic Casual Collective game.  Compete with your friends to cr
 
 Live version available at http://45.33.45.17:3000
 
-**WARNING:** A filter has not been implemented yet, so the words obtained from the Wordnik API **_may be offensive or inappropriate_**. Apologies in advance for any offensive or inappropriate words that may be selected. I am currently working on fixing this.
-
-
 ![](https://i.imgur.com/LCdDqa0.jpg)
 
 
@@ -32,7 +29,8 @@ Before installing, you'll need to get a Wordnik API key. This is the API the ser
 
 ### To Do
 
-* [ ]  Add filter for player names, Wordnik words, and player-made sentences.
+* [X]  Add filter for player names, Wordnik words, and player-made sentences.
+* [ ]  Add a more robust client-sided filter that adds the correct number of asterisks for each character that gets censored instead of just three every time.
 * [ ]  Add handling for API errors.
 * [ ]  Add ability to put player names in sentences.
 * [ ]  Change time limit for voting depending on how many sentences there are.
