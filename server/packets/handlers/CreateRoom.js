@@ -1,5 +1,6 @@
-const fieldData        = require ('~/rooms/fieldData.js');
-const validateRoomInfo = require ('$/rooms/info/validateRoomInfo.js');
+const fieldData      = require ('~/rooms/fieldData.js');
+const filterRules    = require ('$/config/filterRules.js');
+const validateFields = require ('$/fields/validateFields.js');
 
 const { GameRoom } = require ('$/rooms/GameRoom.js');
 
@@ -9,7 +10,7 @@ const { mapStringFields }  = require ('$/fields/mapFields.js');
 
 const { sanitizeString, stripNonASCII } = require ('~/util/sanitization.js');
 
-const { ERROR_NONE, ERROR_BAD_PACKET } = require ('~/errorCodes.js');
+const { ERROR_NONE, ERROR_BAD_PACKET, FIELD_ERR_BAD_WORD } = require ('~/errorCodes.js');
 
 
 MainMenuHandlers.addHandler ('Request', 'CreateRoom', ( client, packet ) =>
@@ -37,7 +38,7 @@ MainMenuHandlers.addHandler ('Request', 'CreateRoom', ( client, packet ) =>
 			return field;
 		});
 
-		error = validateRoomInfo (info, client);
+		error = validateFields (info, fieldData, filterRules);
 	}
 
 	if ( error !== ERROR_NONE )

@@ -2,8 +2,9 @@ const got = require ('got');
 
 const objectToURL  = require ('~/util/objectToURL.js');
 const apiRequest   = require ('$/config/apiRequest.js');
-const filterRules  = require ('$/config/badWords.js');
+const filterRules  = require ('$/config/filterRules.js');
 
+const { hasBadWord }   = require ('~/badWordFilter.js');
 const { isValidIndex } = require ('~/util/arrays.js');
 
 const API_KEY = require ('$/config/apiKey.js');
@@ -57,25 +58,6 @@ class GameWordbank
 	}
 
 	/**
-	 * @param   {string}   word
-	 * @returns {boolean}
-	 */
-	isBadWord ( word )
-	{
-		const { length } = filterRules;
-
-		for ( let i = 0; i < length; i++ )
-		{
-			if ( word.match (filterRules[i]).length > 0 )
-			{
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	/**
 	 * @param {string[]} substitutes
 	 */
 	async fetchWords ( substitutes )
@@ -101,7 +83,7 @@ class GameWordbank
 		{
 			const { word } = body[i];
 
-			if ( this.isBadWord (word, filterRules) )
+			if ( hasBadWord (word, filterRules.all) || hasBadWord (word, filterRules.words) )
 			{
 				words.push (substitutes.pop ());
 			}

@@ -25,6 +25,13 @@ class CreateRoom extends Component
 
 			fields: { ...props.info },
 		};
+
+		this.createBtnTimeout = 0;
+	}
+
+	componentWillUnmount ()
+	{
+		clearTimeout (this.createBtnTimeout);
 	}
 
 	onFieldChange ( field, value, fieldName, numRequired )
@@ -44,6 +51,10 @@ class CreateRoom extends Component
 	{
 		this.setState ({ enableCreateBtn: false, sentInfo: true });
 		this.props.sendRoomInfo (this.state.fields);
+
+		const self = this;
+
+		this.createBtnTimeout = setTimeout (() => self.setState ({ enableCreateBtn: true }), 3000);
 	}
 
 	onClickBack ()
@@ -85,7 +96,7 @@ class CreateRoom extends Component
 							text='Create Room >>'
 							inline={true}
 							onClick={this.onClickCreate.bind (this)}
-							disabled={!this.state.enableCreateBtn || errorMessage !== ''}
+							disabled={!this.state.enableCreateBtn}
 						/>
 					</span>
 				</div>

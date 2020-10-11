@@ -1,5 +1,6 @@
-const fieldData          = require ('~/clients/fieldData.js');
-const validateClientInfo = require ('$/clients/info/validateClientInfo.js');
+const fieldData      = require ('~/clients/fieldData.js');
+const filterRules    = require ('$/config/filterRules.js');
+const validateFields = require ('$/fields/validateFields.js');
 
 const { MainMenuHandlers } = require ('$/packets/handlerMaps.js');
 const { mapStringFields }  = require ('$/fields/mapFields.js');
@@ -7,7 +8,14 @@ const { hasClientName }    = require ('$/clients/GameClientNames.js');
 
 const { sanitizeString, stripNonASCII } = require ('~/util/sanitization.js');
 
-const { ERROR_NONE, ERROR_BAD_PACKET, FIELD_ERR_UNIQUE } = require ('~/errorCodes.js');
+const
+{
+	ERROR_NONE,
+	ERROR_BAD_PACKET,
+	FIELD_ERR_UNIQUE,
+	FIELD_ERR_BAD_WORD,
+}
+= require ('~/errorCodes.js');
 
 
 MainMenuHandlers.addHandler ('Request', 'RegisterInfo', ( client, packet ) =>
@@ -32,7 +40,7 @@ MainMenuHandlers.addHandler ('Request', 'RegisterInfo', ( client, packet ) =>
 			return field;
 		});
 
-		const result = validateClientInfo (info);
+		const result = validateFields (info, fieldData, filterRules);
 
 		if ( result !== ERROR_NONE )
 		{

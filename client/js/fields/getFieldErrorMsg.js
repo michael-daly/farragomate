@@ -5,6 +5,8 @@ const
 	FIELD_ERR_MIN,
 	FIELD_ERR_MAX,
 	FIELD_ERR_UNIQUE,
+	FIELD_ERR_BAD_WORD,
+	FIELD_ERR_INVALID,
 }
 = require ('~/errorCodes.js');
 
@@ -57,6 +59,16 @@ const getFieldErrorMsg = ( fields, name, error ) =>
 		case FIELD_ERR_UNIQUE:
 		{
 			return `${label} already taken`;
+		}
+
+		case FIELD_ERR_BAD_WORD:
+		{
+			return `${label} contains an inappropriate word`;
+		}
+
+		case FIELD_ERR_INVALID:
+		{
+			return `${label} is invalid`;
 		}
 
 		default:

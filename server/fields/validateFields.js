@@ -1,4 +1,5 @@
-const { has } = require ('~/util/has.js');
+const { has }        = require ('~/util/has.js');
+const { hasBadWord } = require ('~/badWordFilter.js');
 
 const
 {
@@ -8,6 +9,7 @@ const
 	FIELD_ERR_TYPE,
 	FIELD_ERR_MIN,
 	FIELD_ERR_MAX,
+	FIELD_ERR_BAD_WORD,
 }
 = require ('~/errorCodes.js');
 
@@ -59,16 +61,44 @@ const validate = ( inputFields, fieldName, data ) =>
 };
 
 /**
- * @param {Object} inputFields
- * @param {Object} fieldData
+ * @param {*}        field
+ * @param {Object}   data
+ * @param {RegExp[]} filterRules
+ *
+ * @returns {Integer} ERROR_NONE if no error.
+ *
+ * @private
+ */
+const validateBadWords = ( field, data, filterRules = null ) =>
+{
+	if ( filterRules !== null && data.type === 'string' && typeof field === 'string' &&
+		 (hasBadWord (field, filterRules.all) || hasBadWord (field, filterRules.fields)) )
+	{
+		return FIELD_ERR_BAD_WORD;
+	}
+
+	return ERROR_NONE;
+};
+
+/**
+ * @param {Object}   inputFields
+ * @param {Object}   fieldData
+ * @param {RegExp[]} [filterRules=null]
  *
  * @returns {Integer|Array} [fieldName, errorCode] or ERROR_NONE if no error.
  */
-const validateFields = ( inputFields, fieldData ) =>
+const validateFields = ( inputFields, fieldData, filterRules = null ) =>
 {
 	for ( let fieldName in fieldData )
 	{
-		const result = validate (inputFields, fieldName, fieldData[fieldName]);
+		const data = fieldData[fieldName];
+
+		let result = validate (inputFields, fieldName, data);
+
+		if ( result === ERROR_NONE )
+		{
+			result = validateBadWords (inputFields[fieldName], data, filterRules);
+		}
 
 		if ( result !== ERROR_NONE )
 		{

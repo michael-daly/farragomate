@@ -28,13 +28,13 @@ module.exports =
 		/\bw+((\s|\W)*(e|3))+((\s|\W)*t)+((\s|\W)*b)+((\s|\W)*(a|4|@))+((\s|\W)*(c|k))+\w*/gi,
 
 		// (Part 1) Censor permutations of "n[h]i[h]g" provided that there's not an h or an e after it.
-		/\bn+((\s|\W)*(h|[aeiouyw]|\d)*)*((\s|\W)*(i|l|1))+((\s|\W)*(h|[aeiouyw]|\d)*)*((\s|\W)*g)+(\s|\W)*([^he]|\b)/gi,
+		/\bn+((\s|\W)*(h|[aeiouyw]|\d)*)*((\s|\W)*(i|l|1|!))+((\s|\W)*(h|[aeiouyw]|\d)*)*((\s|\W)*g)+([^he]|\b)/gi,
 
 		// (Part 2) Censor words with "nigh-" prefix that have a g after it.
-		/\bn+(\s|\W)*h*(\s|\W)*(i|l|1)+(\s|\W)*h*(\s|\W)*g+(\s|\W)*[he]*g/gi,
+		/\bn+(\s|\W)*h*(\s|\W)*(i|l|1|!)+(\s|\W)*h*(\s|\W)*g+(\s|\W)*[he]*g/gi,
 
 		// (Part 3) Censor the rest except Nigeria and Nigel.
-		/\bn+h*(i|l|1)+h*g+(e+([^l]*r+|\b))\b/gi,
+		/\bn+h*(i|l|1|!)+h*g+(e+([^l]*r+|\b))\b/gi,
 
 		// Censor permutations of a certain slur unless the word is Pakistan.
 		/\bp+((\s|\W)*(a|4|@))+((\s|\W)*h*)*((\s|\W)*k)+((\s|\W)*(i|l|1))+s*[^t]*[^a]*[^n]*\b/gi,
@@ -94,6 +94,8 @@ module.exports =
 		/((\s|\W)*(s|5|\$))+((\s|\W)*h)+((\s|\W)*(i|l|a|y|1|!))+((\s|\W)*t)+/gi,
 
 		// Censor permutations of "f**k", "f*k", etc.
+		/f+((\s|\W)*u)+((\s|\W)*(c|k))+((\s|\W)*(c|k))+/gi,
+		/f+((\s|\W)*u)+((\s|\W)*(c|k))+((\s|\W)*\S)\b/gi,
 		/f+((\s|\W)*u)+((\s|\W)*(c|k))+\b/gi,
 
 		// Censor permutations of "goddamn".
@@ -123,13 +125,13 @@ module.exports =
 	words:
 	[
 		// Less strict "a**h***" censor rules for words and sentences.
-		/(a|4|\@)+s+h+(o|0)+((l|i|1)+(e|3)+|(e|3)+(l|i|1)+)\b/gi,
+		/(a|4|\@)+s+h+(o|0)+((l|i|1|!)+(e|3)+|(e|3)+(l|i|1|!)+)\b/gi,
 	],
 
-	// Regex rules for display names and server titles.
-	names:
+	// Regex rules for display names and server info.
+	fields:
 	[
-		// Stricter "a**h***" censor rules for display names and server title.
-		/(a|4|\@)+(\s|\W)*(s+(\s|\W)*)+h+(\s|\W)*(o|0)+(\s|\W)*((l|i|1)+(\s|\W)*(e|3)+|(e|3)+(\s|\W)*(l|i|1)+)(\s|\W)*\b/gi,
+		// Stricter "a**h***" censor rules for display names and server info.
+		/(a|4|\@)+(\s|\W)*(([sz5\$])+(\s|\W)*)+h+(\s|\W)*(o|0)+(\s|\W)*((l|i|1|!)+(\s|\W)*(e|3)+|(e|3)+(\s|\W)*(l|i|1|!)+)(\s|\W)*\b/gi,
 	],
 };
